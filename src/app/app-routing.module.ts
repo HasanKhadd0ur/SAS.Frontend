@@ -17,7 +17,9 @@ const routes: Routes = [
     children: [
       
       { path: 'home', component: DashboardComponent },
-    
+      { path: 'map', loadChildren: () => import('./slices/map/map.module').then(m => m.MapModule) },
+      { path: 'events', loadChildren: () => import('./slices/events/events.module').then(m => m.EventsModule) },
+           
     ]
   },
   { path: 'notfound', component: NotfoundComponent },

@@ -13,6 +13,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SidebarModule } from 'primeng/sidebar';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -32,7 +33,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     SidebarModule,
     ButtonModule,
     RadioButtonModule,
-    InputSwitchModule
+    InputSwitchModule,
+    HttpClientModule 
 ],
   providers: [],
   bootstrap: [AppComponent]
