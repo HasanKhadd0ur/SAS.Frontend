@@ -1,0 +1,19 @@
+    <p-card header="Daily Events" *ngIf="events?.length > 0">
+      <p-listbox [options]="events" optionLabel="eventInfo.title" [style]="{width:'100%'}">
+        <ng-template let-event pTemplate="item">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            <div>
+              <div class="event-title">{{ event.eventInfo.title }}</div>
+              <small class="text-secondary">Status: {{ event.status || 'Under Review' }}</small>
+            </div>
+            <div>
+              <button pButton type="button" label="View" icon="pi pi-eye" class="p-button-sm" (click)="onViewEvent(event)"></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </p-card>
+
+    <p-card *ngIf="!events || events.length === 0" header="Daily Events">
+      <p>No events for today.</p>
+    </p-card>

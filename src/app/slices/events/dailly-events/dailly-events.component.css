@@ -1,0 +1,8 @@
+  .event-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .text-secondary {
+      color: var(--text-secondary-color, #6c757d);
+    }
+  
