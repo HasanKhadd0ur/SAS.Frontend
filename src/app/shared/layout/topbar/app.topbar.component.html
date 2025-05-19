@@ -1,0 +1,41 @@
+<div class="layout-topbar">
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+    
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
+        <span class="font-normal">SAS</span>
+    </a>
+
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-calendar"></i>
+            <span>Calendar</span>
+        </button>
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button>
+        <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+            <i class="pi pi-cog"></i>
+            <span>Settings</span>
+        </button>
+        <!-- <div>
+            <p-menu #menu [popup]="true" [model]="items" [appendTo]="'body'" [baseZIndex]="1000" [styleClass]="'my-1'"></p-menu>
+            <button class="p-link layout-topbar-button px-3" (click)="menu.toggle($event)" style="width: auto; border-radius: 12px;">
+                <div class="image-container" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; ">
+                    <img [src]="" style="vertical-align: middle; width: 100%; height: auto;" alt=""/>
+                </div>
+                <span style=" display: block;" class="px-2">Leonel</span>
+                <i class="pi pi-angle-down"></i>
+            </button>
+        </div> -->
+    </div>
+</div>
