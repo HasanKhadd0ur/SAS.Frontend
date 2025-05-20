@@ -3,31 +3,51 @@ import { Event } from '../models/event.model';
 import { EventService } from '../services/event.service';
 
 @Component({
-  selector: 'app-daily-events',
+  selector: 'app-dailly-events',
   templateUrl: './dailly-events.component.html',
-  standalone:false,
-  styleUrls: ['./dailly-events.component.css']
+  styleUrls: ['./dailly-events.component.css'],
+  standalone: false
 })
 export class DailyEventsComponent implements OnInit {
   events: Event[] = [];
+  pagedEvents: Event[] = [];
+  batchSize = 5;
+  currentIndex = 0;
 
   constructor(private eventService: EventService) {}
 
-  ngOnInit() {
-    const twoDaysAgo = new Date();
-    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  ngOnInit(): void {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    this.eventService.getEventsUpdatedAfter(twoDaysAgo).subscribe({
-      next: (events: Event[]) => {
+    this.eventService.getDailyEvent().subscribe({
+      next: events => {
         this.events = events;
+        this.loadMore(); // Initial load
       },
-      error: (err) => {
-        console.error('Failed to load daily events', err);
-      }
+      error: err => console.error(err)
     });
   }
 
+  loadMore(): void {
+    const next = this.events.slice(this.currentIndex, this.currentIndex + this.batchSize);
+    this.pagedEvents.push(...next);
+    this.currentIndex += this.batchSize;
+  }
+
   onViewEvent(event: Event) {
-    alert(`Viewing event: ${event.eventInfo.title}`);
+    // alert(`Viewing event: ${event.eventInfo.title}`);
+  }
+
+  getStatusClass(status: string | undefined): string {
+    switch ((status || '').toLowerCase()) {
+      case 'confirmed':
+        return 'status-confirmed';
+      case 'reported':
+        return 'status-reported';
+      case 'under review':
+      default:
+        return 'status-review';
+    }
   }
 }

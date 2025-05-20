@@ -1,0 +1,24 @@
+.event-detail-card {
+  padding: 1.5rem;
+}
+
+.event-detail-summary {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.event-detail-meta p {
+  margin: 0.5rem 0;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.text-danger {
+  color: #dc3545;
+}

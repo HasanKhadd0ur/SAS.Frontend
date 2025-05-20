@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
   templateUrl: './dashboard.component.html',
   standalone:false
 })
-export class DashboardComponent {
+export class DashboardComponent  implements OnInit{
+
+  tieredItems: MenuItem[] = [];
+
   sasStats = [
     {
       title: 'Active Events',
@@ -41,4 +45,27 @@ export class DashboardComponent {
       footerColor: 'text-500'
     }
   ];
+      ngOnInit() {
+        this.tieredItems = [
+            {
+                label: 'Profile',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Settings',
+                        icon: 'pi pi-fw pi-cog'
+                    },
+                    {
+                        label: 'Billing',
+                        icon: 'pi pi-fw pi-file'
+                    }
+                ]
+            },
+            { separator: true },
+            {
+                label: 'Quit',
+                icon: 'pi pi-fw pi-sign-out'
+            }
+        ];
+      }
 }
