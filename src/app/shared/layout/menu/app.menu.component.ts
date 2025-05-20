@@ -27,17 +27,17 @@ export class AppMenuComponent implements OnInit {
                 label: 'Map',
                 items: [
                     { label: 'Live Map', icon: 'pi pi-fw pi-id-card', routerLink: ['/map/live'] },
-                    { label: 'Daily Eevents', icon: 'pi pi-fw pi-check-square', routerLink: ['/events/daily-events'] },
+                    { label: 'Daily Events', icon: 'pi pi-fw pi-check-square', routerLink: ['/events/daily-events'] },
                     { label: 'Near Me', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
                     { label: 'What Happpen Today', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] },
                     { label: 'Back to History', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
                     { label: 'discusing', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
-                    { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
                 ]
             },
             {
                 label: 'Topics',
                 items: [
+                    { label: 'ALl Topic', icon: 'pi pi-fw pi-table', routerLink: ['/topics'], badge: 'NEW' },
                     { label: 'Topic Map', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
                     { label: 'My Intereset', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
                 ]

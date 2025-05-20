@@ -14,6 +14,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { SidebarModule } from 'primeng/sidebar';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MenubarModule } from 'primeng/menubar';
 
 
 
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MenubarModule,
     SharedModule,
     DividerModule,
     FormsModule,

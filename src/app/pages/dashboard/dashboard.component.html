@@ -1,3 +1,18 @@
+<div class="grid p-fluid">
+  <div class="col-12">
+        <div class="card card-w-title">
+            <h5>MenuBar</h5>
+            <p-menubar [model]="tieredItems">
+                <ng-template pTemplate="end">
+                    <span class="p-input-icon-right">
+                        <input type="text" pInputText placeholder="Search">
+                        <i class="pi pi-search"></i>
+                    </span>
+                </ng-template>
+            </p-menubar>
+        </div>
+    </div>
+</div>
 <div class="grid">
   <div *ngFor="let stat of sasStats" class="col-12 lg:col-6 xl:col-3">
     <div class="card mb-0">
