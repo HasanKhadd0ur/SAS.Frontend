@@ -1,0 +1,43 @@
+<p-card header="Daily Events">
+  <div *ngIf="pagedEvents.length > 0; else noEvents" class="event-card-container" infiniteScroll 
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="300"
+       (scrolled)="loadMore()">
+
+    <div class="event-card" *ngFor="let event of pagedEvents">
+      <!-- Header -->
+      <div class="event-header">
+        <div class="event-title-section">
+          <i class="pi pi-bolt event-icon"></i>
+          <span class="event-title">{{ event.eventInfo.title }}</span>
+        </div>
+        <span class="event-status" [ngClass]="getStatusClass(event.status)">
+          {{ event.status || 'Under Review' }}
+        </span>
+      </div>
+
+      <!-- Summary -->
+      <div class="event-summary">
+        {{ event.eventInfo.summary || 'No summary available.' }}
+      </div>
+
+      <!-- Metadata -->
+      <div class="event-meta">
+        <span><i class="pi pi-calendar"></i> {{ event.createdAt | date: 'mediumDate' }}</span>
+        <span *ngIf="event.topic"><i class="pi pi-tag"></i> {{ event.topic.name }}</span>
+      </div>
+
+      <!-- Footer -->
+      <div class="event-footer">
+        <button pButton icon="pi pi-eye" label="View" class="p-button-sm p-button-outlined" 
+                (click)="onViewEvent(event)" [routerLink]="['/events/view', event.id]">
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #noEvents>
+    <p>No events for today.</p>
+  </ng-template>
+</p-card>

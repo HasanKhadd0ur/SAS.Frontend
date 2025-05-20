@@ -31,14 +31,19 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+                            "src/favicon.ico",
+                            "src/assets"
+                        ],
             "styles": [
-              "src/styles.css"
-            ],
+                "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                "node_modules/primeng/resources/primeng.min.css",
+                "node_modules/primeicons/primeicons.css",
+                "node_modules/primeflex/primeflex.css",
+                "node_modules/primeng/resources/themes/saga-blue/theme.css",
+                "node_modules/leaflet/dist/leaflet.css",
+                "src/styles.scss"
+                
+                ],
             "scripts": []
           },
           "configurations": {
@@ -102,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

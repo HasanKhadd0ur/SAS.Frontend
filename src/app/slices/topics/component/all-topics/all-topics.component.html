@@ -1,0 +1,15 @@
+<p-card header="Event Topics">
+  <div *ngIf="topics.length > 0; else noTopics" class="topic-card-container">
+    <div class="topic-card" *ngFor="let topic of topics">
+      <div class="topic-header">
+        <i class="pi pi-tag topic-icon"></i>
+        <span class="topic-name">{{ topic.name }}</span>
+        <button pButton icon="pi pi-eye" label="View" class="p-button-sm p-button-text" (click)="onViewTopic(topic)"></button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noTopics>
+    <p>No topics available.</p>
+  </ng-template>
+</p-card>
+

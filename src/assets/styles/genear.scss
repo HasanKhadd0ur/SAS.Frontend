@@ -1,0 +1,27 @@
+.p-dataview-emptymessage{
+    text-align: center !important;
+}
+
+:host ::ng-deep .custom-tooltip .ui-tooltip-text {
+    width: 200px !important;
+}
+
+* {
+    scrollbar-color: var(--primary-200);
+}
+
+*::-webkit-scrollbar {
+    width: 4px;
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background:transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--primary-200);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    opacity: 0.5;
+}

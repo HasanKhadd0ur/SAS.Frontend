@@ -1,0 +1,34 @@
+<p-card *ngIf="event" [header]="event.eventInfo.title" styleClass="event-detail-card">
+  <!-- Summary Section -->
+  <div class="event-detail-summary p-mb-3">
+    <p>{{ event.eventInfo.summary || 'No summary available.' }}</p>
+  </div>
+
+  <!-- Metadata Section -->
+  <div class="event-detail-meta p-text-secondary">
+    <p>
+      <i class="pi pi-calendar p-mr-2"></i>
+      <strong>Created:</strong> {{ event.createdAt | date: 'fullDate' }}
+    </p>
+    <p *ngIf="event.topic">
+      <i class="pi pi-tag p-mr-2"></i>
+      <strong>Topic:</strong> {{ event.topic.name }}
+    </p>
+    <p>
+      <i class="pi pi-info-circle p-mr-2"></i>
+      <strong>Status:</strong> 
+      <span [ngClass]="{
+        'text-success': event.status === 'Verified',
+        'text-warning': event.status === 'Under Review',
+        'text-danger': event.status === 'Rejected'
+      }">
+        {{ event.status || 'Under Review' }}
+      </span>
+    </p>
+  </div>
+</p-card>
+
+<!-- Loading State -->
+<p *ngIf="!event" class="p-text-center p-mt-4">
+  <i class="pi pi-spin pi-spinner p-mr-2"></i> Loading event...
+</p>

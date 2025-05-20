@@ -1,6 +1,9 @@
 # 🛰️ Situational Awareness System (SAS) - Frontend
 
 This is the frontend for the **Situational Awareness System (SAS)** — a geospatial platform designed to visualize and track real-world events like crimes and disasters using a map-based interface. The platform enables public users, registered users, and monitors to interact with daily and historical event data.
+----
+![alt text](public/image.png)
+
 
 ## 🌐 Live Demo
 
