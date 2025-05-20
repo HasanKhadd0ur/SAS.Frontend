@@ -1,0 +1,32 @@
+.topic-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.topic-card {
+  background: var(--surface-card);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topic-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.topic-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+}

@@ -65,4 +65,15 @@ export class EventService {
   getMessagesByEvent(eventId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${eventId}/messages`);
   }
+  getDailyEvent():Observable<Event[]>{
+    const now = new Date();
+
+    const todayMidnight = new Date();
+  
+    todayMidnight.setDate(now.getDate() - 2); // set to start of today
+
+
+    return this.getEventsUpdatedAfter(todayMidnight);
+
+  }
 }
