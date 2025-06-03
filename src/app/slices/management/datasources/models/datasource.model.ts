@@ -6,6 +6,7 @@ export interface DataSource {
   domainId: string;
   platformId: string;
   limit: number;
+  lastTimeScraped: Date;
 }
 
 export interface AddDataSourceCommand {
