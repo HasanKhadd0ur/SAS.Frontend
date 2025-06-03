@@ -1,0 +1,21 @@
+<p-dialog header="Edit Scraping Domain" [(visible)]="display" [modal]="true" [closable]="true" [responsive]="true" [style]="{width: '400px'}">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Name</label>
+        <input id="name" type="text" pInputText formControlName="name" />
+      </div>
+      <div class="p-field">
+        <label for="normalisedName">Normalized Name</label>
+        <input id="normalisedName" type="text" pInputText formControlName="normalisedName" />
+      </div>
+      <div class="p-field">
+        <label for="description">Description</label>
+        <textarea id="description" pInputTextarea formControlName="description"></textarea>
+      </div>
+    </div>
+    <p-footer>
+      <button type="submit" pButton label="Update" [disabled]="form.invalid"></button>
+    </p-footer>
+  </form>
+</p-dialog>
