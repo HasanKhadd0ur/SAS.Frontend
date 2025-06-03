@@ -1,0 +1,39 @@
+<p-card header="Event History">
+  <!-- Date selection and load button -->
+  <div class="p-d-flex p-ai-center p-mb-3">
+    <p-calendar [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" placeholder="Choose date" showIcon></p-calendar>
+    <button pButton class="p-ml-2" label="Load Events" icon="pi pi-search" (click)="onLoadEvents()"></button>
+  </div>
+
+  <!-- Event list -->
+  <div *ngIf="pagedEvents.length > 0; else noData" class="event-list">
+    <div class="event-card" *ngFor="let event of pagedEvents">
+      <div class="event-header">
+        <div class="event-title">
+          <i class="pi pi-bolt event-icon"></i> {{ event.eventInfo.title }}
+        </div>
+        <span class="event-status" [ngClass]="getStatusClass(event.status)">
+          {{ event.status || 'Under Review' }}
+        </span>
+      </div>
+
+      <div class="event-summary">
+        {{ event.eventInfo.summary || 'No summary available.' }}
+      </div>
+
+      <div class="event-meta">
+        <span><i class="pi pi-calendar"></i> {{ event.createdAt | date: 'shortDate' }}</span>
+        <span *ngIf="event.topic"><i class="pi pi-tag"></i> {{ event.topic.name }}</span>
+      </div>
+    </div>
+
+    <!-- Load more button -->
+    <button *ngIf="currentIndex < events.length" pButton label="Load More" class="p-mt-3" (click)="loadMore()"></button>
+  </div>
+
+  <!-- No data template -->
+  <ng-template #noData>
+    <p *ngIf="selectedDate">No events found for the selected date.</p>
+    <p *ngIf="!selectedDate">Please select a date and click "Load Events".</p>
+  </ng-template>
+</p-card>
