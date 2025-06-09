@@ -47,7 +47,7 @@
       const todayMidnight = new Date();
 
       
-      todayMidnight.setHours(now.getHours() - 12); // set to start of today
+      todayMidnight.setHours(now.getHours() - 24); // set to start of today
 
         this.eventService.getEventsUpdatedAfter(todayMidnight).subscribe({
         next: (events: Event[]) => {

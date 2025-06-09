@@ -29,7 +29,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Live Map', icon: 'pi pi-fw pi-id-card', routerLink: ['/map/live'] },
                     { label: 'Daily Events', icon: 'pi pi-fw pi-check-square', routerLink: ['/events/daily-events'] },
                     { label: 'Near Me', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
-                    { label: 'What Happpen Today', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/events/tody-report'] },
+                    { label: 'What Happpen Today', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/events/today/summary'] },
                     { label: 'Back to History', icon: 'pi pi-fw pi-box', routerLink: ['/events/history'] },
                 ]
             },
