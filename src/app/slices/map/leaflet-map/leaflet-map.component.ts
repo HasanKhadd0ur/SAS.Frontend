@@ -47,9 +47,9 @@
       const todayMidnight = new Date();
 
       
-      todayMidnight.setDate(now.getDate() - 2); // set to start of today
+      todayMidnight.setHours(now.getHours() - 24); // set to start of today
 
-      this.eventService.getEventsUpdatedAfter(todayMidnight).subscribe({
+        this.eventService.getEventsUpdatedAfter(todayMidnight).subscribe({
         next: (events: Event[]) => {
           console.log (events)
           this.addMarkers(events);
@@ -91,7 +91,7 @@ private addMarkers(events: Event[]): void {
     // Create HTML content for popup: list event titles and statuses
     let popupContent = eventsToShow.map(e => {
       const status = e.status ?? 'Under Review';
-      return `<div><b>${e.eventInfo.title}</b><br>Status: ${status}</div>`;
+      return `<div><b>${e.eventInfo.title}</b><br></div>`;
     }).join('<hr style="margin:4px 0">');
 
     // If there are more than 5 events, show "... and X more"

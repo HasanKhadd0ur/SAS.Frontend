@@ -1,0 +1,45 @@
+<p-card header="Data Sources">
+  <div *ngIf="pagedDataSources.length > 0; else noSources" 
+       class="data-source-card-container"
+       infiniteScroll 
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="300"
+       (scrolled)="loadMore()">
+
+    <div class="data-source-card" *ngFor="let ds of pagedDataSources">
+      
+      <!-- Header -->
+      <div class="ds-header">
+        <div class="ds-title-section">
+          <i class="pi pi-database ds-icon"></i>
+          <span class="ds-title">Source : {{ ds.name }}</span>
+        </div>
+        <span class="ds-limit">Limit: {{ ds.limit }}</span>
+      </div>
+
+      <!-- Metadata Body -->
+      <div class="ds-body">
+        <p><strong>Target:</strong> {{ ds.target }}</p>
+        <p><strong>Platform:</strong> {{ getPlatformName(ds.platformId) }}</p>
+        <p><strong>Last Time Scraped:</strong> {{ ds.lastTimeScraped | date: 'medium' }}</p>
+
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="ds-footer">
+        <button pButton icon="pi pi-pencil" label="Edit" 
+                class="p-button-sm p-button-outlined" 
+                (click)="onEdit(ds)">
+        </button>
+        <button pButton icon="pi pi-trash" label="Delete" 
+                class="p-button-sm p-button-danger p-button-outlined" 
+                (click)="confirmDelete(ds)">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noSources>
+    <p>No data sources found.</p>
+  </ng-template>
+</p-card>

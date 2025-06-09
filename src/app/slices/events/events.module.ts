@@ -12,20 +12,31 @@ import { TagModule } from 'primeng/tag';
 import { MenuModule } from 'primeng/menu';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventHistoryComponent } from './event-history/event-history.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
+import { TodaySummaryComponent } from './today-summary/today-summary.component';
+import { MarkdownModule } from 'ngx-markdown';
+
 
 @NgModule({
   declarations: [
     DailyEventsComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    EventHistoryComponent,
+    TodaySummaryComponent
   ],
   imports: [
     CommonModule,
+     FormsModule, 
     EventsRoutingModule,
     ListboxModule,
     TableModule,
     CardModule,		
     MenubarModule,
+    CalendarModule,
     TagModule,
+    MarkdownModule.forRoot(),
     InfiniteScrollModule,
     ButtonModule,
   ]

@@ -2,12 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private baseUrl = 'https://localhost:44354/api/events';
+  private readonly baseUrl = `${environment.SERVER_URL}/Events`;
 
   constructor(private http: HttpClient) {}
 
@@ -62,6 +63,11 @@ export class EventService {
     return this.http.get<Event[]>(`${this.baseUrl}/by-date`, { params });
   }
 
+getTodaySummary(): Observable<string> {
+  return this.http.get(`${this.baseUrl}/summary/today`, {
+    responseType: 'text',
+  });
+}
   getMessagesByEvent(eventId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${eventId}/messages`);
   }

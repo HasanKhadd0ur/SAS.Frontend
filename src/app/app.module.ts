@@ -16,8 +16,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

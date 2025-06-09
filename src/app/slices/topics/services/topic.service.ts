@@ -7,8 +7,8 @@ import { Topic } from '../../events/models/topic.model';
 
 @Injectable({ providedIn: 'root' })
 export class TopicService {
-  private readonly apiUrl = 'https://localhost:44354/api/topics';
-  private baseUrl = 'https://localhost:44354/api/';
+  private readonly apiUrl = 'https://localhost:7165/api/topics';
+  private baseUrl = 'https://localhost:7165/api/';
 
   constructor(private http: HttpClient) {}
 

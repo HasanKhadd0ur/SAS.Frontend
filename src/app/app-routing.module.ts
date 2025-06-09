@@ -20,6 +20,9 @@ const routes: Routes = [
       { path: 'map', loadChildren: () => import('./slices/map/map.module').then(m => m.MapModule) },
       { path: 'events', loadChildren: () => import('./slices/events/events.module').then(m => m.EventsModule) },
       { path: 'topics', loadChildren: () => import('./slices/topics/topics.module').then(m => m.TopicsModule) },
+      { path: 'data-sources', loadChildren: () => import('./slices/management/datasources/datasources.module').then(m => m.DatasourcesModule) },
+      { path: 'scraping-domains', loadChildren: () => import('./slices/management/scraping-domains/scraping-domains.module').then(m => m.ScrapingDomainsModule) },
+      { path: 'platforms', loadChildren: () => import('./slices/management/platforms/platforms.module').then(m => m.PlatformsModule) },
            
     ]
   },

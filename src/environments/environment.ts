@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
     URLAPI: 'http://localhost:9090/api',
+    SERVER_URL:'https://localhost:44354/api'
 };
 
-/*
+/*44327
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

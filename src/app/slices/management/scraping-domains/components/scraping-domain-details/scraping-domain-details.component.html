@@ -1,0 +1,13 @@
+<h2>Scraping Domain Details</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="domain && !loading">
+  <p><strong>Name:</strong> {{ domain.name }}</p>
+  <p><strong>Normalized:</strong> {{ domain.normalisedName }}</p>
+  <p><strong>Description:</strong> {{ domain.description }}</p>
+</div>
+
+<div *ngIf="!domain && !loading">
+  <p>Domain not found.</p>
+</div>

@@ -1,0 +1,50 @@
+<!-- src/app/datasources/components/data-source/data-source.component.html -->
+
+<form [formGroup]="dataSourceForm" (ngSubmit)="onSubmit()" class="p-fluid">
+  <div class="p-field">
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name" />
+    <small *ngIf="dataSourceForm.controls['name'].invalid && dataSourceForm.controls['name'].touched" class="p-error">
+      Name is required.
+    </small>
+  </div>
+
+  <div class="p-field">
+    <label for="target">Target</label>
+    <input id="target" type="text" formControlName="target" />
+    <small *ngIf="dataSourceForm.controls['target'].invalid && dataSourceForm.controls['target'].touched" class="p-error">
+      Target is required.
+    </small>
+  </div>
+
+  <div class="p-field">
+    <label for="domainId">Domain</label>
+    <select id="domainId" formControlName="domainId">
+      <option value="" disabled>Select a domain</option>
+      <option *ngFor="let domain of domains" [value]="domain.id">{{ domain.name }}</option>
+    </select>
+    <small *ngIf="dataSourceForm.controls['domainId'].invalid && dataSourceForm.controls['domainId'].touched" class="p-error">
+      Domain is required.
+    </small>
+  </div>
+
+  <div class="p-field">
+    <label for="platformId">Platform</label>
+    <select id="platformId" formControlName="platformId">
+      <option value="" disabled>Select a platform</option>
+      <option *ngFor="let platform of platforms" [value]="platform.id">{{ platform.name }}</option>
+    </select>
+    <small *ngIf="dataSourceForm.controls['platformId'].invalid && dataSourceForm.controls['platformId'].touched" class="p-error">
+      Platform is required.
+    </small>
+  </div>
+
+  <div class="p-field">
+    <button type="submit" [disabled]="dataSourceForm.invalid" class="p-button p-component p-button-success">
+      {{ isEditMode ? 'Update' : 'Add' }} Data Source
+    </button>
+    <button type="button" (click)="onCancel()" class="p-button p-component p-button-secondary" style="margin-left: 8px;">
+      Cancel
+    </button>
+  </div>
+</form>

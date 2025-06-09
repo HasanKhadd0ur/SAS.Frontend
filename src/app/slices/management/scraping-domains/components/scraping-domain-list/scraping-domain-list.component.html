@@ -1,0 +1,43 @@
+<p-card header="Scraping Domains">
+  <div *ngIf="pagedScrapingDomains.length > 0; else noSources" 
+       class="data-source-card-container"
+       infiniteScroll 
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="300"
+       (scrolled)="loadMore()">
+
+    <div class="data-source-card" *ngFor="let ds of pagedScrapingDomains">
+      
+      <!-- Header -->
+      <div class="ds-header">
+        <div class="ds-title-section">
+          <i class="pi pi-database ds-icon"></i>
+          <span class="ds-title">Source : {{ ds.name }}</span>
+        </div>
+        <span class="ds-limit">#</span>
+      </div>
+
+      <!-- Metadata Body -->
+      <div class="ds-body">
+        <p> {{ ds.description }} , {{ ds.normalisedName}}</p>
+
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="ds-footer">
+        <button pButton icon="pi pi-pencil" label="Edit" 
+                class="p-button-sm p-button-outlined" 
+                (click)="onEdit(ds)">
+        </button>
+        <button pButton icon="pi pi-trash" label="Delete" 
+                class="p-button-sm p-button-danger p-button-outlined" 
+                (click)="confirmDelete(ds)">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noSources>
+    <p>No Scraping Domains found.</p>
+  </ng-template>
+</p-card>
