@@ -9,12 +9,15 @@ const routes: Routes = [
   {
         path: '',
         component: LandingComponent
-      },
-      
+  },
+  { path: 'auth',loadChildren: () => import('./slices/identity/identity.module').then(m => m.IdentityModule)
+    
+  },    
   {
     path: '',
     component: AppLayoutComponent,
     children: [
+      
       
       { path: 'home', component: DashboardComponent },
       { path: 'map', loadChildren: () => import('./slices/map/map.module').then(m => m.MapModule) },
