@@ -21,7 +21,7 @@ import { MenubarModule } from 'primeng/menubar';
     AppComponent,
     LandingComponent,
     NotfoundComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
