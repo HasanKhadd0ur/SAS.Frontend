@@ -54,39 +54,33 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
 
     const cartoDark = L.tileLayer(
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-      {
-        attribution: '© CartoDB',
-      }
+      { attribution: '© CartoDB' }
     );
 
     const satellite = L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      {
-        attribution: '© Esri',
-      }
+      { attribution: '© Esri' }
     );
 
     this.map = L.map('map', {
       fullscreenControl: true,
-      fullscreenControlOptions: {
-        position: 'topright',
-      },
+      fullscreenControlOptions: { position: 'topright' },
       layers: [osm],
     }).setView([33.5138, 36.2765], 5);
 
     delete (L.Icon.Default.prototype as any)._getIconUrl;
 
     L.Icon.Default.mergeOptions({
-      iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+      iconRetinaUrl: 'assets/leaflet/icons8-protest.png',
       iconUrl: 'assets/leaflet/marker-icon.png',
       shadowUrl: 'assets/leaflet/marker-shadow.png',
     });
 
     const baseMaps = {
-      'OpenStreetMap': osm,
-      'Topographic': topo,
+      OpenStreetMap: osm,
+      Topographic: topo,
       'Carto Dark': cartoDark,
-      'Satellite': satellite,
+      Satellite: satellite,
     };
     L.control.layers(baseMaps, {}, { position: 'topright' }).addTo(this.map);
 
@@ -156,6 +150,7 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
       }
 
       const iconUrl = eventsAtLocation[0]?.topic?.iconUrl;
+
       const icon = iconUrl
         ? L.icon({
             iconUrl: iconUrl,
@@ -165,7 +160,7 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
             shadowUrl: 'assets/leaflet/marker-shadow.png',
             shadowSize: [40, 40],
           })
-        : undefined;
+        : new L.Icon.Default();
 
       const marker = L.marker([lat, lng], { icon }).bindPopup(popupContent);
       marker.addTo(this.map);
