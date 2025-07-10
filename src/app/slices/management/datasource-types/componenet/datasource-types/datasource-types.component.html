@@ -1,0 +1,57 @@
+<p-card header="Data Source Types">
+  <div class="header-actions">
+    <button pButton label="Create New Type" icon="pi pi-plus" (click)="showCreateForm = true"></button>
+  </div>
+
+  <div *ngIf="types.length > 0; else noTypes" class="data-source-card-container-two-columns">
+    <div class="data-source-card" *ngFor="let type of types">
+      <div class="ds-header">
+        <div class="ds-title-section">
+          <i class="pi pi-tag ds-icon"></i>
+          <span class="ds-title">Type: {{ type.name }}</span>
+        </div>
+      </div>
+      <div class="ds-body">
+        <p>
+          <span class="p-badge p-component p-badge-info" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3em 0.6em; border-radius: 10px;">
+            <i class="pi pi-hashtag"></i>
+            {{ type.name }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noTypes>
+    <p>No data source types found.</p>
+  </ng-template>
+</p-card>
+
+<!-- Custom Modal -->
+<div class="custom-modal-backdrop" *ngIf="showCreateForm">
+  <div class="custom-modal">
+    <div class="custom-modal-header">
+      <h3>Add New Data Source Type</h3>
+      <button type="button" class="close-button" (click)="showCreateForm = false">&times;</button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="custom-modal-form">
+
+      <div class="p-field">
+        <label for="name">Type Name</label>
+        <input id="name" type="text" pInputText [formControl]="form.get('name')" autofocus />
+        <small *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="p-error">
+          Name is required.
+        </small>
+      </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+        <i class="bi bi-check-circle me-1"></i> Submit
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="showCreateForm = false">
+        <i class="bi bi-x-circle me-1"></i> Cancel
+      </button>
+    </div>
+
+    </form>
+  </div>
+</div>

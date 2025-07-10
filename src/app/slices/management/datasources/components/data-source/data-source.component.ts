@@ -7,7 +7,7 @@ import { DataSourcesService } from '../../servies/datasources.service';
 import { ScrapingDomainsService } from '../../../scraping-domains/services/scraping-domains.service';
 import { DataSource, AddDataSourceCommand, UpdateDataSourceCommand } from '../../models/datasource.model';
 import { MessageService } from 'primeng/api';
-import { PlatformService } from '../../../platforms/services/platforms.service';
+import { PlatformsService } from '../../../platforms/services/platforms.service';
 
 @Component({
   selector: 'app-data-source',
@@ -29,7 +29,7 @@ export class DataSourceComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dataSourcesService: DataSourcesService,
-    private platformsService: PlatformService,
+    private platformsService: PlatformsService,
     private scrapingDomainsService: ScrapingDomainsService,
     private messageService: MessageService
   ) {

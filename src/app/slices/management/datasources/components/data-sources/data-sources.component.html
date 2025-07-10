@@ -21,8 +21,13 @@
       <div class="ds-body">
         <p><strong>Target:</strong> {{ ds.target }}</p>
         <p><strong>Platform:</strong> {{ getPlatformName(ds.platformId) }}</p>
+        <p>
+          <span *ngIf="ds.dataSourceType" class="p-badge p-component p-badge-info" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3em 0.6em; border-radius: 10px;">
+            <i class="pi pi-tag"></i> <!-- Choose an icon relevant to your type -->
+            {{ ds.dataSourceType.name }}
+          </span>
+        </p>
         <p><strong>Last Time Scraped:</strong> {{ ds.lastTimeScraped | date: 'medium' }}</p>
-
       </div>
 
       <!-- Footer Actions -->

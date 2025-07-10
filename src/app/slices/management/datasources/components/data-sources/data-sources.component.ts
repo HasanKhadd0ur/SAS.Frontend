@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { forkJoin } from 'rxjs';
+
 import { DataSource } from '../../models/datasource.model';
 import { DataSourcesService } from '../../servies/datasources.service';
-import { PlatformService } from '../../../platforms/services/platforms.service';
+import { PlatformsService } from '../../../platforms/services/platforms.service';
 import { Platform } from '../../../platforms/models/platforms.model';
 
 @Component({
@@ -19,45 +21,40 @@ export class DataSourcesComponent implements OnInit {
   batchSize = 6;
   currentIndex = 0;
 
-
   constructor(
     private dataSourcesService: DataSourcesService,
+    private platformService: PlatformsService,
     private messageService: MessageService,
-    private platformsService: PlatformService,
     private confirmationService: ConfirmationService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-
-    this.platformsService.getAll().subscribe({
-      next: (platforms) => {
-        console.log(platforms);
-
-        this.platforms = platforms;
-        this.loadDataSources();
-      },
-      error: () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load platforms' });
-      }
-    });
+    this.loadDataAndPlatforms();
   }
 
-  loadDataSources() {
-    this.dataSourcesService.getAll().subscribe({
-      next: (sources) => {
-        this.dataSources = sources.map(ds => ({
-        ...ds,
-        
-        lastTimeScraped: ds.lastTimeScraped ?? new Date()
-      }));
+  loadDataAndPlatforms(): void {
+    forkJoin({
+      dataSources: this.dataSourcesService.getAll(),
+      platforms: this.platformService.getAll()
+    }).subscribe({
+      next: ({ dataSources, platforms }) => {
+        this.platforms = platforms;
+
+        this.dataSources = dataSources.map(ds => ({
+          ...ds,
+          lastTimeScraped: ds.lastTimeScraped ?? new Date(),
+          platform: platforms.find(p => p.id === ds.platformId)
+        }));
+
+        this.pagedDataSources = [];
+        this.currentIndex = 0;
         this.loadMore();
       },
       error: () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load data sources' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load data sources or platforms' });
       }
     });
-
   }
 
   getPlatformName(id: string): string {
@@ -97,6 +94,6 @@ export class DataSourcesComponent implements OnInit {
     this.dataSources = [];
     this.pagedDataSources = [];
     this.currentIndex = 0;
-    this.ngOnInit();
+    this.loadDataAndPlatforms();
   }
 }
