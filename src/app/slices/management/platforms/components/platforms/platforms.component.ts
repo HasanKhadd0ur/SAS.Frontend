@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { PlatformService } from '../../../platforms/services/platforms.service';
+import { PlatformsService } from '../../../platforms/services/platforms.service';
 import { Platform } from '../../../platforms/models/platforms.model';
 
 @Component({
@@ -19,14 +19,16 @@ export class PlatformsComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private platformsService: PlatformService,
+    private platformsService: PlatformsService,
   ) { }
 
   ngOnInit(): void {
 
+    
     this.platformsService.getAll().subscribe({
       next: (platforms) => {
         this.platforms = platforms;
+        this.loadMore();
       },
       error: () => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load platforms' });

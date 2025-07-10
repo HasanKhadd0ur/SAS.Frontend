@@ -3,15 +3,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Platform } from '../models/platforms.model';
-import { environment } from 'src/environments/environment';
+import { ConfigService } from 'src/app/core/services/config/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlatformService {
-  private readonly apiUrl = `${environment.SERVER_URL}/Platforms`;
+export class PlatformsService {
+  private readonly apiUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = `${this.configService.getManagementServiceUrl()}/Platforms`;
+  }
 
   getAll(pageNumber?: number, pageSize?: number): Observable<Platform[]> {
     let params: any = {};
