@@ -89,3 +89,38 @@
   background-color: #e2e3e5;
   color: #6c757d;
 }
+.event-list {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.event-card {
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+.badge.status-published {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.badge.status-draft {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.badge.status-under-review {
+  background-color: #17a2b8;
+  color: #fff;
+}

@@ -1,43 +1,172 @@
-<p-card header="Daily Events">
-  <div *ngIf="pagedEvents.length > 0; else noEvents" class="event-card-container" infiniteScroll 
+<style>
+  /* Container */
+  .events-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .events-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Event Card */
+  .event-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+  }
+  .event-card:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+  }
+
+  /* Header */
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .event-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .event-title i {
+    color: #f39c12; /* warm gold */
+    font-size: 1.5rem;
+  }
+
+  /* Status Badge */
+  .event-status {
+    background-color: #3498db;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* Summary */
+  .event-summary {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    min-height: 3rem;
+    white-space: pre-wrap;
+  }
+
+  /* Metadata */
+  .event-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: #95a5a6;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .event-meta i {
+    margin-right: 0.4rem;
+    color: #2980b9;
+  }
+
+  /* Footer */
+  .event-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .view-button {
+    background-color: transparent;
+    border: 2px solid #2980b9;
+    color: #2980b9;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+  }
+  .view-button:hover {
+    background-color: #2980b9;
+    color: #fff;
+  }
+  .view-button i {
+    font-size: 1.1rem;
+  }
+
+  /* No Events */
+  .no-events {
+    text-align: center;
+    font-style: italic;
+    color: #bdc3c7;
+    font-size: 1.1rem;
+    padding: 3rem 1rem;
+  }
+</style>
+
+<div class="events-container">
+  <div class="events-header">Daily Events</div>
+
+  <div *ngIf="pagedEvents.length > 0; else noEvents" 
+       infiniteScroll 
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="300"
        (scrolled)="loadMore()">
 
-    <div class="event-card" *ngFor="let event of pagedEvents">
-      <!-- Header -->
+    <div *ngFor="let event of pagedEvents" class="event-card" (click)="onViewEvent(event)">
       <div class="event-header">
-        <div class="event-title-section">
-          <i class="pi pi-bolt event-icon"></i>
-          <span class="event-title">{{ event.eventInfo.title }}</span>
+        <div class="event-title">
+          <i class="fas fa-bolt"></i>
+          <span>{{ event.eventInfo.title }}</span>
         </div>
         <span class="event-status" [ngClass]="getStatusClass(event.status)">
           {{ event.status || 'Under Review' }}
         </span>
       </div>
 
-      <!-- Summary -->
       <div class="event-summary">
         {{ event.eventInfo.summary || 'No summary available.' }}
       </div>
 
-      <!-- Metadata -->
       <div class="event-meta">
-        <span><i class="pi pi-calendar"></i> {{ event.createdAt | date: 'mediumDate' }}</span>
-        <span *ngIf="event.topic"><i class="pi pi-tag"></i> {{ event.topic.name }}</span>
+        <span><i class="fas fa-calendar-alt"></i> {{ event.createdAt | date: 'mediumDate' }}</span>
+        <span *ngIf="event.topic"><i class="fas fa-tag"></i> {{ event.topic.name }}</span>
       </div>
 
-      <!-- Footer -->
       <div class="event-footer">
-        <button pButton icon="pi pi-eye" label="View" class="p-button-sm p-button-outlined" 
-                (click)="onViewEvent(event)" [routerLink]="['/events/view', event.id]">
+        <button class="view-button" (click)="onViewEvent(event); $event.stopPropagation()" [routerLink]="['/events/view', event.id]">
+          <i class="fas fa-eye"></i> View
         </button>
       </div>
     </div>
-
   </div>
 
   <ng-template #noEvents>
-    <p>No events for today.</p>
+    <div class="no-events">No events for today.</div>
   </ng-template>
-</p-card>
+</div>
