@@ -1,0 +1,22 @@
+<div class="container mt-4" *ngIf="!loading && dataSource">
+  <h3 class="mb-4">Data Source Details</h3>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">{{ dataSource.name }}</h5>
+
+      <p><strong>Target:</strong> {{ dataSource.target }}</p>
+      <p><strong>Domain:</strong> {{ domainName || 'Loading...' }}</p>
+      <p><strong>Platform:</strong> {{ platformName || 'Loading...' }}</p>
+      <p><strong>Data Source Type:</strong> {{ typeName || 'Loading...' }}</p>
+      <p><strong>Limit:</strong> {{ dataSource.limit ?? 'Not Set' }}</p>
+      <p><strong>Last Scraped:</strong> {{ dataSource.lastTimeScraped | date:'medium' }}</p>
+
+      <button class="btn btn-secondary mt-3" (click)="router.navigate(['/data-sources'])">Back to List</button>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="loading" class="text-center mt-5">
+  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i> Loading...
+</p>
