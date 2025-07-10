@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as L from 'leaflet';
-import { UserInterestService } from '../../services/user-interest.service';
+import { UserInterestService } from '../../service/user-interest.service';
 import { MessageService } from 'primeng/api';
 
 // Fix Leaflet's default icon paths (otherwise markers won't show properly)
