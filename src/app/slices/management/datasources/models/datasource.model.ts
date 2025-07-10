@@ -1,3 +1,4 @@
+import { DataSourceType } from "../../datasource-types/models/datasource-type.model";
 
 export interface DataSource {
   id: string;
@@ -6,6 +7,7 @@ export interface DataSource {
   domainId: string;
   platformId: string;
   limit: number;
+  dataSourceType: DataSourceType;
   lastTimeScraped: Date;
 }
 
