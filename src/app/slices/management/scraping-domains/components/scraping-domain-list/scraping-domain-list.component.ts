@@ -5,7 +5,7 @@ import { ScrapingDomainsService } from '../../services/scraping-domains.service'
 import { Platform } from '../../../platforms/models/platforms.model';
 import { DataSourcesService } from '../../../datasources/servies/datasources.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { PlatformService } from '../../../platforms/services/platforms.service';
+import { PlatformsService } from '../../../platforms/services/platforms.service';
 
 @Component({
   selector: 'app-scraping-domain-list',
@@ -27,7 +27,7 @@ export class ScrapingDomainListComponent implements OnInit {
     private dataSourcesService: DataSourcesService,
     private scrapingDomainService: ScrapingDomainsService,
     private messageService: MessageService,
-    private platformsService: PlatformService,
+    private platformsService: PlatformsService,
     private confirmationService: ConfirmationService,
     private router: Router
   ) { }
