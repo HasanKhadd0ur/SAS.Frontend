@@ -3,14 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
 import { environment } from 'src/environments/environment';
+import { ConfigService } from 'src/app/core/services/config/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private readonly baseUrl = `${environment.SERVER_URL}/Events`;
 
-  constructor(private http: HttpClient) {}
+  private readonly baseUrl = `${this.config.getEventServiceUrl()}/Events`;
+
+  constructor(private http: HttpClient,
+              private config: ConfigService  ) {}
 
   getAllEvents(pageNumber?: number, pageSize?: number): Observable<Event[]> {
     let params = new HttpParams();

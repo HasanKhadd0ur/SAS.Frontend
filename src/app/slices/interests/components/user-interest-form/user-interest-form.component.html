@@ -1,0 +1,112 @@
+<div class="container pt-3 px-3">
+  <div class="row g-4 align-items-start">
+
+    <!-- Map on the left -->
+    <div class="col-12 col-md-7">
+      <div
+        id="map"
+        style="height: 450px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+      ></div>
+    </div>
+
+    <!-- Form on the right -->
+    <div class="col-12 col-md-5">
+      <h3 class="mb-4 text-center">📍 Define Your Interest Area</h3>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+        <!-- Interest Name -->
+        <div class="mb-3">
+          <label for="interestName" class="form-label">Interest Name</label>
+          <input
+            id="interestName"
+            type="text"
+            class="form-control"
+            formControlName="interestName"
+            [class.is-invalid]="
+              form.get('interestName')?.invalid && form.get('interestName')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              form.get('interestName')?.invalid && form.get('interestName')?.touched
+            "
+            class="invalid-feedback"
+          >
+            Interest Name is required.
+          </div>
+        </div>
+
+        <!-- Radius -->
+        <div class="mb-3">
+          <label for="radiusInKm" class="form-label">Radius (km)</label>
+          <input
+            id="radiusInKm"
+            type="number"
+            class="form-control"
+            formControlName="radiusInKm"
+            (input)="onRadiusChange()"
+            min="1"
+            [class.is-invalid]="
+              form.get('radiusInKm')?.invalid && form.get('radiusInKm')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              form.get('radiusInKm')?.invalid && form.get('radiusInKm')?.touched
+            "
+            class="invalid-feedback"
+          >
+            Radius must be at least 1 km.
+          </div>
+        </div>
+
+        <!-- Lat / Lng -->
+        <div class="mb-3">
+          <label class="form-label">Location Coordinates</label>
+          <div class="d-flex gap-2">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="latitude"
+              readonly
+              style="flex: 1"
+            />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="longitude"
+              readonly
+              style="flex: 1"
+            />
+          </div>
+        </div>
+
+        <!-- Hidden fields for City/Country -->
+        <div style="display: none;">
+          <input type="text" formControlName="city" />
+          <input type="text" formControlName="country" />
+        </div>
+
+        <!-- Show City / Country -->
+        <div *ngIf="form.value.city || form.value.country" class="mb-3">
+          <p><strong>City:</strong> {{ form.value.city || 'N/A' }}</p>
+          <p><strong>Country:</strong> {{ form.value.country || 'N/A' }}</p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg"
+            [disabled]="form.invalid"
+          >
+            Create Interest
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

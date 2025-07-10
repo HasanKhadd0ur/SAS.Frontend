@@ -1,27 +1,25 @@
-// src/app/scraping-domains/scraping-domain.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';  // Import environment
 import { ScrapingDomain, CreateScrapingDomainCommand, UpdateScrapingDomainCommand } from '../models/scraping-domains.model';
-
+import { ConfigService } from 'src/app/core/services/config/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScrapingDomainsService {
-  // Use SERVER_URL from environment
-  private baseUrl = `${environment.SERVER_URL}/scrapingdomains`;
+  private baseUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.baseUrl = `${this.configService.getManagementServiceUrl()}/scrapingdomains`;
+  }
 
   getAll(pageNumber?: number, pageSize?: number): Observable<ScrapingDomain[]> {
-    let url = this.baseUrl;
     const params: any = {};
     if (pageNumber) params.pageNumber = pageNumber;
     if (pageSize) params.pageSize = pageSize;
 
-    return this.http.get<ScrapingDomain[]>(url, { params });
+    return this.http.get<ScrapingDomain[]>(this.baseUrl, { params });
   }
 
   getById(id: string): Observable<ScrapingDomain> {

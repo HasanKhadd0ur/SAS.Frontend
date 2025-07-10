@@ -38,12 +38,14 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'ALl Topic', icon: 'pi pi-fw pi-table', routerLink: ['/topics'], badge: 'NEW' },
                     { label: 'Topic Map', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-                    { label: 'My Intereset', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
+                    { label: 'My Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests'], target: '_blank' },
+                    { label: 'Add Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests/add'], target: '_blank' },
                 ]
             },            {
                 label: 'Management',
                 items: [
                     { label: 'ALl Sources', icon: 'pi pi-fw pi-table', routerLink: ['/data-sources'], badge: 'NEW' },
+                    { label: 'ALl Source Types', icon: 'pi pi-fw pi-table', routerLink: ['/data-source-types'], badge: 'NEW' },
                     { label: 'Scraping Domains', icon: 'pi pi-fw pi-eye', routerLink: ['/scraping-domains'], badge: 'NEW' },
                     { label: 'Platfroms', icon: 'pi pi-fw pi-globe', routerLink: ['/platforms'], badge: 'NEW' },
                 ]

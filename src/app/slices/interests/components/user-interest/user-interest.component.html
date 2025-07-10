@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <h4 class="fw-bold text-center mb-4">My Interest Areas</h4>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let interest of interests">
+      <div class="card shadow-sm h-100">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title">{{ interest.interestName }}</h5>
+            <p class="card-text mb-1">
+              <strong>Radius:</strong> {{ interest.radiusInKm }} km
+            </p>
+            <p class="card-text">
+              ({{ interest.location.country }}, {{ interest.location.city }})
+            </p>
+          </div>
+          <div class="d-flex gap-2 mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-primary flex-grow-1"
+              (click)="showOnMap(interest)"
+            >
+              Zoom to Interest
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger flex-grow-1"
+              (click)="confirmDelete(interest)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container mt-4">
+    <h5 class="text-center mb-3">Map View: All Interests</h5>
+    <div
+      id="interestMap"
+      style="height: 500px; width: 100%; max-width: 900px; margin: 0 auto"
+    ></div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div
+  class="modal fade show"
+  tabindex="-1"
+  [ngClass]="{ show: showDeleteModal }"
+  [ngStyle]="{ display: showDeleteModal ? 'block' : 'none', backgroundColor: 'rgba(0,0,0,0.5)' }"
+  role="dialog"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete Interest</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="cancelDelete()"></button>
+      </div>
+      <div class="modal-body" *ngIf="interestToDelete">
+        <p>Are you sure you want to delete the interest area:</p>
+        <ul>
+          <li><strong>Name:</strong> {{ interestToDelete.interestName }}</li>
+          <li><strong>Radius:</strong> {{ interestToDelete.radiusInKm }} km</li>
+          <li><strong>Location:</strong> {{ interestToDelete.location.city }}, {{ interestToDelete.location.country }}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteInterest()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

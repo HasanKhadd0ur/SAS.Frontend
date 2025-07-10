@@ -1,0 +1,88 @@
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <!-- Left Panel: Registration Form -->
+    <div class="auth-form-section">
+      <div class="auth-form-box">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <h2 class="auth-title">Create Account</h2>
+          <p class="auth-subtitle">Fill the form below to create your account.</p>
+
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              id="firstName"
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              placeholder="Enter your first name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              id="lastName"
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Enter your last name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="userName">Username</label>
+            <input
+              id="userName"
+              type="text"
+              formControlName="userName"
+              class="form-control"
+              placeholder="Choose a username"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Enter a password"
+            />
+          </div>
+
+          <div *ngIf="errorMessage" class="form-error">
+            {{ errorMessage }}
+          </div>
+
+          <button type="submit" [disabled]="isLoading" class="btn-primary">
+            {{ isLoading ? 'Registering...' : 'Register' }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Right Panel: Info -->
+    <div class="auth-info-section">
+      <div class="auth-info-box">
+        <img src="assets/layout/images/logo-dark.svg" alt="Logo" class="logo-img" />
+        <p class="info-heading">Sign up for an account</p>
+        <h1 class="info-title">Join Us Today!</h1>
+        <p class="info-text">
+          Create your account and gain access to situational awareness features right away.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

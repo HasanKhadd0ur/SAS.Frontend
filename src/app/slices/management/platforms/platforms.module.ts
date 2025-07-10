@@ -23,7 +23,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   imports: [
     CommonModule,
       CommonModule,
-      DatasourcesRoutingModule,
       ButtonModule,
       DialogModule,
       ToastModule,    

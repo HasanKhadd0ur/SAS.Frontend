@@ -1,18 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AddDataSourceCommand, DataSource, UpdateDataSourceCommand } from '../models/datasource.model';
+import { ConfigService } from 'src/app/core/services/config/config.service';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataSourcesService {
-  // Use environment variable here
-  private readonly apiUrl = `${environment.SERVER_URL}/DataSources`;
 
-  constructor(private http: HttpClient) {}
+  private readonly apiUrl = `${this.config.getManagementServiceUrl()}/DataSources`;
+
+  constructor(private http: HttpClient,
+              private config: ConfigService) {}
 
   getAll(pageNumber?: number, pageSize?: number): Observable<DataSource[]> {
     let params = new HttpParams();

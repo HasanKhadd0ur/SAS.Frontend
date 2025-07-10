@@ -9,12 +9,15 @@ const routes: Routes = [
   {
         path: '',
         component: LandingComponent
-      },
-      
+  },
+  { path: 'auth',loadChildren: () => import('./slices/identity/identity.module').then(m => m.IdentityModule)
+    
+  },    
   {
     path: '',
     component: AppLayoutComponent,
     children: [
+      
       
       { path: 'home', component: DashboardComponent },
       { path: 'map', loadChildren: () => import('./slices/map/map.module').then(m => m.MapModule) },
@@ -23,6 +26,8 @@ const routes: Routes = [
       { path: 'data-sources', loadChildren: () => import('./slices/management/datasources/datasources.module').then(m => m.DatasourcesModule) },
       { path: 'scraping-domains', loadChildren: () => import('./slices/management/scraping-domains/scraping-domains.module').then(m => m.ScrapingDomainsModule) },
       { path: 'platforms', loadChildren: () => import('./slices/management/platforms/platforms.module').then(m => m.PlatformsModule) },
+      { path: 'data-source-types', loadChildren: () => import('./slices/management/datasource-types/datasource-types.module').then(m => m.DatasourceTypesModule) },
+      { path: 'user-interests', loadChildren: () => import('./slices/interests/interests.module').then(m => m.InterestsModule) },
            
     ]
   },

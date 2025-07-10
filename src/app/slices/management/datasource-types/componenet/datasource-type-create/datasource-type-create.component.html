@@ -1,0 +1,23 @@
+<p-card header="Add Data Source Type">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="p-fluid">
+
+    <div class="p-field">
+      <label for="name">Type Name</label>
+      <input id="name" type="text" pInputText [formControl]="form.get('name')" />
+      <small *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="p-error">
+        Name is required.
+      </small>
+    </div>
+
+    <div class="p-mt-3">
+      <button pButton type="submit" label="Submit" [disabled]="form.invalid" icon="pi pi-check"></button>
+    </div>
+
+  </form>
+
+  <div class="p-mt-3">
+    <a routerLink="/datasourcetypes">
+      <button pButton label="Back to List" icon="pi pi-arrow-left" class="p-button-secondary"></button>
+    </a>
+  </div>
+</p-card>

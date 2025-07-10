@@ -41,10 +41,18 @@
                 "node_modules/primeflex/primeflex.css",
                 "node_modules/primeng/resources/themes/saga-blue/theme.css",
                 "node_modules/leaflet/dist/leaflet.css",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+                "node_modules/leaflet/dist/leaflet.css",
+                "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css",
+                "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                 "src/styles.scss"
-                
-                ],
-            "scripts": []
+              ],
+            "scripts": [
+               "node_modules/leaflet/dist/leaflet.js",
+                "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js"
+
+            ]
           },
           "configurations": {
             "production": {

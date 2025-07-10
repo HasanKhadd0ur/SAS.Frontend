@@ -1,0 +1,68 @@
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <!-- Left Panel: Login Form -->
+    <div class="auth-form-section">
+      <div class="auth-form-box">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <h2 class="auth-title">Sign In</h2>
+          <p class="auth-subtitle">Please enter your credentials to sign in.</p>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              name="userName"
+              type="text"
+              [(ngModel)]="credentials.userName"
+              required
+              class="form-control"
+              placeholder="Enter your username"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              [(ngModel)]="credentials.password"
+              required
+              class="form-control"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div *ngIf="error" class="form-error">
+            {{ error }}
+          </div>
+
+          <button type="submit" class="btn-primary">Sign In</button>
+        
+          <!-- Google Login Button -->
+          <button type="button" class="btn btn-primary mt-2" (click)="loginWithGoogle()">
+            Sign in with Google
+          </button>
+
+          <!-- ✅ Register link -->
+          <p class="form-footer">
+            Don’t have an account?
+            <a routerLink="/auth/register" class="link">Register here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Right Panel: Branding Info -->
+    <div class="auth-info-section">
+      <div class="auth-info-box">
+        <img src="assets/layout/images/logo-dark.svg" alt="Logo" class="logo-img" />
+        <p class="info-heading">Sign in to your account</p>
+        <h1 class="info-title">Welcome Back!</h1>
+        <p class="info-text">
+          Please sign in to your account by completing the necessary fields below.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
