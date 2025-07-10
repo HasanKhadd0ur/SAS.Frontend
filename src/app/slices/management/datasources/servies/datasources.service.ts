@@ -27,8 +27,8 @@ export class DataSourcesService {
     return this.http.get<DataSource>(`${this.apiUrl}/${id}`);
   }
 
-  add(command: AddDataSourceCommand): Observable<DataSource> {
-    return this.http.post<DataSource>(this.apiUrl, command);
+  add(command: AddDataSourceCommand): Observable<string> {
+    return this.http.post<string>(this.apiUrl, command);
   }
 
   update(id: string, command: UpdateDataSourceCommand): Observable<DataSource> {

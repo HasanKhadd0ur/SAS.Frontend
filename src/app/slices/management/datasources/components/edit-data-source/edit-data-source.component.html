@@ -1,0 +1,94 @@
+<div *ngIf="loading" class="text-center my-5">
+  <i class="pi pi-spin pi-spinner" style="font-size: 2rem;"></i>
+  <p>Loading data source...</p>
+</div>
+
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" novalidate class="p-4 bg-light rounded shadow-sm" style="max-width: 600px; margin: auto;">
+
+  <h3 class="mb-4 text-center">Edit Data Source</h3>
+
+  <div class="mb-3">
+    <label for="name" class="form-label fw-semibold">Name *</label>
+    <input id="name" formControlName="name" type="text" class="form-control"
+      [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+    <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="invalid-feedback">
+      Name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="target" class="form-label fw-semibold">Target *</label>
+    <input id="target" formControlName="target" type="text" class="form-control"
+      [class.is-invalid]="form.get('target')?.invalid && form.get('target')?.touched" />
+    <div *ngIf="form.get('target')?.invalid && form.get('target')?.touched" class="invalid-feedback">
+      Target is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Domain *</label>
+    <p-autoComplete
+      formControlName="domain"
+      [suggestions]="domainSuggestions"
+      field="name"
+      optionLabel="name"
+      (completeMethod)="searchDomains($event)"
+      placeholder="Search domain"
+      [forceSelection]="true"
+      class="w-100"
+    ></p-autoComplete>
+    <div *ngIf="form.get('domain')?.invalid && form.get('domain')?.touched" class="text-danger mt-1 small">
+      Domain is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Platform *</label>
+    <p-autoComplete
+      formControlName="platform"
+      [suggestions]="platformSuggestions"
+      field="name"
+      optionLabel="name"
+      (completeMethod)="searchPlatforms($event)"
+      placeholder="Search platform"
+      [forceSelection]="true"
+      class="w-100"
+    ></p-autoComplete>
+    <div *ngIf="form.get('platform')?.invalid && form.get('platform')?.touched" class="text-danger mt-1 small">
+      Platform is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label fw-semibold">Data Source Type *</label>
+    <p-autoComplete
+      formControlName="type"
+      [suggestions]="typeSuggestions"
+      field="name"
+      optionLabel="name"
+      (completeMethod)="searchTypes($event)"
+      placeholder="Search type"
+      [forceSelection]="true"
+      class="w-100"
+    ></p-autoComplete>
+    <div *ngIf="form.get('type')?.invalid && form.get('type')?.touched" class="text-danger mt-1 small">
+      Type is required.
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+      <i class="pi pi-check"></i> Save
+    </button>
+
+    <div>
+      <button type="button" class="btn btn-outline-primary me-2" (click)="goToDetails()">
+        <i class="pi pi-eye"></i> View Details
+      </button>
+      <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+        <i class="pi pi-arrow-left"></i> Back to List
+      </button>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,5 @@
+#map:fullscreen {
+  height: 100vh !important;
+  width: 100vw !important;
+  z-index: 9999;
+}

@@ -16,6 +16,7 @@ export interface AddDataSourceCommand {
   target: string;
   domainId: string;
   platformId: string;
+  dataSourceTypeId:string;
 }
 
 export interface UpdateDataSourceCommand {
@@ -24,4 +25,5 @@ export interface UpdateDataSourceCommand {
   target: string;
   domainId: string;
   platformId: string;
+  dataSourceTypeId:string;
 }

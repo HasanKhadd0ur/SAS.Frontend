@@ -14,11 +14,18 @@ import { DataSourceComponent } from './components/data-source/data-source.compon
 import { DataSourcesComponent } from './components/data-sources/data-sources.component';
 import { CardModule } from 'primeng/card';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AddDataSourceComponent } from './components/add-data-source/add-data-source.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DataSourceDetailsComponent } from './components/data-source-details/data-source-details.component';
+import { EditDataSourceComponent } from './components/edit-data-source/edit-data-source.component';
 
 @NgModule({
   declarations: [
     DataSourceComponent,
-    DataSourcesComponent
+    DataSourcesComponent,
+    AddDataSourceComponent,
+    DataSourceDetailsComponent,
+    EditDataSourceComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +36,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     TableModule,
     CardModule,	
     ConfirmDialogModule,
-    
+    AutoCompleteModule,
     InfiniteScrollModule,
     InputTextModule,
     FormsModule,

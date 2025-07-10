@@ -68,7 +68,7 @@ export class DataSourcesComponent implements OnInit {
   }
 
   onEdit(dataSource: DataSource): void {
-    this.router.navigate(['/datasources/edit', dataSource.id]);
+    this.router.navigate(['/data-sources/edit', dataSource.id]);
   }
 
   confirmDelete(dataSource: DataSource): void {
@@ -88,6 +88,11 @@ export class DataSourcesComponent implements OnInit {
         });
       }
     });
+  }
+
+  
+  onView(ds: DataSource): void {
+    this.router.navigate(['/data-sources', ds.id]);
   }
 
   reset(): void {

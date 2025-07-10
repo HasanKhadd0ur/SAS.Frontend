@@ -1,19 +1,17 @@
-// src/app/datasources/components/data-source/data-source.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataSourcesService } from '../../servies/datasources.service';
 import { ScrapingDomainsService } from '../../../scraping-domains/services/scraping-domains.service';
+import { PlatformsService } from '../../../platforms/services/platforms.service';
 import { DataSource, AddDataSourceCommand, UpdateDataSourceCommand } from '../../models/datasource.model';
 import { MessageService } from 'primeng/api';
-import { PlatformsService } from '../../../platforms/services/platforms.service';
 
 @Component({
   selector: 'app-data-source',
   templateUrl: './data-source.component.html',
   styleUrls: ['./data-source.component.css'],
-  standalone:false
+  standalone: false
 })
 export class DataSourceComponent implements OnInit {
   dataSourceForm: FormGroup;
@@ -23,6 +21,7 @@ export class DataSourceComponent implements OnInit {
 
   platforms: { id: string; name: string }[] = [];
   domains: { id: string; name: string }[] = [];
+  dataSourceTypes: { id: string; name: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +30,7 @@ export class DataSourceComponent implements OnInit {
     private dataSourcesService: DataSourcesService,
     private platformsService: PlatformsService,
     private scrapingDomainsService: ScrapingDomainsService,
+    private dataSourceTypesService: DataSourcesService,
     private messageService: MessageService
   ) {
     this.dataSourceForm = this.fb.group({
@@ -38,13 +38,14 @@ export class DataSourceComponent implements OnInit {
       target: ['', Validators.required],
       domainId: ['', Validators.required],
       platformId: ['', Validators.required],
-      // limit is omitted here as before
+      dataSourceTypeId: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.loadPlatforms();
     this.loadDomains();
+    this.loadDataSourceTypes();
 
     this.dataSourceId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.dataSourceId;
@@ -68,6 +69,13 @@ export class DataSourceComponent implements OnInit {
     });
   }
 
+  loadDataSourceTypes() {
+    this.dataSourceTypesService.getAll().subscribe({
+      next: (data) => this.dataSourceTypes = data,
+      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load data source types' }),
+    });
+  }
+
   loadDataSource(id: string) {
     this.loading = true;
     this.dataSourcesService.getById(id).subscribe({
@@ -77,6 +85,7 @@ export class DataSourceComponent implements OnInit {
           target: data.target,
           domainId: data.domainId,
           platformId: data.platformId,
+          dataSourceTypeId: data.dataSourceType?.id || ''
         });
         this.loading = false;
       },
@@ -99,6 +108,7 @@ export class DataSourceComponent implements OnInit {
         target: formValue.target,
         domainId: formValue.domainId,
         platformId: formValue.platformId,
+        dataSourceTypeId: formValue.dataSourceTypeId
       };
 
       this.dataSourcesService.update(this.dataSourceId, updateCommand).subscribe({
@@ -115,6 +125,7 @@ export class DataSourceComponent implements OnInit {
         target: formValue.target,
         domainId: formValue.domainId,
         platformId: formValue.platformId,
+        dataSourceTypeId: formValue.dataSourceTypeId
       };
 
       this.dataSourcesService.add(addCommand).subscribe({

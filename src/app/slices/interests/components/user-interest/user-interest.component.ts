@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserInterest } from '../../models/user-interest.model';
-import { UserInterestService } from '../../services/user-interest.service';
+import { UserInterestService } from '../../service/user-interest.service';
 
 import * as L from 'leaflet';
 
