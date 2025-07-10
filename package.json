@@ -25,6 +25,8 @@
     "bootstrap-icons": "^1.13.1",
     "crypto-js": "^4.2.0",
     "leaflet": "^1.9.4",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet-minimap": "^3.6.1",
     "leaflet.awesome-markers": "^2.0.5",
     "marked": "^15.0.12",
     "ngx-infinite-scroll": "^19.0.0",

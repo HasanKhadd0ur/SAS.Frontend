@@ -46,12 +46,15 @@
                 "node_modules/leaflet/dist/leaflet.css",
                 "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css",
                 "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css",
+                "node_modules/leaflet-minimap/dist/Control.MiniMap.min.css",
                 "src/styles.scss"
               ],
             "scripts": [
                "node_modules/leaflet/dist/leaflet.js",
-                "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js"
-
+                "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js",
+                "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.min.js",
+                "node_modules/leaflet-minimap/dist/Control.MiniMap.min.js"
             ]
           },
           "configurations": {
