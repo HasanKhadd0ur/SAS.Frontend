@@ -79,9 +79,9 @@ export class AppMenuComponent implements OnInit {
                ]
             },
             {
-                label: 'Alerts',
+                label: 'Settings',
                 items: [
-                    { label: 'Alters', icon: 'pi pi-fw pi-prime', routerLink: ['/utilities/icons'] },
+                    { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
                 ]
             },
             {

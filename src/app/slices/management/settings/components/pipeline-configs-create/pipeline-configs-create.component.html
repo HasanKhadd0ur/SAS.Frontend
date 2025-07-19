@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Create Pipeline Config</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="pipelineForm" (ngSubmit)="save()">
+        <!-- Pipeline Key -->
+        <div class="mb-3">
+          <label for="pipelineKey" class="form-label">Pipeline Key</label>
+          <input id="pipelineKey" type="text" formControlName="pipelineKey" class="form-control" [class.is-invalid]="pipelineForm.get('pipelineKey')?.touched && pipelineForm.get('pipelineKey')?.invalid" />
+          <div *ngIf="pipelineForm.get('pipelineKey')?.touched && pipelineForm.get('pipelineKey')?.invalid" class="invalid-feedback">
+            Pipeline Key is required.
+          </div>
+        </div>
+
+        <!-- Version -->
+        <div class="mb-4">
+          <label for="version" class="form-label">Version</label>
+          <input id="version" type="number" formControlName="version" class="form-control" [class.is-invalid]="pipelineForm.get('version')?.touched && pipelineForm.get('version')?.invalid" />
+          <div *ngIf="pipelineForm.get('version')?.touched && pipelineForm.get('version')?.invalid" class="invalid-feedback">
+            Version must be a positive number.
+          </div>
+        </div>
+
+        <!-- Stages -->
+        <div class="border p-3 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0">Stages</h5>
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="addStage()">+ Add Stage</button>
+          </div>
+
+          <div formArrayName="stages">
+            <div *ngFor="let stage of stages.controls; let i = index" [formGroupName]="i" class="mb-2 row g-2 align-items-center">
+              <div class="col">
+                <input formControlName="stageName" class="form-control" placeholder="Stage name" />
+              </div>
+              <div class="col-auto">
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeStage(i)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+        <!-- Submit -->
+        <div class="d-flex align-items-center">
+          <button type="submit" class="btn btn-primary" [disabled]="isSaving">Create</button>
+          <div *ngIf="isSaving" class="spinner-border text-primary ms-3" role="status">
+            <span class="visually-hidden">Saving...</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -56,7 +56,8 @@
                 "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js",
                 "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.min.js",
                 "node_modules/leaflet-minimap/dist/Control.MiniMap.min.js",
-                "node_modules/leaflet-measure/dist/leaflet-measure.js"
+                "node_modules/leaflet-measure/dist/leaflet-measure.js",
+                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
