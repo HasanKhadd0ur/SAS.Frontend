@@ -35,11 +35,7 @@
                             "src/assets"
                         ],
             "styles": [
-                "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-                "node_modules/primeng/resources/primeng.min.css",
-                "node_modules/primeicons/primeicons.css",
                 "node_modules/primeflex/primeflex.css",
-                "node_modules/primeng/resources/themes/saga-blue/theme.css",
                 "node_modules/leaflet/dist/leaflet.css",
                 "node_modules/bootstrap/dist/css/bootstrap.min.css",
                 "node_modules/bootstrap-icons/font/bootstrap-icons.css",
@@ -49,6 +45,7 @@
                 "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css",
                 "node_modules/leaflet-minimap/dist/Control.MiniMap.min.css",
                 "node_modules/leaflet-measure/dist/leaflet-measure.css",
+                "node_modules/ngx-toastr/toastr.css",
                 "src/styles.scss"
               ],
             "scripts": [
