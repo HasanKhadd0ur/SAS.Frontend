@@ -3,9 +3,9 @@ $gutter: 1rem;
 // @import "assets/styles/variables"; // your custom styles
 // @import "./assets/styles/variables";
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-}
+// body {
+//   font-family: 'Segoe UI', sans-serif;
+// }
 
 @import "assets/layout/styles/layout/layout.scss" ;
 
@@ -13,13 +13,13 @@ body {
 @import "assets/styles/flags/flags" ;
 @import "assets/styles/badges" ;
 @import "assets/styles/code" ;
-@layer theme {
-  :root {
-    --p-primary-color: #ce93d8;
-    --p-text-color: #333;
-    /* etc. */
-  }
-}
+// @layer theme {
+//   :root {
+//     --p-primary-color: #ce93d8;
+//     --p-text-color: #333;
+//     /* etc. */
+//   }
+// }
 
 
 .toast-success {

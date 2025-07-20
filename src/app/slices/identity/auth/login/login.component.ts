@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       // this.router.navigate(['/']);
       setTimeout(() => {
         this.router.navigate(['/']);
-      }, 5000);
+      }, 100);
     }
     
   }
