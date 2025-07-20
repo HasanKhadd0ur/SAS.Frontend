@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'data-source-types', loadChildren: () => import('./slices/management/datasource-types/datasource-types.module').then(m => m.DatasourceTypesModule) },
       { path: 'user-interests', loadChildren: () => import('./slices/interests/interests.module').then(m => m.InterestsModule) },
       { path: 'management/settings', loadChildren: () => import('./slices/management/settings/settings.module').then(m => m.SettingsModule) },
+      { path: 'management/scrapers', loadChildren: () => import('./slices/management/scrapers/scrapers.module').then(m => m.ScrapersModule) },
            
     ]
   },
