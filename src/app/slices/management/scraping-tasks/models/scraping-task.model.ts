@@ -1,3 +1,4 @@
+import { DataSource } from "../../datasources/models/datasource.model";
 import { ScrapingDomain } from "../../scraping-domains/models/scraping-domains.model";
 
 export interface ScrapingTask {
@@ -11,5 +12,6 @@ export interface ScrapingTask {
     hostname: string;
     ipAddress: string;
   };
-  domain?: ScrapingDomain
+  domain?: ScrapingDomain;
+  dataSources: DataSource[]
 }

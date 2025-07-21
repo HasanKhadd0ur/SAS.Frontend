@@ -30,6 +30,7 @@ const routes: Routes = [
       { path: 'user-interests', loadChildren: () => import('./slices/interests/interests.module').then(m => m.InterestsModule) },
       { path: 'management/settings', loadChildren: () => import('./slices/management/settings/settings.module').then(m => m.SettingsModule) },
       { path: 'management/scrapers', loadChildren: () => import('./slices/management/scrapers/scrapers.module').then(m => m.ScrapersModule) },
+      { path: 'management/scraping-tasks', loadChildren: () => import('./slices/management/scraping-tasks/scraping-tasks.module').then(m => m.ScrapingTasksModule) },
            
     ]
   },

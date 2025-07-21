@@ -1,0 +1,25 @@
+<p-card header="Scraping Task Details" *ngIf="task">
+  <p><strong>Domain:</strong> {{ task.domain?.name || 'N/A' }}</p>
+  <p><strong>Executor:</strong> {{ task.scrapingExecutor?.scraperName || 'Unassigned' }}</p>
+  <p><strong>Published:</strong> {{ task.publishedAt | date: 'short' }}</p>
+  <p><strong>Status:</strong>
+    <span [ngClass]="task.completedAt ? 'text-success' : 'text-warning'">
+      {{ task.completedAt ? 'Completed' : 'Pending' }}
+    </span>
+  </p>
+
+  <div *ngIf="task.datasources?.length > 0">
+    <h5>Data Sources</h5>
+    <ul>
+      <li *ngFor="let ds of task.datasources">
+        <strong>{{ ds.name }}</strong> ({{ ds.type }}) - {{ ds.url }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!task.datasources?.length">
+    <p>No data sources associated with this task.</p>
+  </div>
+</p-card>
+
+<p *ngIf="loading">Loading...</p>
+<p *ngIf="error" class="text-danger">{{ error }}</p>
