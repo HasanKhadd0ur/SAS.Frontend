@@ -1,8 +1,38 @@
 $gutter: 1rem;
 
+// @import "assets/styles/variables"; // your custom styles
+// @import "./assets/styles/variables";
+
+// body {
+//   font-family: 'Segoe UI', sans-serif;
+// }
+
 @import "assets/layout/styles/layout/layout.scss" ;
 
 /* Demos and Custom Styles */
 @import "assets/styles/flags/flags" ;
 @import "assets/styles/badges" ;
 @import "assets/styles/code" ;
+// @layer theme {
+//   :root {
+//     --p-primary-color: #ce93d8;
+//     --p-text-color: #333;
+//     /* etc. */
+//   }
+// }
+
+
+.toast-success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.toast-info {
+  background-color: #17a2b8 !important;
+  color: white !important;
+}
+
+
+.toast-message {
+  font-weight: bold;
+}

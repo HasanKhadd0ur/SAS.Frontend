@@ -15,6 +15,14 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
+// import { provideAnimationsAsync } from '@angular/platform-browser/animations';
+import { providePrimeNG } from 'primeng/config';
+
+import Aura from '@primeng/themes/aura';
 
 @NgModule({
   declarations: [
@@ -33,10 +41,26 @@ import { MenubarModule } from 'primeng/menubar';
     SidebarModule,
     ButtonModule,
     RadioButtonModule,
+    BrowserAnimationsModule,
+    ToastModule,
     InputSwitchModule,
     HttpClientModule 
 ],
-  providers: [],
+  providers: [ 
+    // provideAnimationsAsync(),
+    providePrimeNG({
+    theme: {
+      preset: Aura,
+      options: {
+        cssLayer: {
+          name: 'primeng',
+          order: 'primeng,theme'
+        }
+      }
+    }
+    }),
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

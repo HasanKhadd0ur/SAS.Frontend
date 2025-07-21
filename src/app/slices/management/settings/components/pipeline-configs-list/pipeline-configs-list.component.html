@@ -1,0 +1,45 @@
+<h2>Pipeline Configs</h2>
+
+<!-- Create button -->
+<div class="mb-3">
+  <a routerLink="/management/settings/pipeline/create" class="btn btn-primary">
+    + Create Pipeline Config
+  </a>
+</div>
+
+<!-- Loader -->
+<div *ngIf="isLoading" class="text-center my-4">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Accordion -->
+<div *ngIf="!isLoading && pipelineConfigs.length > 0" class="accordion" id="pipelineAccordion">
+  <div class="accordion-item" *ngFor="let config of pipelineConfigs; let i = index">
+    <h2 class="accordion-header" [id]="'heading-' + i">
+      <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse-' + i"
+              aria-expanded="false"
+              [attr.aria-controls]="'collapse-' + i">
+        {{ config.pipelineKey }} (v{{ config.version }})
+      </button>
+    </h2>
+    <div [id]="'collapse-' + i"
+         class="accordion-collapse collapse"
+         [attr.aria-labelledby]="'heading-' + i"
+         data-bs-parent="#pipelineAccordion">
+      <div class="accordion-body">
+        <p><strong>Pipeline Key:</strong> {{ config.pipelineKey }}</p>
+        <p><strong>Version:</strong> {{ config.version }}</p>
+        <button (click)="onEdit(config.id)" class="btn btn-outline-primary btn-sm">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Empty state -->
+<div *ngIf="!isLoading && pipelineConfigs.length === 0" class="alert alert-warning">
+  No pipeline configs found.
+</div>

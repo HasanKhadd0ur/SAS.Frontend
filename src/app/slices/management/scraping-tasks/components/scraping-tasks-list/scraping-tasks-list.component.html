@@ -1,0 +1,42 @@
+<p-card header="Scraping Tasks">
+  <ng-container *ngIf="!loading || tasks.length > 0; else loadingTpl">
+    <div 
+      class="task-list" 
+      style="max-height: 245px; overflow-y: auto;" 
+      pInfiniteScroll 
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="150"
+      (onLazyLoad)="loadMore()">
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li *ngFor="let task of tasks" class="task-item">
+          <strong>Domain:</strong> {{ task.domain?.name || 'N/A' }} <br />
+          <strong>Executor:</strong> {{ task.scrapingExecutor?.scraperName || 'Unassigned' }} <br />
+          <strong>Published:</strong> {{ task.publishedAt | date: 'short' }} <br />
+          <strong>Status:</strong>
+          <span [ngClass]="task.completedAt ? 'text-success' : 'text-warning'">
+            {{ task.completedAt ? 'Completed' : 'Pending' }}
+          </span>
+          <br />
+          <a [routerLink]="['/management/scraping-tasks', task.id]" 
+             class="p-link view-details-icon" 
+             title="View Details" 
+             aria-label="View Details">
+            <i class="pi pi-eye"></i>
+          </a>
+          <hr />
+        </li>
+      </ul>
+
+      <p *ngIf="loadingMore" class="text-center">Loading more...</p>
+    </div>
+
+    <ng-template #noTasks>
+      <p>No tasks found.</p>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <p>Loading tasks...</p>
+  </ng-template>
+</p-card>

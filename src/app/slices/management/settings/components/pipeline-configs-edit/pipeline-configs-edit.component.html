@@ -1,0 +1,44 @@
+<h2>Edit Pipeline Config</h2>
+
+<form [formGroup]="pipelineForm" (ngSubmit)="saveChanges()">
+
+  <div class="mb-3">
+    <label for="pipelineKey" class="form-label">Key:</label>
+    <input id="pipelineKey" formControlName="pipelineKey" class="form-control" />
+    <div *ngIf="pipelineForm.get('pipelineKey')?.invalid && pipelineForm.get('pipelineKey')?.touched" class="text-danger">
+      Pipeline Key is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="version" class="form-label">Version:</label>
+    <input id="version" type="number" formControlName="version" class="form-control" min="1" />
+    <div *ngIf="pipelineForm.get('version')?.invalid && pipelineForm.get('version')?.touched" class="text-danger">
+      Version must be a positive number.
+    </div>
+  </div>
+
+  <hr />
+
+  <h3>Stages</h3>
+
+  <div formArrayName="stages" *ngIf="stages.controls.length > 0; else noStages">
+    <div *ngFor="let stage of stages.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2">
+      <input formControlName="stageName" class="form-control me-2" placeholder="Stage name" />
+      <button type="button" class="btn btn-danger btn-sm" (click)="removeStage(i)">Remove</button>
+    </div>
+  </div>
+
+  <ng-template #noStages>
+    <p>No stages added yet.</p>
+  </ng-template>
+
+  <button type="button" class="btn btn-secondary mt-2" (click)="addStage()">Add Stage</button>
+
+  <hr />
+
+  <button type="submit" class="btn btn-primary" [disabled]="pipelineForm.invalid || isSaving">
+    {{ isSaving ? 'Saving...' : 'Save' }}
+  </button>
+
+</form>

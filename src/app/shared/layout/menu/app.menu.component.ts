@@ -79,9 +79,9 @@ export class AppMenuComponent implements OnInit {
                ]
             },
             {
-                label: 'Alerts',
+                label: 'Settings',
                 items: [
-                    { label: 'Alters', icon: 'pi pi-fw pi-prime', routerLink: ['/utilities/icons'] },
+                    { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
                 ]
             },
             {
@@ -112,14 +112,14 @@ export class AppMenuComponent implements OnInit {
                   ]
                 },
              {
-                label: 'Get Started',
+                label: 'Scrapers',
                 items: [
                     {
-                        label: 'Documentation', icon: 'pi pi-fw pi-question', routerLink: ['/documentation']
+                        label: 'All Scrapers', icon: 'pi pi-fw pi-question', routerLink: ['/management/scrapers']
                     },
                     {
-                        label: 'View Source', icon: 'pi pi-fw pi-search', url: ['https://github.com/primefaces/sakai-ng'], target: '_blank'
-                    }
+                        label: 'Scraping Tasks', icon: 'pi pi-fw pi-search', routerLink: ['/management/scraping-tasks']
+                    },
                 ]
             }
         ];

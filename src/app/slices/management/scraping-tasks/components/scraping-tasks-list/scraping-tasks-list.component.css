@@ -1,0 +1,40 @@
+:host ::ng-deep .p-card {
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+:host ::ng-deep .p-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+:host ::ng-deep .p-badge-success {
+  background-color: #22c55e;
+  color: white;
+}
+
+:host ::ng-deep .p-badge-warning {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .md\:col-6 {
+    width: 48%;
+  }
+}
+
+@media (min-width: 992px) {
+  .lg\:col-4 {
+    width: 31%;
+  }
+}

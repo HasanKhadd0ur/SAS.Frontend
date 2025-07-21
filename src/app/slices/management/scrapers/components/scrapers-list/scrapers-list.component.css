@@ -1,0 +1,92 @@
+.p-card {
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease-in-out;
+  padding: 10px;
+}
+
+.p-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.p-card .p-card-header,
+.p-card .p-card-footer {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem;
+}
+
+.p-card .p-card-body {
+  padding: 1rem;
+  color: #333;
+}
+
+.p-badge-success {
+  background-color: #22c55e !important; /* green */
+  color: white;
+}
+
+.p-badge-danger {
+  background-color: #ef4444 !important; /* red */
+  color: white;
+}
+
+.p-button {
+  min-width: 90px;
+}
+
+.text-secondary {
+  color: #6c757d;
+}
+
+.p-card .pi {
+  font-size: 1.2rem;
+}
+
+.text-500 {
+  color: #6b7280;
+}
+
+.text-3xl {
+  font-size: 2rem;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .md\\:col-6 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .lg\\:col-4 {
+    width: 33.3333%;
+  }
+}

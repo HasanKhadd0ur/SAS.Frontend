@@ -43,7 +43,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     CardModule,	
     ConfirmDialogModule,  
     InfiniteScrollModule,
-  
     InputTextarea,
     CommonModule,
     RouterModule,
