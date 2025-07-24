@@ -13,7 +13,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SidebarModule } from 'primeng/sidebar';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
@@ -24,6 +24,7 @@ import { providePrimeNG } from 'primeng/config';
 
 import Aura from '@primeng/themes/aura';
 import { NotificationsComponent } from './shared/coponents/notifications/notifications.component';
+import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,11 @@ import { NotificationsComponent } from './shared/coponents/notifications/notific
     HttpClientModule 
 ],
   providers: [ 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true 
+    },
     // provideAnimationsAsync(),
     providePrimeNG({
     theme: {

@@ -7,6 +7,7 @@ export interface AuthResponse {
     username: string;
     refreshToken: string;
     expiredAt: string;
+    accessToken:string;
   };
 }
 
