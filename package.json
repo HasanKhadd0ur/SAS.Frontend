@@ -21,6 +21,7 @@
     "@angular/router": "^19.2.11",
     "@asymmetrik/ngx-leaflet": "^8.1.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@microsoft/signalr": "^8.0.7",
     "@primeng/themes": "^19.1.4",
     "@primeuix/themes": "^1.2.1",
     "bootstrap": "^5.3.7",

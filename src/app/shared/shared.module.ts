@@ -16,7 +16,9 @@ import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MenuModule } from 'primeng/menu';
-
+import { NotificationsComponent } from './coponents/notifications/notifications.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import { MenuModule } from 'primeng/menu';
       AppMenuComponent,
       AppSidebarComponent,
       AppLayoutComponent,
+      NotificationsComponent,
   ],
   imports: [
 
@@ -34,6 +37,7 @@ import { MenuModule } from 'primeng/menu';
     NgOptimizedImage,
     RouterModule,
     AppConfigModule,
+    ToastModule,
     BrowserModule,
     FormsModule,
     SidebarModule,
@@ -51,6 +55,7 @@ import { MenuModule } from 'primeng/menu';
       AppSidebarComponent,
       AppLayoutComponent,
   
-  ]
+  ],
+  providers:[MessageService]
 })
 export class SharedModule { }

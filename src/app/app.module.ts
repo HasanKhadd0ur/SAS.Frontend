@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 
 import Aura from '@primeng/themes/aura';
+import { NotificationsComponent } from './shared/coponents/notifications/notifications.component';
 
 @NgModule({
   declarations: [
