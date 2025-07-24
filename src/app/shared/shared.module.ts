@@ -19,6 +19,7 @@ import { MenuModule } from 'primeng/menu';
 import { NotificationsComponent } from './coponents/notifications/notifications.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MessageService } from 'primeng/api';
     CommonModule,
     NgOptimizedImage,
     RouterModule,
+    TooltipModule,
     AppConfigModule,
     ToastModule,
     BrowserModule,
