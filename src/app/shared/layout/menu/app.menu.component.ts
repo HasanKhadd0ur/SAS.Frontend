@@ -1,6 +1,7 @@
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
 import {LayoutService} from '../service/app.layout.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
     selector: 'app-menu',
@@ -12,7 +13,7 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) {
+    constructor(public layoutService: LayoutService, private authService :AuthenticationService) {
     }
 
     ngOnInit() {
@@ -128,7 +129,20 @@ export class AppMenuComponent implements OnInit {
                         label: 'Scraping Tasks', icon: 'pi pi-fw pi-search', routerLink: ['/management/scraping-tasks']
                     },
                 ]
-            }
+            },{
+                label: 'Account',
+                items: [
+                    {
+                    label: 'Logout',
+                    icon: 'pi pi-fw pi-sign-out',
+                    command: () => this.logout()
+                    }
+                ]
+                }
+
         ];
+    }
+    logout(): void {
+        this.authService.logout();
     }
 }
