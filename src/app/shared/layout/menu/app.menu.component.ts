@@ -41,7 +41,14 @@ export class AppMenuComponent implements OnInit {
                     { label: 'My Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests'], target: '_blank' },
                     { label: 'Add Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests/add'], target: '_blank' },
                 ]
-            },            {
+            },    
+            {
+                label: 'Interests',
+                items: [
+                    { label: 'My Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests'], target: '_blank' },
+                    { label: 'Add Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests/add'], target: '_blank' },
+                ]
+            },          {
                 label: 'Management',
                 items: [
                     { label: 'ALl Sources', icon: 'pi pi-fw pi-table', routerLink: ['/data-sources'], badge: 'NEW' },
@@ -91,7 +98,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Notification',
                         icon: 'pi pi-fw pi-globe',
-                        routerLink: ['/landing']
+                        routerLink: ['/notifications']
                     },
                     {
                         label: 'Box',
