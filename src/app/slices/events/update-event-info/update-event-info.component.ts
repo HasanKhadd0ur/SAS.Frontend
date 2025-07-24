@@ -75,7 +75,7 @@ export class UpdateEventInfoComponent implements OnInit {
     this.eventService.updateEventInfo(this.eventId, eventInfoPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Event info updated successfully.' });
-        this.router.navigate(['/view', this.eventId]);
+        this.router.navigate(['/events/view', this.eventId]);
       },
       error: () => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update event info.' });

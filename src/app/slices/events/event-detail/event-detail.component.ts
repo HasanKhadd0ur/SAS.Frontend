@@ -25,4 +25,9 @@ export class EventDetailComponent implements OnInit {
   if (!this.event?.id) return;
   this.router.navigate(['/events', this.event.id, 'location']);
 }
+goToUpdateInfo(): void {
+  if (this.event?.id) {
+    this.router.navigate([`/events/${this.event.id}/update-info`]);
+  }
+}
 }

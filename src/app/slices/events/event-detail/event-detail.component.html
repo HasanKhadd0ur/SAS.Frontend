@@ -1,5 +1,10 @@
 <div *ngIf="event; else loading" class="event-detail-card">
-  <div class="event-detail-header">{{ event.eventInfo.title }}</div>
+  <div class="event-detail-header">
+    {{ event.eventInfo.title }}
+    <button class="btn btn-sm btn-link float-end" (click)="goToUpdateInfo()">
+      <i class="fas fa-edit"></i>
+    </button>
+  </div>
 
   <div class="event-detail-summary">
     {{ event.eventInfo.summary || 'No summary available.' }}
@@ -25,12 +30,16 @@
         {{ event.status || 'Under Review' }}
       </span>
     </p>
-     <div class="mt-3 text-end">
-    <button class="btn btn-primary" (click)="goToUpdateLocation()">
-      <i class="fas fa-map-marker-alt"></i> Update Location
-    </button>
-  </div>
-  
+
+    <div class="mt-3 text-end">
+      <button class="btn btn-primary me-2" (click)="goToUpdateLocation()">
+        <i class="fas fa-map-marker-alt"></i> Update Location
+      </button>
+
+      <button class="btn btn-secondary" (click)="goToUpdateInfo()">
+        <i class="fas fa-edit"></i> Edit Info
+      </button>
+    </div>
   </div>
 </div>
 
@@ -45,5 +54,18 @@
   @keyframes spin {
     0% { transform: rotate(0deg);}
     100% { transform: rotate(360deg);}
+  }
+
+  .event-detail-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+  }
+
+  .event-detail-header .btn-link {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2rem;
   }
 </style>

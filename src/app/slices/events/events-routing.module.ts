@@ -6,6 +6,7 @@ import { TodaySummaryComponent } from './today-summary/today-summary.component';
 import { EventHistoryComponent } from './event-history/event-history.component';
 import { TopicEventsComponent } from './topic-events/topic-events.component';
 import { UpdateEventLocationComponent } from './update-event-location/update-event-location.component';
+import { UpdateEventInfoComponent } from './update-event-info/update-event-info.component';
 
 const routes: Routes = [
   { path: 'daily-events', component: DailyEventsComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'today/summary', component: TodaySummaryComponent },
   { path: 'topic-events', component: TopicEventsComponent },
   { path: ':eventId/location',  component: UpdateEventLocationComponent,},
+  { path: ':eventId/update-info',  component: UpdateEventInfoComponent,},
 
 ];
 
