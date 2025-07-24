@@ -1,0 +1,23 @@
+<div class="container px-3">
+  <h3 class="text-center">✏️ Update Event Information</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input id="title" type="text" formControlName="title" class="form-control" />
+      <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
+        Title is required and must be under 200 characters.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="summary" class="form-label">Summary</label>
+      <textarea id="summary" formControlName="summary" class="form-control" rows="4"></textarea>
+      <div *ngIf="form.get('summary')?.invalid && form.get('summary')?.touched" class="text-danger">
+        Summary is required and must be under 1000 characters.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update Info</button>
+  </form>
+</div>
