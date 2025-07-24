@@ -14,9 +14,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventHistoryComponent } from './event-history/event-history.component';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodaySummaryComponent } from './today-summary/today-summary.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { TopicEventsComponent } from './topic-events/topic-events.component';
+import { UpdateEventLocationComponent } from './update-event-location/update-event-location.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { MarkdownModule } from 'ngx-markdown';
     DailyEventsComponent,
     EventDetailComponent,
     EventHistoryComponent,
-    TodaySummaryComponent
+    TodaySummaryComponent,
+    TopicEventsComponent,
+    UpdateEventLocationComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,7 @@ import { MarkdownModule } from 'ngx-markdown';
     EventsRoutingModule,
     ListboxModule,
     TableModule,
+    ReactiveFormsModule,
     CardModule,		
     MenubarModule,
     CalendarModule,

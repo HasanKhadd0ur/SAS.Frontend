@@ -1,83 +1,3 @@
-<style>
-  .event-detail-card {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    padding: 2rem 2.5rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2c3e50;
-  }
-
-  .event-detail-header {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    border-bottom: 3px solid #2980b9;
-    padding-bottom: 0.3rem;
-    color: #34495e;
-  }
-
-  .event-detail-summary {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 2rem;
-    white-space: pre-wrap;
-  }
-
-  .event-detail-meta p {
-    margin: 0.4rem 0;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .event-detail-meta strong {
-    min-width: 90px;
-    color: #34495e;
-  }
-
-  .icon {
-    font-size: 1.2rem;
-    color: #2980b9;
-  }
-
-  .status {
-    padding: 0.25rem 0.7rem;
-    border-radius: 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    width: max-content;
-  }
-
-  .status.verified {
-    background-color: #27ae60;
-    color: white;
-  }
-  .status.under-review {
-    background-color: #f39c12;
-    color: white;
-  }
-  .status.rejected {
-    background-color: #e74c3c;
-    color: white;
-  }
-
-  /* Loading text style */
-  .loading-text {
-    max-width: 700px;
-    margin: 3rem auto;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #95a5a6;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-</style>
-
 <div *ngIf="event; else loading" class="event-detail-card">
   <div class="event-detail-header">{{ event.eventInfo.title }}</div>
 
@@ -105,6 +25,12 @@
         {{ event.status || 'Under Review' }}
       </span>
     </p>
+     <div class="mt-3 text-end">
+    <button class="btn btn-primary" (click)="goToUpdateLocation()">
+      <i class="fas fa-map-marker-alt"></i> Update Location
+    </button>
+  </div>
+  
   </div>
 </div>
 

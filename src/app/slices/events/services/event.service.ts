@@ -85,4 +85,8 @@ getTodaySummary(): Observable<string> {
     return this.getEventsUpdatedAfter(todayMidnight);
 
   }
+  updateLocation(eventId: string, payload: any) {
+  return this.http.put(`${this.baseUrl}/${eventId}/location`, payload);
+}
+
 }

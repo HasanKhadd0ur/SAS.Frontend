@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from 'src/app/slices/events/models/topic.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topic-list',
@@ -11,7 +12,7 @@ import { Topic } from 'src/app/slices/events/models/topic.model';
 export class AllTopicsComponent implements OnInit {
   topics: Topic[] = [];
 
-  constructor(private topicService: TopicService) {}
+  constructor(private topicService: TopicService,private router: Router) {}
 
   ngOnInit(): void {
     this.topicService.getTopics().subscribe(topics => {
@@ -20,7 +21,7 @@ export class AllTopicsComponent implements OnInit {
   }
 
   onViewTopic(topic: Topic): void {
-    alert(`Viewing topic: ${topic.name}`);
+    this.router.navigate(['/events/topic-events'], { queryParams: { name: topic.name } });  
   }
 }
 
