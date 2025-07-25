@@ -1,6 +1,6 @@
 <div *ngIf="loading">Loading summary...</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
-<div *ngIf="!loading && !error">
+<div *ngIf="!loading && !error" dir="rtl" style="text-align: right;">
   <markdown [data]="summaryMarkdown"></markdown>
 </div>

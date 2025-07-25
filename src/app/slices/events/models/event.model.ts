@@ -20,5 +20,5 @@ export interface EventInfo{
   title: string;
   summary: string;
   sentimentScore:number;
-  sentimentLabel:""
+  sentimentLabel:string
 }

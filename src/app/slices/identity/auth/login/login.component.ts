@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.auth.login(this.credentials).subscribe({
       next: (res) => {
+        debugger
         // Save token
         this.storageService.setLocalStorage('token', res.token);
 

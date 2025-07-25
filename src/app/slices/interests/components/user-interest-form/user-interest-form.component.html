@@ -1,7 +1,5 @@
-<div class="container  px-3">
-  <div class="row g-4 align-items-start">
-      <h3 class="text-center">📍 Define Your Interest Area</h3>
-
+<div class="container  ">
+  <div class="row align-items-start">
     <!-- Map on the left -->
     <div class="col-12 col-md-7">
       <div
@@ -14,9 +12,12 @@
     <div class="col-12 col-md-5">
 
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <h4 class="text-center">Define Your Interest Area</h4>
 
         <!-- Interest Name -->
         <div class="mb-3">
+          
+
           <label for="interestName" class="form-label">Interest Name</label>
           <input
             id="interestName"
@@ -90,8 +91,7 @@
 
         <!-- Show City / Country -->
         <div *ngIf="form.value.city || form.value.country" class="mb-3">
-          <p><strong>City:</strong> {{ form.value.city || 'N/A' }}</p>
-          <p><strong>Country:</strong> {{ form.value.country || 'N/A' }}</p>
+          <p> {{ form.value.country || 'N/A Country' }}, {{ form.value.city || 'N/A City' }}</p>
         </div>
 
         <!-- Submit Button -->

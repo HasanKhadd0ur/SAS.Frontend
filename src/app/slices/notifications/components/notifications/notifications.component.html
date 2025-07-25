@@ -1,0 +1,37 @@
+
+<div class="notifications-container">
+  <div class="notifications-header">My Notifications</div>
+
+  <div *ngIf="loading">Loading notifications...</div>
+
+  <div *ngIf="!loading && notifications.length === 0" class="no-notifications">
+    No notifications found.
+  </div>
+
+  <div *ngIf="!loading && notifications.length > 0">
+    <div *ngFor="let n of notifications" class="notification-card">
+      <div class="notification-header">
+        <div class="notification-title">
+          <i class="fas fa-bell"></i>
+          <span>{{ n.title }}</span>
+        </div>
+        <!-- <span *ngIf="!n.isRead" class="notification-status">Unread</span> -->
+      </div>
+
+      <div class="notification-summary">
+        Related to: {{ n.interestName || 'General' }}
+      </div>
+
+      <div class="notification-meta">
+        <div><i class="fas fa-calendar-alt"></i> {{ n.occurredAt | date: 'medium' }}</div>
+        <div><i class="fas fa-map-marker-alt"></i> Lat: {{ n.latitude }}, Lng: {{ n.longitude }}</div>
+        <div><i class="fas fa-clock"></i> Created: {{ n.createdAt | date: 'short' }}</div>
+        <div>
+          <a [routerLink]="['/events/view', n.eventId]" class="view-event-icon" title="View Event">
+            <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

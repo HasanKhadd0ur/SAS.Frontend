@@ -1,6 +1,7 @@
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
 import {LayoutService} from '../service/app.layout.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
     selector: 'app-menu',
@@ -12,7 +13,7 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) {
+    constructor(public layoutService: LayoutService, private authService :AuthenticationService) {
     }
 
     ngOnInit() {
@@ -37,11 +38,15 @@ export class AppMenuComponent implements OnInit {
                 label: 'Topics',
                 items: [
                     { label: 'ALl Topic', icon: 'pi pi-fw pi-table', routerLink: ['/topics'], badge: 'NEW' },
-                    { label: 'Topic Map', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
+                ]
+            },    
+            {
+                label: 'Interests',
+                items: [
                     { label: 'My Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests'], target: '_blank' },
                     { label: 'Add Intereset', icon: 'pi pi-fw pi-globe', routerLink: ['/user-interests/add'], target: '_blank' },
                 ]
-            },            {
+            },          {
                 label: 'Management',
                 items: [
                     { label: 'ALl Sources', icon: 'pi pi-fw pi-table', routerLink: ['/data-sources'], badge: 'NEW' },
@@ -91,7 +96,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Notification',
                         icon: 'pi pi-fw pi-globe',
-                        routerLink: ['/landing']
+                        routerLink: ['/notifications']
                     },
                     {
                         label: 'Box',
@@ -121,7 +126,20 @@ export class AppMenuComponent implements OnInit {
                         label: 'Scraping Tasks', icon: 'pi pi-fw pi-search', routerLink: ['/management/scraping-tasks']
                     },
                 ]
-            }
+            },{
+                label: 'Account',
+                items: [
+                    {
+                    label: 'Logout',
+                    icon: 'pi pi-fw pi-sign-out',
+                    command: () => this.logout()
+                    }
+                ]
+                }
+
         ];
+    }
+    logout(): void {
+        this.authService.logout();
     }
 }

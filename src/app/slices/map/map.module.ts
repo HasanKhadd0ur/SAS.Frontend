@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MapRoutingModule,
     HttpClientModule 
-  ]
+  ],
+  exports:[LeafletMapComponent]
 })
 export class MapModule { }

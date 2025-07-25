@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event } from '../models/event.model';
+import { Event, EventInfo } from '../models/event.model';
 import { environment } from 'src/environments/environment';
 import { ConfigService } from 'src/app/core/services/config/config.service';
 
@@ -85,4 +85,11 @@ getTodaySummary(): Observable<string> {
     return this.getEventsUpdatedAfter(todayMidnight);
 
   }
+  updateLocation(eventId: string, payload: any) {
+  return this.http.put(`${this.baseUrl}/${eventId}/location`, payload);
+}
+updateEventInfo(eventId: string, eventInfo: EventInfo) {
+  return this.http.put(`${this.baseUrl}/${eventId}/info`, eventInfo);
+}
+
 }

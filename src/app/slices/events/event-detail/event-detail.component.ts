@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { Event } from '../../events/models/event.model';
 
@@ -13,7 +13,7 @@ import { Event } from '../../events/models/event.model';
 export class EventDetailComponent implements OnInit {
   event: Event | null = null;
 
-  constructor(private route: ActivatedRoute, private eventService: EventService) {}
+  constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -21,4 +21,13 @@ export class EventDetailComponent implements OnInit {
       this.eventService.getEventById(id).subscribe(event => this.event = event);
     }
   }
+  goToUpdateLocation(): void {
+  if (!this.event?.id) return;
+  this.router.navigate(['/events', this.event.id, 'location']);
+}
+goToUpdateInfo(): void {
+  if (this.event?.id) {
+    this.router.navigate([`/events/${this.event.id}/update-info`]);
+  }
+}
 }

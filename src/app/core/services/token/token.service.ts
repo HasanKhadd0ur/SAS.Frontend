@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {jwtDecode} from 'jwt-decode';
+import { StorageService } from '../storage-service/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  constructor() {}
+  constructor(private storageService :StorageService) {}
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.storageService.getToken();
   }
 
   isTokenExpired(): boolean {
