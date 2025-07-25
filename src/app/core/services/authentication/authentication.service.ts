@@ -7,6 +7,7 @@ import { AuthResponse } from '../../models/response/AuthResponse';
 import { ConfigService } from '../config/config.service';
 import { Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,8 @@ export class AuthenticationService {
       private http: HttpClient,
       private config: ConfigService,
       private router: Router,
-      private messageService: MessageService
+      private messageService: MessageService,
+      private tokenService :TokenService
     ) {}
     login(data: LoginRequest): Observable<AuthResponse> {
       return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data);
@@ -57,4 +59,8 @@ export class AuthenticationService {
         // Navigate to login 
         this.router.navigate(['']);
       }
+
+    isLoggedIn(): boolean {
+      return !!this.tokenService.getToken();
+    }
 }

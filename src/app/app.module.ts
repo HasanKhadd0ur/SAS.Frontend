@@ -22,9 +22,12 @@ import { MessageService } from 'primeng/api';
 // import { provideAnimationsAsync } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
 
+import { StyleClassModule } from 'primeng/styleclass';
 import Aura from '@primeng/themes/aura';
 import { NotificationsComponent } from './shared/coponents/notifications/notifications.component';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
+import { RippleModule } from "primeng/ripple";
+import { MapModule } from './slices/map/map.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,11 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
     BrowserAnimationsModule,
     ToastModule,
     InputSwitchModule,
-    HttpClientModule 
+    MapModule,
+    HttpClientModule,
+     ButtonModule,
+    RippleModule,
+    StyleClassModule 
 ],
   providers: [ 
     {
