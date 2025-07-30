@@ -9,7 +9,7 @@ export interface Event {
   createdAt: Date;
   lastUpdatedAt: Date;
   
-  status: 'Under Review' | 'Confirmed' | 'Dismissed' ;
+  isReviewed: Boolean ;
 
   topic: Topic;
   location: Location;
