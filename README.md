@@ -42,8 +42,7 @@ This is the frontend for the **Situational Awareness System (SAS)** — a geospa
  │   ├── home/         # Landing, about, daily event list
  │   ├── map/          # Leaflet-based map view
  │   ├── events/       # Event details, history, reviews
- │   ├── profile/      # User profile management
  │   ├── regions/      # Manage interest regions
- │   └── admin/        # Monitor-only functionality
+ │   └── management/      
  ├── app-routing.module.ts
  └── app.module.ts
