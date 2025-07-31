@@ -41,91 +41,90 @@
       </span>
     </p>
 
-    <!-- Mark as Reviewed Button -->
-    <div  class="mt-3 text-end">
-      <button  *ngIf="isMonitor && !event.isReviewed"  class="btn btn-success" (click)="markAsReviewed()">
+    <div class="mt-3 text-end">
+      <button *ngIf="isMonitor && !event.isReviewed" class="btn btn-success" (click)="markAsReviewed()">
         <i class="fas fa-check"></i> Mark as Reviewed
       </button>
-      
-        <button class="m-1 btn btn-secondary" (click)="toggleNamedEntities()">
-      <i class="fas fa-list"></i>
-      {{ showNamedEntities ? 'Hide Entities' : 'Show Entities' }}
-    </button>
 
+      <button class="m-1 btn btn-secondary" (click)="toggleNamedEntities()">
+        <i class="fas fa-list"></i>
+        {{ showNamedEntities ? 'Hide Entities' : 'Show Entities' }}
+      </button>
 
-      <button  *ngIf="isMonitor"  class="btn btn-warning me-2" (click)="startEditTopic()">
+      <button *ngIf="isMonitor" class="btn btn-warning me-2" (click)="startEditTopic()">
         <i class="fas fa-tag"></i> Change Topic
       </button>
 
-      <button  *ngIf="isMonitor"  class="btn btn-primary me-2" (click)="goToUpdateLocation()">
+      <button *ngIf="isMonitor" class="btn btn-primary me-2" (click)="goToUpdateLocation()">
         <i class="fas fa-map-marker-alt"></i> Update Location
       </button>
-      <button  *ngIf="isMonitor" class="btn btn-secondary" (click)="goToUpdateInfo()">
+      <button *ngIf="isMonitor" class="btn btn-secondary" (click)="goToUpdateInfo()">
         <i class="fas fa-edit"></i> Edit Info
       </button>
     </div>
- 
-<!-- Named Entities List -->
-<div *ngIf="showNamedEntities && namedEntities.length > 0" class="named-entities-list mt-3 text-center">
-  <h5>Named Entities</h5>
-  <ul class="list-group">
-    <li
-      class="list-group-item d-flex justify-content-between align-items-center"
-      *ngFor="let entity of namedEntities"
-    >
-      {{ entity.entityName }} ({{ entity.type?.typeName || 'Unknown' }})
-      <button
-        class="btn btn-sm btn-outline-primary"
-        (click)="goToEventsByNamedEntity(entity.entityName)"
-        title="View events with this entity"
-      >
-        <i class="fas fa-arrow-right"></i>
-      </button>
-    </li>
-  </ul>
-</div>
 
-<!-- Optionally, show message if no named entities -->
-<div *ngIf="showNamedEntities && namedEntities.length === 0" class="mt-3 text-center text-muted">
-  No named entities found for this event.
-</div>
+    <!-- Named Entities List -->
+    <div *ngIf="showNamedEntities && namedEntities.length > 0" class="named-entities-list mt-3 text-center">
+      <h5>Named Entities</h5>
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let entity of namedEntities"
+        >
+          {{ entity.entityName }} ({{ entity.type?.typeName || 'Unknown' }})
+          <button
+            class="btn btn-sm btn-outline-primary"
+            (click)="goToEventsByNamedEntity(entity.entityName)"
+            title="View events with this entity"
+          >
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
 
+    <div *ngIf="showNamedEntities && namedEntities.length === 0" class="mt-3 text-center text-muted">
+      No named entities found for this event.
+    </div>
   </div>
 </div>
 
 <!-- Edit Topic Form -->
 <ng-template #editTopicForm>
-  <div class="event-detail-card">
+  <div class="event-detail-card" style="position: relative;">
     <h4>Change Event Topic</h4>
 
     <form [formGroup]="topicForm" (ngSubmit)="submitTopicChange()">
-      <div class="mb-3">
+      <div class="mb-3" style="position: relative;">
         <label for="topicName" class="form-label">Topic Name</label>
         <input
           id="topicName"
           type="text"
           class="form-control"
           formControlName="topicName"
-          [attr.autocomplete]="'off'"
-          (input)="filteredTopics$ = searchTopics(topicForm.get('topicName')!.value)"
-          list="topicsList"
+          autocomplete="off"
+          (input)="onTopicNameInput(topicForm.get('topicName')!.value)"
           required
         />
-        <datalist id="topicsList">
-          <option
-            *ngFor="let topic of filteredTopics$ | async"
-            [value]="topic.name"
+        <!-- Dropdown suggestions -->
+        <ul
+          *ngIf="filteredTopics.length > 0"
+          class="list-group position-absolute"
+          style="z-index: 1000; max-height: 150px; overflow-y: auto; width: 100%;"
+        >
+          <li
+            class="list-group-item list-group-item-action"
+            *ngFor="let topic of filteredTopics"
             (click)="selectTopic(topic)"
-          ></option>
-        </datalist>
+            style="cursor: pointer;"
+          >
+            {{ topic.name }}
+          </li>
+        </ul>
       </div>
 
-      <button type="submit" class="btn btn-success me-2" [disabled]="topicForm.invalid">
-        Save
-      </button>
-      <button type="button" class="btn btn-secondary" (click)="cancelEditTopic()">
-        Cancel
-      </button>
+      <button type="submit" class="btn btn-success me-2" [disabled]="topicForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEditTopic()">Cancel</button>
     </form>
   </div>
 </ng-template>

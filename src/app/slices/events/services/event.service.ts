@@ -94,7 +94,8 @@ export class EventService {
   }
 
   changeEventTopic(eventId: string, topicId: string): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/${eventId}/change-topic`, { topicId });
+    const params = new HttpParams().set('topicId', topicId);
+    return this.http.put<void>(`${this.baseUrl}/${eventId}/change-topic`,  null, { params });
   }
 
   deleteEvent(eventId: string): Observable<void> {
