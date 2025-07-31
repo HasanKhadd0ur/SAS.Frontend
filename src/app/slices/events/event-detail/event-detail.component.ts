@@ -18,6 +18,10 @@ import { TopicService } from '../../topics/services/topic.service';
 export class EventDetailComponent implements OnInit {
   event: Event | null = null;
   isMonitor = false;
+  eventMessages: any[] = [];
+  loadingMessages = false;
+  showMessages = false;
+  showDeleteConfirm = false;
 
   editingTopic = false;
 
@@ -54,6 +58,30 @@ export class EventDetailComponent implements OnInit {
 
     this.isMonitor = this.userService.getRoles().includes(UserService.ROLE_MONITOR);
   }
+   loadEventMessages() {
+    if (!this.event) return;
+
+    this.loadingMessages = true;
+    this.showMessages = false;
+
+    this.eventService.getMessagesByEvent(this.event.id).subscribe({
+      next: (messages) => {
+        this.eventMessages = messages;
+        this.showMessages = true;
+        this.loadingMessages = false;
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load event messages.',
+          life: 3000,
+        });
+        this.loadingMessages = false;
+      }
+    });
+  }
+
 
   onTopicNameInput(value: string) {
     if (!value || value.trim() === '') {
@@ -77,6 +105,14 @@ export class EventDetailComponent implements OnInit {
     });
     this.filteredTopics = [];
   }
+  toggleMessages(): void {
+  this.showMessages = !this.showMessages;
+
+  if (this.showMessages && this.eventMessages.length === 0) {
+    this.loadEventMessages();
+  }
+}
+
 
   startEditTopic() {
     this.editingTopic = true;
@@ -194,4 +230,35 @@ export class EventDetailComponent implements OnInit {
   goToEventsByNamedEntity(entityName: string) {
     this.router.navigate(['/events', 'named-entity', entityName]);
   }
+
+deleteEvent() {
+  if (!this.event?.id) return;
+
+  this.eventService.deleteEvent(this.event.id).subscribe({
+    next: () => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Deleted',
+        detail: 'The event has been deleted.',
+        life: 3000,
+      });
+      this.router.navigate(['/events']);
+    },
+    error: (err) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to delete the event.',
+        life: 3000,
+      });
+      console.error('Delete failed:', err);
+    },
+  });
+
+  this.showDeleteConfirm = false; // hide popup
+}
+confirmDelete() {
+  this.showDeleteConfirm = true;
+}
+
 }

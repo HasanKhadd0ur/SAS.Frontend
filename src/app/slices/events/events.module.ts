@@ -20,6 +20,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { TopicEventsComponent } from './topic-events/topic-events.component';
 import { UpdateEventLocationComponent } from './update-event-location/update-event-location.component';
 import { UpdateEventInfoComponent } from './update-event-info/update-event-info.component';
+import { NamedEntityComponent } from './named-entity/named-entity.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { UpdateEventInfoComponent } from './update-event-info/update-event-info.
     TodaySummaryComponent,
     TopicEventsComponent,
     UpdateEventLocationComponent,
-    UpdateEventInfoComponent
+    UpdateEventInfoComponent,
+    NamedEntityComponent
   ],
   imports: [
     CommonModule,

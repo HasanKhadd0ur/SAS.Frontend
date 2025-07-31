@@ -38,6 +38,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Topics',
                 items: [
                     { label: 'ALl Topic', icon: 'pi pi-fw pi-table', routerLink: ['/topics'], badge: 'NEW' },
+                    { label: 'Entities', icon: 'pi pi-fw pi-table', routerLink: ['/events/entities'], badge: 'NEW' },
                 ]
             },    
             {
@@ -55,14 +56,6 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Platfroms', icon: 'pi pi-fw pi-globe', routerLink: ['/platforms'], badge: 'NEW' },
                 ]
             },
-            {
-                label: 'Regions',
-                items: [
-                    { label: 'My Region Intereset', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-                    { label: 'Regions', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-                ]
-            },
-            
             {
                 label: 'Events',
                 items: [

@@ -159,7 +159,6 @@
     font-size: 1.15rem;
   }
 </style>
-
 <div class="card">
   <div class="card-header">Event History</div>
 
@@ -173,30 +172,36 @@
 
   <!-- Event list -->
   <div *ngIf="pagedEvents.length > 0; else noData" class="event-list">
-    <div *ngFor="let event of pagedEvents" class="event-card">
-      <div class="event-header">
-        <div class="event-title">
-          <span class="event-icon">⚡</span>
-          {{ event.eventInfo.title }}
-        </div>
-        <span class="event-status" [ngClass]="{
-          'verified': event.status === 'Verified',
-          'under-review': event.status === 'Under Review',
-          'rejected': event.status === 'Rejected'
-        }">
-          {{ event.status || 'Under Review' }}
-        </span>
-      </div>
-
-      <div class="event-summary">
-        {{ event.eventInfo.summary || 'No summary available.' }}
-      </div>
-
-      <div class="event-meta">
-        <span class="icon-calendar">{{ event.createdAt | date: 'shortDate' }}</span>
-        <span *ngIf="event.topic" class="icon-tag">{{ event.topic.name }}</span>
-      </div>
+    <!-- Inside your *ngFor loop -->
+<div *ngFor="let event of pagedEvents" class="event-card">
+  <div class="event-header">
+    <div class="event-title">
+      <span class="event-icon">⚡</span>
+      {{ event.eventInfo.title }}
     </div>
+
+    <!-- ✅ Status icon as same size as metadata -->
+    <span *ngIf="event.isReviewed" class="reviewed-icon" title="Reviewed">
+      ✅
+    </span>
+  </div>
+
+  <div class="event-summary">
+    {{ event.eventInfo.summary || 'No summary available.' }}
+  </div>
+
+  <div class="event-meta">
+    <span class="icon-calendar">{{ event.createdAt | date: 'shortDate' }}</span>
+    <span *ngIf="event.topic" class="icon-tag">{{ event.topic.name }}</span>
+
+    <div class="event-footer">
+      <button class="view-button" (click)="onViewEvent(event); $event.stopPropagation()" [routerLink]="['/events/view', event.id]">
+        <i class="fas fa-eye"></i> View
+      </button>
+    </div>
+  </div>
+</div>
+
 
     <!-- Load more button -->
     <button *ngIf="currentIndex < events.length" class="load-more-btn" (click)="loadMore()">
