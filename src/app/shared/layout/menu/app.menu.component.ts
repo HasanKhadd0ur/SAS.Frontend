@@ -87,6 +87,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Settings',
                 items: [
                     { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
+                    { label: 'Blocked Terms', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/blocked-terms'] },
                 ]
             },
             {
@@ -97,22 +98,6 @@ export class AppMenuComponent implements OnInit {
                         label: 'Notification',
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/notifications']
-                    },
-                    {
-                        label: 'Box',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Event Notification',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
-                            },
-                            {
-                                label: 'Messages',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error']
-                            }
-                        ]
                     }
                   ]
                 },

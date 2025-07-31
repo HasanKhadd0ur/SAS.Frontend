@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Blocked Terms</h2>
+
+  <!-- Show List -->
+  <div *ngIf="!showForm">
+    <button class="btn btn-success mb-3" (click)="onCreateNew()">
+      Create New Term
+    </button>
+
+    <div *ngIf="loading" class="text-center mb-3">Loading...</div>
+    <div *ngIf="error" class="alert alert-danger mb-3">{{ error }}</div>
+
+    <ul class="list-group">
+      <li
+        *ngFor="let term of blockedTerms"
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        {{ term.term }}
+        <div>
+          <button
+            class="btn btn-sm btn-secondary me-2"
+            (click)="onEdit(term)"
+            [disabled]="loading"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="onDelete(term.id)"
+            [disabled]="loading"
+          >
+            Delete
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Show Form -->
+  <div *ngIf="showForm" class="form-container">
+    <h3>{{ isEditing ? 'Edit Blocked Term' : 'Create Blocked Term' }}</h3>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" novalidate>
+      <div class="form-group">
+        <label for="term">Term</label>
+        <input
+          id="term"
+          type="text"
+          formControlName="term"
+          class="form-control"
+          placeholder="Enter blocked term"
+        />
+        <div
+          *ngIf="form.controls['term'].invalid && form.controls['term'].touched"
+          class="text-danger"
+        >
+          Term is required.
+        </div>
+      </div>
+
+      <div class="modal-actions mt-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          {{ isEditing ? 'Update' : 'Create' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+    </form>
+  </div>
+</div>
