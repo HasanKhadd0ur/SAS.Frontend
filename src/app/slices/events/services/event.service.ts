@@ -90,11 +90,11 @@ export class EventService {
   }
 
   markEventAsReviewed(eventId: string): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/${eventId}/review`, {});
+    return this.http.post<void>(`${this.baseUrl}/${eventId}/mark-reviewed`, {});
   }
 
   changeEventTopic(eventId: string, topicId: string): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/${eventId}/topic`, { topicId });
+    return this.http.put<void>(`${this.baseUrl}/${eventId}/change-topic`, { topicId });
   }
 
   deleteEvent(eventId: string): Observable<void> {

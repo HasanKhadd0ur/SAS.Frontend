@@ -18,6 +18,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update Info</button>
+    <button type="submit" class="m-1 btn btn-primary" [disabled]="form.invalid">Update Info</button>
+    <button class="m-1 btn btn-secondary" [routerLink]="['/events/view', this.eventId]">Back to Event</button>
   </form>
 </div>

@@ -1,16 +1,24 @@
-<div *ngIf="event; else loading" class="event-detail-card">
+<ng-template #loading>
+  <div class="loading-text">
+    <span style="font-size: 1.5rem; animation: spin 1.5s linear infinite;">⏳</span>
+    Loading event...
+  </div>
+</ng-template>
+
+<!-- Show event card only if NOT editing topic -->
+<div *ngIf="event && !editingTopic; else editTopicForm" class="event-detail-card">
   <div class="event-detail-header">
     {{ event.eventInfo.title }}
-    <button class="btn btn-sm btn-link float-end" (click)="goToUpdateInfo()">
+    <button class="btn btn-sm btn-link float-end" (click)="goToUpdateInfo()" *ngIf="isMonitor">
       <i class="fas fa-edit"></i>
     </button>
   </div>
 
-  <div class="event-detail-summary">
+  <div class="event-detail-summary text-center">
     {{ event.eventInfo.summary || 'No summary available.' }}
   </div>
 
-  <div class="event-detail-meta">
+  <div class="event-detail-meta text-center">
     <p>
       <span class="icon">📅</span>
       <strong>Created:</strong> {{ event.createdAt | date: 'fullDate' }}
@@ -19,42 +27,106 @@
       <span class="icon">🏷️</span>
       <strong>Topic:</strong> {{ event.topic.name }}
     </p>
+    <p *ngIf="event.location">
+      <span class="icon">📍</span>
+      <strong>Location:</strong>
+      {{ event.location.city || '-' }}, {{ event.location.country || '-' }} {{ event.location.region || '' }}
+    </p>
     <p>
       <span class="icon">ℹ️</span>
-      <strong>Status:</strong> 
-      <span [ngClass]="{
-        'status verified': event.status === 'Verified',
-        'status under-review': event.status === 'Under Review',
-        'status rejected': event.status === 'Rejected'
-      }">
-        {{ event.status || 'Under Review' }}
+      <strong>Status:</strong>
+      <span [ngClass]="{'status reviewed': event.isReviewed, 'status under-review': !event.isReviewed}">
+        <ng-container *ngIf="event.isReviewed; else notReviewed">✔️ Reviewed</ng-container>
+        <ng-template #notReviewed>Under Review</ng-template>
       </span>
     </p>
 
     <!-- Mark as Reviewed Button -->
-    <div *ngIf="isMonitor && !event.isReviewed" class="mt-3 text-end">
-      <button class="btn btn-success" (click)="markAsReviewed()">
+    <div  class="mt-3 text-end">
+      <button  *ngIf="isMonitor && !event.isReviewed"  class="btn btn-success" (click)="markAsReviewed()">
         <i class="fas fa-check"></i> Mark as Reviewed
       </button>
-    </div>
+      
+        <button class="m-1 btn btn-secondary" (click)="toggleNamedEntities()">
+      <i class="fas fa-list"></i>
+      {{ showNamedEntities ? 'Hide Entities' : 'Show Entities' }}
+    </button>
 
-    <!-- Other Actions -->
-    <div class="mt-3 text-end">
-      <button class="btn btn-primary me-2" (click)="goToUpdateLocation()">
-        <i class="fas fa-map-marker-alt"></i> Update Location
+
+      <button  *ngIf="isMonitor"  class="btn btn-warning me-2" (click)="startEditTopic()">
+        <i class="fas fa-tag"></i> Change Topic
       </button>
 
-      <button class="btn btn-secondary" (click)="goToUpdateInfo()">
+      <button  *ngIf="isMonitor"  class="btn btn-primary me-2" (click)="goToUpdateLocation()">
+        <i class="fas fa-map-marker-alt"></i> Update Location
+      </button>
+      <button  *ngIf="isMonitor" class="btn btn-secondary" (click)="goToUpdateInfo()">
         <i class="fas fa-edit"></i> Edit Info
       </button>
     </div>
+ 
+<!-- Named Entities List -->
+<div *ngIf="showNamedEntities && namedEntities.length > 0" class="named-entities-list mt-3 text-center">
+  <h5>Named Entities</h5>
+  <ul class="list-group">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let entity of namedEntities"
+    >
+      {{ entity.entityName }} ({{ entity.type?.typeName || 'Unknown' }})
+      <button
+        class="btn btn-sm btn-outline-primary"
+        (click)="goToEventsByNamedEntity(entity.entityName)"
+        title="View events with this entity"
+      >
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </li>
+  </ul>
+</div>
+
+<!-- Optionally, show message if no named entities -->
+<div *ngIf="showNamedEntities && namedEntities.length === 0" class="mt-3 text-center text-muted">
+  No named entities found for this event.
+</div>
+
   </div>
 </div>
 
-<ng-template #loading>
-  <div class="loading-text">
-    <span style="font-size: 1.5rem; animation: spin 1.5s linear infinite;">⏳</span>
-    Loading event...
+<!-- Edit Topic Form -->
+<ng-template #editTopicForm>
+  <div class="event-detail-card">
+    <h4>Change Event Topic</h4>
+
+    <form [formGroup]="topicForm" (ngSubmit)="submitTopicChange()">
+      <div class="mb-3">
+        <label for="topicName" class="form-label">Topic Name</label>
+        <input
+          id="topicName"
+          type="text"
+          class="form-control"
+          formControlName="topicName"
+          [attr.autocomplete]="'off'"
+          (input)="filteredTopics$ = searchTopics(topicForm.get('topicName')!.value)"
+          list="topicsList"
+          required
+        />
+        <datalist id="topicsList">
+          <option
+            *ngFor="let topic of filteredTopics$ | async"
+            [value]="topic.name"
+            (click)="selectTopic(topic)"
+          ></option>
+        </datalist>
+      </div>
+
+      <button type="submit" class="btn btn-success me-2" [disabled]="topicForm.invalid">
+        Save
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEditTopic()">
+        Cancel
+      </button>
+    </form>
   </div>
 </ng-template>
 
@@ -77,18 +149,20 @@
     font-size: 1.2rem;
   }
 
-  .status.verified {
+  .status.reviewed {
     color: green;
     font-weight: bold;
   }
 
   .status.under-review {
-    color: orange;
+    color: white;
     font-weight: bold;
   }
 
-  .status.rejected {
-    color: red;
-    font-weight: bold;
+  .event-detail-card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
   }
 </style>
