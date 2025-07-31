@@ -8,6 +8,7 @@ import { ConfigService } from '../config/config.service';
 import { Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { TokenService } from '../token/token.service';
+import { StorageService } from '../storage-service/storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +27,8 @@ export class AuthenticationService {
       private config: ConfigService,
       private router: Router,
       private messageService: MessageService,
-      private tokenService :TokenService
+      private tokenService :TokenService,
+      private storageService :StorageService
     ) {}
     login(data: LoginRequest): Observable<AuthResponse> {
       return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data);

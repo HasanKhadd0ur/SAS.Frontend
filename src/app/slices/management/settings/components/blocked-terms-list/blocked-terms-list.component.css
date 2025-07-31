@@ -1,0 +1,338 @@
+/* block list container */
+div {
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* header */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* create button */
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* error message */
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+/* list styles */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #f8f9fa;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+/* term text */
+li span.term-text {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+/* buttons inside list */
+li button {
+  background-color: #6c757d;
+  padding: 6px 12px;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+li button:hover {
+  background-color: #5a6268;
+}
+
+/* Delete button */
+li button.delete-btn {
+  background-color: #dc3545;
+}
+
+li button.delete-btn:hover {
+  background-color: #a71d2a;
+}
+
+/* blocked-terms-list.component.css */
+
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+form {
+  margin-bottom: 25px;
+}
+
+label.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1.5px solid #ccc;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input[type='text']:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.text-danger {
+  color: #d93025;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 8px 16px;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button[type='submit'] {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10px;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+button.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+button.btn-secondary:hover:not(:disabled) {
+  background-color: #545b62;
+}
+
+button.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.btn-danger:hover:not(:disabled) {
+  background-color: #a71d2a;
+}
+
+button.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+button.btn-success:hover {
+  background-color: #19692c;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.alert {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.list-group {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group-item {
+  background-color: #f8f9fa;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item > div button {
+  margin-left: 8px;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+/* modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+/* modal box */
+.modal {
+  position: relative;
+  z-index: 1060;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-sizing: border-box;
+  min-height: 200px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+/* form group inside modal */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1.5px solid #ccc;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* modal action buttons */
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-actions button {
+  min-width: 100px;
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-actions button.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-actions button.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.modal-actions button.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-actions button.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+.modal-actions button.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-actions button.btn-danger:hover {
+  background-color: #a71d2a;
+}
+
+/* alert inside modal */
+.alert {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: #842029;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  font-size: 14px;
+}

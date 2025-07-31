@@ -6,13 +6,15 @@ import { PipelineConfigsListComponent } from './components/pipeline-configs-list
 import { PipelineConfigsEditComponent } from './components/pipeline-configs-edit/pipeline-configs-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipelineConfigsCreateComponent } from './components/pipeline-configs-create/pipeline-configs-create.component';
+import { BlockedTermsListComponent } from './components/blocked-terms-list/blocked-terms-list.component';
 
 
 @NgModule({
   declarations: [
     PipelineConfigsListComponent,
     PipelineConfigsEditComponent,
-    PipelineConfigsCreateComponent
+    PipelineConfigsCreateComponent,
+    BlockedTermsListComponent,
   ],
   imports: [
     CommonModule,

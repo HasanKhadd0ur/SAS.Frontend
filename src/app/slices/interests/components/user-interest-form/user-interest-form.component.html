@@ -1,4 +1,4 @@
-<div class="container  ">
+<div class="container">
   <div class="row align-items-start">
     <!-- Map on the left -->
     <div class="col-12 col-md-7">
@@ -11,13 +11,12 @@
     <!-- Form on the right -->
     <div class="col-12 col-md-5">
 
+      
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <h4 class="text-center">Define Your Interest Area</h4>
 
         <!-- Interest Name -->
         <div class="mb-3">
-          
-
           <label for="interestName" class="form-label">Interest Name</label>
           <input
             id="interestName"
@@ -83,30 +82,33 @@
           </div>
         </div>
 
-        <!-- Hidden fields for City/Country -->
-        <div style="display: none;">
-          <input type="text" formControlName="city" />
-          <input type="text" formControlName="country" />
-        </div>
-
-        <!-- Show City / Country -->
+        <!-- Show City / Country clearly -->
         <div *ngIf="form.value.city || form.value.country" class="mb-3">
-          <p> {{ form.value.country || 'N/A Country' }}, {{ form.value.city || 'N/A City' }}</p>
+          <input
+            type="text"
+            class="form-control"
+            [value]="form.value.city + ', ' + form.value.country"
+            readonly
+          />
         </div>
 
         <!-- Submit Button -->
         <div class="d-grid">
           <button
             type="submit"
-            class="btn btn-primary btn-lg"
+            class="btn m-1 btn-primary btn-sm"
             [disabled]="form.invalid"
           >
-            Create Interest
+            <i class="fas fa-plus-circle"></i> Create Interest
           </button>
+          
+            <button class="m-1 btn btn-sm  btn-secondary" routerLink="/user-interests">
+          <i class="fas fa-list"></i> Show Interests List
+        </button>
+      
         </div>
 
       </form>
     </div>
-
   </div>
 </div>

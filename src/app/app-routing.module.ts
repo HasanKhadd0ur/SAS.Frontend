@@ -31,9 +31,8 @@ const routes: Routes = [
       { path: 'management/settings', loadChildren: () => import('./slices/management/settings/settings.module').then(m => m.SettingsModule) },
       { path: 'management/scrapers', loadChildren: () => import('./slices/management/scrapers/scrapers.module').then(m => m.ScrapersModule) },
       { path: 'management/scraping-tasks', loadChildren: () => import('./slices/management/scraping-tasks/scraping-tasks.module').then(m => m.ScrapingTasksModule) },
-      { path: 'notifications', loadChildren: () => import('./slices/notifications/notifications.module').then(m => m.NotificationsModule
-        
-      ) },
+      { path: 'notifications', loadChildren: () => import('./slices/notifications/notifications.module').then(m => m.NotificationsModule) },
+      { path: 'location', loadChildren: () => import('./slices/location-inference/location-inference-routing.module').then(m => m.LocationInferenceRoutingModule) },
            
     ]
   },

@@ -29,9 +29,11 @@
 
         <!-- Submit Button -->
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid">
+          <button type="submit" class="m-1 btn btn-primary btn" [disabled]="form.invalid">
             Update Location
           </button>
+              <button class="m-1 btn btn-secondary" [routerLink]="['/events/view', this.eventId]">Back to Event</button>
+
         </div>
       </form>
     </div>

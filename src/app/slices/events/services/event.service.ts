@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event, EventInfo } from '../models/event.model';
+import { Event, EventInfo, NamedEntity } from '../models/event.model';
 import { environment } from 'src/environments/environment';
 import { ConfigService } from 'src/app/core/services/config/config.service';
 
@@ -9,17 +9,17 @@ import { ConfigService } from 'src/app/core/services/config/config.service';
   providedIn: 'root',
 })
 export class EventService {
-
   private readonly baseUrl = `${this.config.getEventServiceUrl()}/Events`;
 
-  constructor(private http: HttpClient,
-              private config: ConfigService  ) {}
+  constructor(
+    private http: HttpClient,
+    private config: ConfigService
+  ) {}
 
   getAllEvents(pageNumber?: number, pageSize?: number): Observable<Event[]> {
     let params = new HttpParams();
     if (pageNumber) params = params.set('pageNumber', pageNumber);
     if (pageSize) params = params.set('pageSize', pageSize);
-
     return this.http.get<Event[]>(`${this.baseUrl}`, { params });
   }
 
@@ -44,7 +44,6 @@ export class EventService {
       .set('Latitude', lat)
       .set('Longitude', lng)
       .set('RadiusInKm', radius);
-
     return this.http.get<Event[]>(`${this.baseUrl}/area`, { params });
   }
 
@@ -57,7 +56,6 @@ export class EventService {
     const params = new HttpParams()
       .set('from', from.toISOString())
       .set('to', to.toISOString());
-
     return this.http.get<Event[]>(`${this.baseUrl}/created-between`, { params });
   }
 
@@ -66,30 +64,59 @@ export class EventService {
     return this.http.get<Event[]>(`${this.baseUrl}/by-date`, { params });
   }
 
-getTodaySummary(): Observable<string> {
-  return this.http.get(`${this.baseUrl}/summary/today`, {
-    responseType: 'text',
-  });
-}
+  getTodaySummary(): Observable<string> {
+    return this.http.get(`${this.baseUrl}/summary/today`, {
+      responseType: 'text',
+    });
+  }
+
   getMessagesByEvent(eventId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${eventId}/messages`);
   }
-  getDailyEvent():Observable<Event[]>{
+
+  getDailyEvent(): Observable<Event[]> {
     const now = new Date();
-
     const todayMidnight = new Date();
-  
-    todayMidnight.setDate(now.getDate() - 2); // set to start of today
-
-
+    todayMidnight.setDate(now.getDate() - 2);
     return this.getEventsUpdatedAfter(todayMidnight);
-
   }
-  updateLocation(eventId: string, payload: any) {
-  return this.http.put(`${this.baseUrl}/${eventId}/location`, payload);
-}
-updateEventInfo(eventId: string, eventInfo: EventInfo) {
-  return this.http.put(`${this.baseUrl}/${eventId}/info`, eventInfo);
-}
 
+  updateLocation(eventId: string, payload: any): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${eventId}/location`, payload);
+  }
+
+  updateEventInfo(eventId: string, eventInfo: EventInfo): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${eventId}/info`, eventInfo);
+  }
+
+  markEventAsReviewed(eventId: string): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${eventId}/mark-reviewed`, {});
+  }
+
+  changeEventTopic(eventId: string, topicId: string): Observable<void> {
+    const params = new HttpParams().set('topicId', topicId);
+    return this.http.put<void>(`${this.baseUrl}/${eventId}/change-topic`,  null, { params });
+  }
+
+  deleteEvent(eventId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${eventId}`);
+  }
+
+  getEventNamedEntities(eventId: string): Observable<NamedEntity[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${eventId}/named-entities`);
+  }
+    getEventsByNamedEntityId(
+    namedEntityId: string,
+    pageNumber?: number,
+    pageSize?: number
+  ): Observable<Event[]> {
+    let params = new HttpParams();
+    if (pageNumber) params = params.set('pageNumber', pageNumber.toString());
+    if (pageSize) params = params.set('pageSize', pageSize.toString());
+
+    return this.http.get<Event[]>(
+      `${this.baseUrl}/by-named-entity/${namedEntityId}`,
+      { params }
+    );
+  }
 }

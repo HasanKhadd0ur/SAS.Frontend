@@ -38,6 +38,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Topics',
                 items: [
                     { label: 'ALl Topic', icon: 'pi pi-fw pi-table', routerLink: ['/topics'], badge: 'NEW' },
+                    { label: 'Entities', icon: 'pi pi-fw pi-table', routerLink: ['/events/entities'], badge: 'NEW' },
                 ]
             },    
             {
@@ -55,14 +56,6 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Platfroms', icon: 'pi pi-fw pi-globe', routerLink: ['/platforms'], badge: 'NEW' },
                 ]
             },
-            {
-                label: 'Regions',
-                items: [
-                    { label: 'My Region Intereset', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-                    { label: 'Regions', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-                ]
-            },
-            
             {
                 label: 'Events',
                 items: [
@@ -87,6 +80,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'Settings',
                 items: [
                     { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
+                    { label: 'Blocked Terms', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/blocked-terms'] },
+                    { label: 'Location Infernce', icon: 'pi pi-fw pi-prime', routerLink: ['/location/config'] },
+                
                 ]
             },
             {
@@ -97,22 +93,6 @@ export class AppMenuComponent implements OnInit {
                         label: 'Notification',
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/notifications']
-                    },
-                    {
-                        label: 'Box',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Event Notification',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
-                            },
-                            {
-                                label: 'Messages',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error']
-                            }
-                        ]
                     }
                   ]
                 },

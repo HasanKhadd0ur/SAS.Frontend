@@ -3,6 +3,7 @@ export interface AuthResponse {
   email: string;
   firstName: string;
   lastName: string;
+  roles:{name:string}[]
   tokenInfo: {
     username: string;
     refreshToken: string;
@@ -16,5 +17,5 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  roles: string[]
+  roles: {name:string}[]
 }

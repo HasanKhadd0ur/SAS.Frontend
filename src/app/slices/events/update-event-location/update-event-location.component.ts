@@ -34,7 +34,7 @@ export class UpdateEventLocationComponent implements OnInit {
     private route: ActivatedRoute,
     private messageService: MessageService,
     private eventService: EventService,
-    private router : Router
+    private router: Router
   ) {
     this.form = this.fb.group({
       latitude: [0, Validators.required],
@@ -104,7 +104,8 @@ export class UpdateEventLocationComponent implements OnInit {
   }
 
   fetchReverseGeocode(lat: number, lon: number): void {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+    // Add accept-language=ar to get Arabic city and country names
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ar`;
 
     this.http.get<any>(url).subscribe({
       next: data => {
@@ -135,7 +136,7 @@ export class UpdateEventLocationComponent implements OnInit {
       this.eventService.updateLocation(this.eventId, payload).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Location updated successfully.' });
-           this.router.navigate(['/events/view', this.eventId]);
+          this.router.navigate(['/events/view', this.eventId]);
         },
         error: () => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update location.' });

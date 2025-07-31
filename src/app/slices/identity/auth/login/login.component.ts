@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           email: res.email,
           firstName: res.firstName,
           lastName: res.lastName,
-          roles: [],
+          roles: res.roles,
           token: res.token
         };
         this.storageService.setLocalStorage('user', userInfo);

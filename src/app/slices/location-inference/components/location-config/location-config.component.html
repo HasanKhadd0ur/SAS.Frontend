@@ -1,0 +1,36 @@
+<div class="p-6 border border-gray-300 rounded-2xl shadow bg-white max-w-xl mx-auto">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Location Inference Configuration</h2>
+
+  <div class="mb-4 text-gray-700">
+    <p><strong>Current Recognizer:</strong> {{ currentRecognizer }}</p>
+    <p><strong>Current Resolver:</strong> {{ currentResolver }}</p>
+  </div>
+
+  <button class="bg-gray-600 hover:bg-gray-700 text-white font-medium px-4 py-2 rounded mb-4"
+          (click)="toggleForm()">
+    {{ showForm ? 'Cancel' : 'Change Configuration' }}
+  </button>
+
+  <div *ngIf="showForm" class="space-y-4">
+    <div>
+      <label class="block font-medium text-sm text-gray-600 mb-1">Select Recognizer</label>
+      <select class="w-full border p-2 rounded focus:ring focus:ring-blue-200"
+              [(ngModel)]="selectedRecognizer">
+        <option *ngFor="let r of recognizers" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block font-medium text-sm text-gray-600 mb-1">Select Resolver</label>
+      <select class="w-full border p-2 rounded focus:ring focus:ring-blue-200"
+              [(ngModel)]="selectedResolver">
+        <option *ngFor="let r of resolvers" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+
+    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded"
+            (click)="saveConfig()">
+      Save
+    </button>
+  </div>
+</div>

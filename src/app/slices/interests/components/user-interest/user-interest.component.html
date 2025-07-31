@@ -1,7 +1,26 @@
 <div class="container mt-4">
+  <div class="text-center mb-3">
+    
   <h4 class="fw-bold text-center mb-4">My Interest Areas</h4>
+  <div class="text-center mb-3 d-flex justify-content-center gap-3">
+  <button class="btn btn-primary" (click)="toggleView()">
+    <i class="bi" [ngClass]="showMapView ? 'bi-list' : 'bi-map'"></i>
+    {{ showMapView ? 'Show List' : 'Show Map' }}
+  </button>
 
-  <div class="row">
+  <button
+    class="btn btn-success"
+    [routerLink]="['/user-interests/add']"
+    title="Add New Interest"
+  >
+    <i class="bi bi-plus-circle"></i>
+    Add Interest
+  </button>
+</div>
+
+
+  <!-- LIST VIEW -->
+  <div *ngIf="!showMapView" class="row">
     <div class="col-md-6 col-lg-4 mb-4" *ngFor="let interest of interests">
       <div class="card shadow-sm h-100">
         <div class="card-body d-flex flex-column justify-content-between">
@@ -35,11 +54,11 @@
     </div>
   </div>
 
-  <div class="map-container mt-4">
-    <h5 class="text-center mb-3">Map View: All Interests</h5>
+  <!-- MAP VIEW -->
+  <div *ngIf="showMapView" class="map-container mt-4 text-center">
     <div
       id="interestMap"
-      style="height: 500px; width: 100%; max-width: 900px; margin: 0 auto"
+      style="height: 350px; width: 100%; max-width: 900px; margin: 0 auto"
     ></div>
   </div>
 </div>
@@ -49,29 +68,42 @@
   class="modal fade show"
   tabindex="-1"
   [ngClass]="{ show: showDeleteModal }"
-  [ngStyle]="{ display: showDeleteModal ? 'block' : 'none', backgroundColor: 'rgba(0,0,0,0.5)' }"
+  [ngStyle]="{
+    display: showDeleteModal ? 'block' : 'none',
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  }"
   role="dialog"
 >
-  <div
-    class="modal-dialog modal-dialog-centered"
-    role="document"
-  >
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Confirm Delete Interest</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="cancelDelete()"></button>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="cancelDelete()"
+        ></button>
       </div>
       <div class="modal-body" *ngIf="interestToDelete">
         <p>Are you sure you want to delete the interest area:</p>
         <ul>
           <li><strong>Name:</strong> {{ interestToDelete.interestName }}</li>
           <li><strong>Radius:</strong> {{ interestToDelete.radiusInKm }} km</li>
-          <li><strong>Location:</strong> {{ interestToDelete.location.city }}, {{ interestToDelete.location.country }}</li>
+          <li>
+            <strong>Location:</strong>
+            {{ interestToDelete.location.city }},
+            {{ interestToDelete.location.country }}
+          </li>
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="deleteInterest()">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger" (click)="deleteInterest()">
+          Delete
+        </button>
       </div>
     </div>
   </div>

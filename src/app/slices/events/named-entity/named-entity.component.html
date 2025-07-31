@@ -1,0 +1,27 @@
+<div class="entity-list-container">
+  <div *ngFor="let entity of namedEntities" class="entity-card">
+    <div class="entity-header">
+      <span class="entity-name">{{ entity.entityName }}</span>
+      <span class="entity-type">{{ entity.type.typeName }}</span>
+    </div>
+
+    <div class="entity-details">
+    </div>
+
+    <div class="entity-actions">
+      <mat-icon
+        class="view-icon"
+        (click)="goToEvents(entity.id); $event.stopPropagation()"
+        title="View related events"
+        >View</mat-icon>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="status-message loading">
+    <mat-spinner diameter="24"></mat-spinner> Loading...
+  </div>
+
+  <div *ngIf="allLoaded && !isLoading" class="status-message end">
+    All entities loaded.
+  </div>
+</div>
