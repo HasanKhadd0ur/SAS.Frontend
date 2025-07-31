@@ -7,7 +7,7 @@ import { User } from '../models/response/AuthResponse';
 })
 export class UserService {
   private readonly USER_KEY = 'user';
-
+  public static readonly ROLE_MONITOR = 'Monitor';
   constructor(private storageService: StorageService) {}
 
   getCurrentUser(): User | null {
@@ -32,6 +32,6 @@ export class UserService {
 
   getRoles(): string[] {
     const user = this.getCurrentUser();
-    return user?.roles || [];
+    return (user?.roles || [] ).map(e => e.name);
   }
 }
