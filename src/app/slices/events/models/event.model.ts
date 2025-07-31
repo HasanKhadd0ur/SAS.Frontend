@@ -24,6 +24,7 @@ export interface EventInfo {
 export interface NamedEntity {
   id: string;
   entityName: string;
+  lastMantionedAt:Date;
   type: NamedEntityType;
 }
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event, EventInfo } from '../models/event.model';
+import { Event, EventInfo, NamedEntity } from '../models/event.model';
 import { environment } from 'src/environments/environment';
 import { ConfigService } from 'src/app/core/services/config/config.service';
 
@@ -102,7 +102,21 @@ export class EventService {
     return this.http.delete<void>(`${this.baseUrl}/${eventId}`);
   }
 
-  getEventNamedEntities(eventId: string): Observable<any[]> {
+  getEventNamedEntities(eventId: string): Observable<NamedEntity[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${eventId}/named-entities`);
+  }
+    getEventsByNamedEntityId(
+    namedEntityId: string,
+    pageNumber?: number,
+    pageSize?: number
+  ): Observable<Event[]> {
+    let params = new HttpParams();
+    if (pageNumber) params = params.set('pageNumber', pageNumber.toString());
+    if (pageSize) params = params.set('pageSize', pageSize.toString());
+
+    return this.http.get<Event[]>(
+      `${this.baseUrl}/by-named-entity/${namedEntityId}`,
+      { params }
+    );
   }
 }

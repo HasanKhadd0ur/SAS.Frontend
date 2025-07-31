@@ -1,1 +1,52 @@
-<p>named-entity-events works!</p>
+<div class="events-container">
+  <div class="events-header">Events Related to Entity</div>
+
+  <div *ngIf="pagedEvents.length > 0; else noEvents"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="300"
+       (scrolled)="loadMore()">
+       <div class="back-button-container">
+      <button class="back-button" routerLink="/events/entities">
+        ⬅️ Back to Entities List
+      </button>
+    </div>
+
+
+    <div *ngFor="let event of pagedEvents" class="event-card" (click)="onViewEvent(event)">
+      <div class="event-header">
+        <div class="event-title">
+          <i class="fas fa-bolt"></i>
+          <span>{{ event.eventInfo?.title }}</span>
+        </div>
+        <span class="event-status" [ngClass]="getStatusClass(event.status)">
+          <span [ngClass]="{'status reviewed': event.isReviewed, 'status under-review': !event.isReviewed}">
+            <ng-container *ngIf="event.isReviewed; else notReviewed">✔️ Reviewed</ng-container>
+            <ng-template #notReviewed>Under Review</ng-template>
+          </span>
+        </span>
+      </div>
+
+      <div class="event-summary">
+        {{ event.eventInfo?.summary || 'No summary available.' }}
+      </div>
+
+      <div class="event-meta">
+        <span><i class="fas fa-calendar-alt"></i> {{ event.createdAt | date: 'mediumDate' }}</span>
+        <span *ngIf="event.topic"><i class="fas fa-tag"></i> {{ event.topic.name }}</span>
+      </div>
+
+      <div class="event-footer">
+        <button class="view-button"
+                (click)="onViewEvent(event); $event.stopPropagation()"
+                [routerLink]="['/events/view', event.id]">
+          <i class="fas fa-eye"></i> View
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noEvents>
+    <div class="no-events">No events related to this entity.</div>
+  </ng-template>
+</div>

@@ -88,12 +88,22 @@
         <i class="fas fa-font"></i>
       </div>
       <div class="flex-grow-1">
-        <p class="mb-1"><strong>{{ entity.text }}</strong></p>
-        <small class="text-muted">Type: {{ entity.type || 'Unknown' }}</small>
+        <a [routerLink]="['/events/by-named-entity', entity.id]" class="text-decoration-none fw-bold text-dark">
+          {{ entity.entityName }}
+        </a>
+        <br />
+        <small class="text-muted">Type: {{ entity.type?.typeName || 'Unknown' }}</small>
+      </div>
+      <div>
+        <a [routerLink]="['/events/by-named-entity', entity.id]" class="btn btn-outline-primary btn-sm" title="View related events">
+          <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
     </li>
   </ul>
 </div>
+
+
 
 <!-- Event Messages Section -->
 <div *ngIf="showMessages" class="event-messages mt-4 p-3 border rounded shadow-sm bg-light">

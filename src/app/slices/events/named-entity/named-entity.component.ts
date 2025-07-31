@@ -51,6 +51,6 @@ export class NamedEntityComponent implements OnInit {
   }
   
   goToEvents(entityId: string): void {
-    this.router.navigate(['/events/by-entity', entityId]);
+    this.router.navigate(['/events/by-named-entity', entityId]);
   }
 }
