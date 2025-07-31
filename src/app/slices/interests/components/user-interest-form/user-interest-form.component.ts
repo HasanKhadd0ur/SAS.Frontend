@@ -67,7 +67,6 @@ export class UserInterestFormComponent implements OnInit {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
 
-    // Use default Leaflet icon here:
     this.marker = L.marker(initialLatLng, { draggable: true }).addTo(this.map);
 
     this.circle = L.circle(initialLatLng, {
@@ -77,7 +76,7 @@ export class UserInterestFormComponent implements OnInit {
       fillOpacity: 0.3
     }).addTo(this.map);
 
-    // Fetch city and country for initial position
+    // Fetch city and country for initial position (Arabic names)
     this.fetchCityCountry(initialLatLng.lat, initialLatLng.lng);
 
     // Update form and circle position when marker is dragged
@@ -102,7 +101,7 @@ export class UserInterestFormComponent implements OnInit {
   }
 
   fetchCityCountry(lat: number, lon: number): void {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ar`;
 
     fetch(url)
       .then(response => response.json())
