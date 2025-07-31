@@ -28,6 +28,7 @@ import { NotificationsComponent } from './shared/coponents/notifications/notific
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { RippleModule } from "primeng/ripple";
 import { MapModule } from './slices/map/map.module';
+import { LocationInferenceModule } from './slices/location-inference/location-inference.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MapModule } from './slices/map/map.module';
     HttpClientModule,
      ButtonModule,
     RippleModule,
-    StyleClassModule 
+    StyleClassModule,
+    LocationInferenceModule 
 ],
   providers: [ 
     {

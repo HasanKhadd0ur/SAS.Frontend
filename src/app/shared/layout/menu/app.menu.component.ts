@@ -88,6 +88,8 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
                     { label: 'Blocked Terms', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/blocked-terms'] },
+                    { label: 'Location Infernce', icon: 'pi pi-fw pi-prime', routerLink: ['/location/config'] },
+                
                 ]
             },
             {
