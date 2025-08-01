@@ -111,3 +111,41 @@
 .avatar {
   font-size: 1.2rem;
 }
+  @keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+  }
+
+  .event-detail-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+  }
+
+  .event-detail-header .btn-link {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2rem;
+  }
+
+  .status.reviewed {
+    color: green;
+    font-weight: bold;
+  }
+
+  .status.under-review {
+    color: white;
+    font-weight: bold;
+  }
+
+  .event-detail-card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+
+  .avatar {
+    font-size: 1.2rem;
+  }

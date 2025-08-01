@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event, EventInfo, NamedEntity } from '../models/event.model';
+import { Event, EventInfo, NamedEntity, Review } from '../models/event.model';
 import { environment } from 'src/environments/environment';
 import { ConfigService } from 'src/app/core/services/config/config.service';
 
@@ -118,5 +118,18 @@ export class EventService {
       `${this.baseUrl}/by-named-entity/${namedEntityId}`,
       { params }
     );
+  }
+  addReview(review: { eventId: string, comment: string }): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${review.eventId}/reviews`, review);
+  }
+  getReviewsByEvent(eventId: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.baseUrl}/${eventId}/reviews`);
+  }
+
+  /**
+   * Edit/update an existing review by review ID.
+   */
+  editReview(reviewId: string, review: Partial<Review>): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/reviews/${reviewId}`, review);
   }
 }

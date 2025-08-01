@@ -1,0 +1,18 @@
+<div class="mt-4 p-3 border rounded shadow-sm bg-light" *ngIf="show">
+  <h5 class="text-center mb-3"><i class="fas fa-star"></i> Event Reviews</h5>
+
+  <div *ngIf="reviews.length === 0" class="text-center text-muted">
+    <i class="fas fa-star-half-alt fa-2x mb-2"></i>
+    <p>No reviews found for this event.</p>
+  </div>
+
+  <ul *ngIf="reviews.length > 0" class="list-group">
+    <li *ngFor="let review of reviews" class="list-group-item">
+      <strong>{{ review.userFullName }}</strong>
+      <span> - Rating: {{ review.rating }} / 5</span><br />
+      <small class="text-muted">{{ review.createdAt | date: 'short' }}</small>
+      <p>{{ review.comment }}</p>
+    </li>
+  </ul>
+</div>
+

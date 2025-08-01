@@ -22,6 +22,11 @@ import { UpdateEventLocationComponent } from './update-event-location/update-eve
 import { UpdateEventInfoComponent } from './update-event-info/update-event-info.component';
 import { NamedEntityComponent } from './named-entity/named-entity.component';
 import { NamedEntityEventsComponent } from './named-entity-events/named-entity-events.component';
+import { EventItemComponent } from './components/event-item/event-item.component';
+import { EventReviewsComponent } from './components/event-reviews/event-reviews.component';
+import { EventNamedEntitiesComponent } from './components/event-named-entities/event-named-entities.component';
+import { EventMessagesComponent } from './components/event-messages/event-messages.component';
+import { EventReviewFormComponent } from './components/event-review-form/event-review-form.component';
 
 
 @NgModule({
@@ -34,7 +39,12 @@ import { NamedEntityEventsComponent } from './named-entity-events/named-entity-e
     UpdateEventLocationComponent,
     UpdateEventInfoComponent,
     NamedEntityComponent,
-    NamedEntityEventsComponent
+    NamedEntityEventsComponent,
+    EventItemComponent,
+    EventReviewsComponent,
+    EventNamedEntitiesComponent,
+    EventMessagesComponent,
+    EventReviewFormComponent
   ],
   imports: [
     CommonModule,

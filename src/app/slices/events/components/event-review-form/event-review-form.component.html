@@ -1,0 +1,39 @@
+<div *ngIf="show" class="modal-backdrop-custom">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 bg-white p-3">
+      <!-- Modal Header -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">
+          <i class="fas fa-user me-2"></i> Submit Your Review
+        </h5>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="cancel()"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <p class="text-muted mb-3">
+          Share your thoughts and feedback about this event. Your input helps others understand the event better.
+        </p>
+
+        <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+          <div class="mb-3">
+            <label for="comment" class="form-label">Review</label>
+            <textarea
+              id="comment"
+              formControlName="comment"
+              rows="4"
+              class="form-control"
+              placeholder="Write your review here..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="reviewForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ export interface Event {
   isReviewed: boolean;
   topic: Topic;
   location: Location;
+  reviews: Review[];
   messages: Message[];
   mentionedEntities: NamedEntity[]; 
 }
@@ -32,4 +33,14 @@ export interface NamedEntityType {
   id: string;
   typeName: string;
   normalisedName: string;
+}
+
+export interface Review {
+  id: string;
+  eventId: string;
+  userId: string;
+  userFullName: string;
+  comment: string;
+  createdAt: string;
+  lastUpdatedAt:string
 }
