@@ -1,60 +1,77 @@
 <p-card header="Scrapers" styleClass="mb-4 shadow-2">
-  <div *ngIf="pagedScrapers.length > 0; else noScrapers"
-       class="grid gap-3"
-       infiniteScroll
-       [infiniteScrollDistance]="2"
-       [infiniteScrollThrottle]="300"
-       (scrolled)="loadMore()">
+  <div
+    *ngIf="pagedScrapers.length > 0; else noScrapers"
+    class="grid p-fluid gap-4"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="300"
+    (scrolled)="loadMore()"
+  >
+    <div class="col-12" *ngFor="let scraper of pagedScrapers">
+      <p-card styleClass="h-full shadow-1" [header]="scraper.scraperName">
+        <div class="flex justify-content-between align-items-center mb-3">
+          <span class="text-sm text-500">Tasks: {{ scraper.tasksHandled }}</span>
+        </div>
 
-    <div class="col-12 md:col-6 lg:col-4" *ngFor="let scraper of pagedScrapers">
-      <p-card styleClass="h-full" class="m-3">
-        <ng-template pTemplate="header">
-          <div class="flex justify-content-between align-items-center">
-            <div class="flex align-items-center gap-2">
-              <i class="pi pi-server text-primary text-lg"></i>
-              <span class="font-bold text-lg">Scraper: {{ scraper.scraperName }}</span>
-            </div>
-            <span class="text-sm text-500">Tasks: {{ scraper.tasksHandled }}</span>
-          </div>
-        </ng-template>
-
-        <div class="mt-2">
-          <div class="mb-2">
-            <i class="pi pi-globe mr-2 text-secondary"></i>
-            <strong>Host:</strong> {{ scraper.hostname }}
+        <div class="mt-3 text-sm text-700">
+          <div class="mb-3 flex align-items-center gap-2">
+            <i class="pi pi-globe text-secondary"></i>
+            <strong>Host:</strong>
+            <span>{{ scraper.hostname }}</span>
           </div>
 
-          <div class="mb-2">
-            <i class="pi pi-map-marker mr-2 text-secondary"></i>
-            <strong>IP:</strong> {{ scraper.ipAddress }}
+          <div class="mb-3 flex align-items-center gap-2">
+            <i class="pi pi-map-marker text-secondary"></i>
+            <strong>IP:</strong>
+            <span>{{ scraper.ipAddress }}</span>
           </div>
 
-          <div class="mb-2">
-            <i class="pi pi-info-circle mr-2 text-secondary"></i>
+          <div class="mb-3 flex align-items-center gap-2">
+            <i class="pi pi-info-circle text-secondary"></i>
             <strong>Status:</strong>
-            <span class="p-badge"
-                  [ngClass]="{
-                    'p-badge-success': scraper.isActive,
-                    'p-badge-danger': !scraper.isActive
-                  }">
+            <span
+              class="p-badge"
+              [ngClass]="{
+                'p-badge-success': scraper.isActive,
+                'p-badge-danger': !scraper.isActive
+              }"
+            >
               {{ scraper.isActive ? 'Active' : 'Inactive' }}
             </span>
           </div>
 
-          <div>
-            <i class="pi pi-calendar mr-2 text-secondary"></i>
-            <strong>Registered:</strong> {{ scraper.registeredAt | date: 'medium' }}
+          <div class="flex align-items-center gap-2">
+            <i class="pi pi-calendar text-secondary"></i>
+            <strong>Registered:</strong>
+            <span>{{ scraper.registeredAt | date: 'medium' }}</span>
           </div>
         </div>
 
         <ng-template pTemplate="footer">
-          <div class="flex justify-content-end gap-2 mt-3">
-            <button pButton icon="pi pi-eye" class="p-button-sm p-button-info p-button-outlined"
-                    (click)="onView(scraper)" label="View"></button>
-            <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined"
-                    (click)="onEdit(scraper)" label="Edit"></button>
-            <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger p-button-outlined"
-                    (click)="confirmDelete(scraper)" label="Delete"></button>
+          <div class="flex justify-content-end gap-3 mt-4">
+            <button
+              pButton
+              icon="pi pi-eye"
+              class="p-button-sm p-button-info p-button-outlined"
+              (click)="onView(scraper)"
+              label="View"
+            ></button>
+            <button
+              disabled
+              pButton
+              icon="pi pi-pencil"
+              class="p-button-sm p-button-outlined"
+              (click)="onEdit(scraper)"
+              label="Edit"
+            ></button>
+            <button
+              disabled
+              pButton
+              icon="pi pi-trash"
+              class="p-button-sm p-button-danger p-button-outlined"
+              (click)="confirmDelete(scraper)"
+              label="Delete"
+            ></button>
           </div>
         </ng-template>
       </p-card>
@@ -62,8 +79,8 @@
   </div>
 
   <ng-template #noScrapers>
-    <div class="text-center text-500 p-4">
-      <i class="pi pi-info-circle text-3xl mb-2 text-gray-400"></i>
+    <div class="text-center text-500 p-5">
+      <i class="pi pi-info-circle text-4xl mb-3 text-gray-400"></i>
       <p>No scrapers found.</p>
     </div>
   </ng-template>
