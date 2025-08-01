@@ -29,6 +29,7 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { RippleModule } from "primeng/ripple";
 import { MapModule } from './slices/map/map.module';
 import { LocationInferenceModule } from './slices/location-inference/location-inference.module';
+import { DetectionModule } from './slices/detection/detection.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
     AppRoutingModule,
     MenubarModule,
     SharedModule,
+    DetectionModule,
     DividerModule,
     FormsModule,
     SidebarModule,

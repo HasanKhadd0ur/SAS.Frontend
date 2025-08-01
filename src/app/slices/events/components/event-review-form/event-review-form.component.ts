@@ -24,8 +24,7 @@ export class EventReviewFormComponent {
     private messageService: MessageService
   ) {
     this.reviewForm = this.fb.group({
-      comment: ['', [Validators.required, Validators.maxLength(1000)]],
-      rating: [null, [Validators.required, Validators.min(1), Validators.max(5)]],
+      comment: ['', [Validators.required, Validators.maxLength(1000)]]
     });
   }
 

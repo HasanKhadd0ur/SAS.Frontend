@@ -33,6 +33,7 @@ const routes: Routes = [
       { path: 'management/scraping-tasks', loadChildren: () => import('./slices/management/scraping-tasks/scraping-tasks.module').then(m => m.ScrapingTasksModule) },
       { path: 'notifications', loadChildren: () => import('./slices/notifications/notifications.module').then(m => m.NotificationsModule) },
       { path: 'location', loadChildren: () => import('./slices/location-inference/location-inference-routing.module').then(m => m.LocationInferenceRoutingModule) },
+      { path: 'detection', loadChildren: () => import('./slices/detection/detection-routing.module').then(m => m.DetectionRoutingModule) },
            
     ]
   },
