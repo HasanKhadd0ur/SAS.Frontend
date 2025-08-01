@@ -35,7 +35,6 @@
                             "src/assets"
                         ],
             "styles": [
-                "node_modules/primeflex/primeflex.css",
                 "node_modules/primeng/resources/primeng.min.css",
                 "node_modules/primeicons/primeicons.css",
                 "node_modules/leaflet/dist/leaflet.css",
@@ -49,6 +48,9 @@
                 "node_modules/leaflet-minimap/dist/Control.MiniMap.min.css",
                 "node_modules/leaflet-measure/dist/leaflet-measure.css",
                 "node_modules/ngx-toastr/toastr.css",
+                
+                "node_modules/primeflex/primeflex.css",
+                "node_modules/primeflex/primeflex.min.css",
                 "src/styles.scss"
               ],
             "scripts": [
