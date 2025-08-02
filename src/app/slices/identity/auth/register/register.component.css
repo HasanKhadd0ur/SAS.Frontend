@@ -125,3 +125,134 @@
   font-size: 16px;
   color: #d0d0d0;
 }
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.auth-container {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.auth-form-section {
+  flex: 1;
+  padding: 2rem;
+}
+
+.auth-form-box {
+  max-width: 450px;
+  margin: auto;
+}
+
+.auth-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.auth-subtitle {
+  margin-bottom: 2rem;
+  color: #6c757d;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+}
+
+.form-error {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.auth-info-section {
+  flex: 1;
+  background-color: #f1f3f5;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-info-box {
+  text-align: center;
+  max-width: 300px;
+}
+
+.logo-img {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.info-heading {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.25rem;
+}
+
+.info-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.info-text {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* ✅ Two-column input layout for first/last name */
+.form-group-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group-row .form-group {
+  flex: 1;
+}
+
+/* Responsive fix: stack first/last name on small screens */
+@media (max-width: 600px) {
+  .form-group-row {
+    flex-direction: column;
+  }
+}
