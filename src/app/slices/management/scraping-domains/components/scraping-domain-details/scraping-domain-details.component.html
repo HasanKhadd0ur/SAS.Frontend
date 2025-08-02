@@ -1,13 +1,54 @@
-<h2>Scraping Domain Details</h2>
+<div class="container my-5 p-4 shadow border rounded bg-white">
+  <h2 class="mb-4 text-primary">Scraping Domain Details</h2>
 
-<div *ngIf="loading">Loading...</div>
+  <ng-container *ngIf="loading; else loadedContent">
+    <div class="text-center py-5">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem;"></i>
+      <p class="mt-2">Loading domain details...</p>
+    </div>
+  </ng-container>
 
-<div *ngIf="domain && !loading">
-  <p><strong>Name:</strong> {{ domain.name }}</p>
-  <p><strong>Normalized:</strong> {{ domain.normalisedName }}</p>
-  <p><strong>Description:</strong> {{ domain.description }}</p>
+  <ng-template #loadedContent>
+    <ng-container *ngIf="domain; else notFound">
+      <div class="mb-4">
+        <p><strong>Name:</strong> {{ domain.name }}</p>
+        <p><strong>Normalized Name:</strong> {{ domain.normalisedName }}</p>
+        <p><strong>Description:</strong> {{ domain.description || 'N/A' }}</p>
+      </div>
+
+    <div *ngIf="domain.dataSources?.length > 0" class="mt-4">
+  <h4 class="mb-3">Associated Data Sources</h4>
+  <p-table [value]="domain.dataSources" class="p-datatable-sm" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Target</th>
+        <th>Platform</th>
+        <th>Type</th>
+        <th>Last Scraped</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ds>
+      <tr>
+        <td>{{ ds.name }}</td>
+        <td>{{ ds.target }}</td>
+        <td>{{ ds.platform.name }}</td>
+        <td>{{ ds.dataSourceType?.name || 'N/A' }}</td>
+        <td>{{ ds.lastTimeScraped | date: 'medium' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
-<div *ngIf="!domain && !loading">
-  <p>Domain not found.</p>
+<div *ngIf="domain.dataSources?.length === 0" class="text-muted mt-3">
+  No associated data sources found.
+</div>
+</ng-container>
+
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        <strong>Domain not found.</strong>
+      </div>
+    </ng-template>
+  </ng-template>
 </div>

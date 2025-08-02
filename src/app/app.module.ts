@@ -17,7 +17,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 // import { provideAnimationsAsync } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
@@ -30,6 +30,7 @@ import { RippleModule } from "primeng/ripple";
 import { MapModule } from './slices/map/map.module';
 import { LocationInferenceModule } from './slices/location-inference/location-inference.module';
 import { DetectionModule } from './slices/detection/detection.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DetectionModule } from './slices/detection/detection.module';
     HttpClientModule,
      ButtonModule,
     RippleModule,
+    ConfirmDialogModule,
     StyleClassModule,
     LocationInferenceModule 
 ],
@@ -64,7 +66,7 @@ import { DetectionModule } from './slices/detection/detection.module';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true 
-    },
+    },ConfirmationService,
     // provideAnimationsAsync(),
     providePrimeNG({
     theme: {

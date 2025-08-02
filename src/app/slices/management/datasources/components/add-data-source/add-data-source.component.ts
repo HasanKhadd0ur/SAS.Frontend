@@ -67,6 +67,11 @@ export class AddDataSourceComponent implements OnInit {
       );
     });
   }
+  isInvalid(controlName: string): boolean {
+  const control = this.form.get(controlName);
+  return !!control && control.invalid && (control.touched || control.dirty);
+}
+
 
   submit(): void {
     if (this.form.invalid) {

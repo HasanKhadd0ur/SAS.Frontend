@@ -1,4 +1,6 @@
-<p-card header="Scraping Domains">
+<p-confirmDialog></p-confirmDialog>
+
+<p-card header="Scraping Domains" styleClass="mb-4">
   <div *ngIf="pagedScrapingDomains.length > 0; else noSources" 
        class="data-source-card-container"
        infiniteScroll 
@@ -9,26 +11,31 @@
     <div class="data-source-card" *ngFor="let ds of pagedScrapingDomains">
       
       <!-- Header -->
-      <div class="ds-header">
-        <div class="ds-title-section">
-          <i class="pi pi-database ds-icon"></i>
-          <span class="ds-title">Source : {{ ds.name }}</span>
+      <div class="ds-header flex justify-between items-center mb-2">
+        <div class="ds-title-section flex align-items-center gap-2">
+          <i class="pi pi-database text-primary"></i>
+          <span class="font-medium text-lg">Source: {{ ds.name }}</span>
         </div>
-        <span class="ds-limit">#</span>
+        <span class="text-muted text-sm">Normalized: {{ ds.normalisedName }}</span>
       </div>
 
       <!-- Metadata Body -->
-      <div class="ds-body">
-        <p> {{ ds.description }} , {{ ds.normalisedName}}</p>
-
+      <div class="ds-body text-sm text-gray-700 mb-3">
+        {{ ds.description || 'No description available.' }}
       </div>
 
       <!-- Footer Actions -->
-      <div class="ds-footer">
+      <div class="ds-footer flex gap-2 justify-end">
+        <button pButton icon="pi pi-eye" label="View" 
+                class="p-button-sm p-button-secondary" 
+                (click)="onView(ds)">
+        </button>
+
         <button pButton icon="pi pi-pencil" label="Edit" 
                 class="p-button-sm p-button-outlined" 
                 (click)="onEdit(ds)">
         </button>
+
         <button pButton icon="pi pi-trash" label="Delete" 
                 class="p-button-sm p-button-danger p-button-outlined" 
                 (click)="confirmDelete(ds)">
@@ -38,6 +45,6 @@
   </div>
 
   <ng-template #noSources>
-    <p>No Scraping Domains found.</p>
+    <p class="text-center text-muted my-4">No Scraping Domains found.</p>
   </ng-template>
 </p-card>
