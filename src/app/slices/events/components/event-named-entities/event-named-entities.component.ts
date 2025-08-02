@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { EventService } from '../../services/event.service';
 import { NamedEntity } from '../../models/event.model';
@@ -6,15 +6,15 @@ import { NamedEntity } from '../../models/event.model';
 @Component({
   selector: 'app-event-named-entities',
   templateUrl: './event-named-entities.component.html',
-  standalone:false,
+  standalone: false,
   styleUrls: ['./event-named-entities.component.css']
 })
-export class EventNamedEntitiesComponent implements OnInit {
+export class EventNamedEntitiesComponent implements OnInit, OnChanges {
   @Input() eventId!: string;
+  @Input() show = false;
 
   namedEntities: NamedEntity[] = [];
   loading = false;
-  @Input()show;
 
   constructor(
     private eventService: EventService,
@@ -23,10 +23,14 @@ export class EventNamedEntitiesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggle(): void {
-    this.show = !this.show;
-    if (this.show && this.namedEntities.length === 0) {
-      this.loadNamedEntities();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['show']) {
+      if (this.show && this.namedEntities.length === 0) {
+        this.loadNamedEntities();
+      }
+      if (!this.show) {
+        this.namedEntities = [];
+      }
     }
   }
 

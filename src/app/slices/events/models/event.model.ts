@@ -39,7 +39,7 @@ export interface Review {
   id: string;
   eventId: string;
   userId: string;
-  userFullName: string;
+  userName: string;
   comment: string;
   createdAt: string;
   lastUpdatedAt:string

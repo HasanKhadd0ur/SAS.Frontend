@@ -1,26 +1,116 @@
 .modal-backdrop-custom {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem; /* adds spacing from screen edge */
+  padding: 1.5rem;
   z-index: 2000;
+  backdrop-filter: blur(4px);
 }
 
 .modal-dialog {
-  width: 90%;
-  max-width: 500px;
-  margin: 1rem auto; /* vertical spacing in case it's not centered */
+  width: 100%;
+  max-width: 520px;
+  margin: 1rem auto;
   z-index: 2001;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgb(0 0 0 / 0.2);
+  animation: fadeInScale 0.3s ease forwards;
+  background: #fff;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-content {
-  background-color: #ffffff !important;
-  border-radius: 0.5rem;
-  padding: 1.5rem; /* inner padding for content */
+  padding: 2rem 2.5rem;
+  border: none !important;
+  border-radius: 0.75rem !important;
 }
+
+.modal-header {
+  padding-bottom: 1.25rem;
+  border-bottom: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.modal-header .btn-close {
+  filter: brightness(120%);
+  transition: filter 0.2s ease;
+}
+.modal-header .btn-close:hover {
+  filter: brightness(140%);
+}
+
+.modal-body p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.form-label {
+  font-size: 1.05rem;
+}
+
+textarea.form-control {
+  resize: vertical;
+  font-size: 1rem;
+  min-height: 120px;
+  border-radius: 0.5rem;
+  border: 1.5px solid #ced4da;
+  transition: border-color 0.3s ease;
+}
+
+textarea.form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+.btn-lg {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.5rem 1.6rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-outline-secondary {
+  border: 2px solid #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+  box-shadow: 0 4px 12px rgb(108 117 125 / 0.4);
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 6px 20px rgb(29 78 216 / 0.45);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

@@ -1,30 +1,33 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-event-messages',
   templateUrl: './event-messages.component.html',
-  standalone:false,
+  standalone: false,
   styleUrls: ['./event-messages.component.css'],
 })
-export class EventMessagesComponent {
+export class EventMessagesComponent implements OnChanges {
   @Input() eventId!: string;
+  @Input() show = false;
 
   eventMessages: any[] = [];
   loading = false;
-  @Input()show;
 
   constructor(
     private eventService: EventService,
     private messageService: MessageService
   ) {}
 
-  toggle(): void {
-    this.show = !this.show;
-
-    if (this.show && this.eventMessages.length === 0) {
-      this.loadMessages();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['show']) {
+      if (this.show && this.eventMessages.length === 0) {
+        this.loadMessages();
+      }
+      if (!this.show) {
+        this.eventMessages = [];
+      }
     }
   }
 

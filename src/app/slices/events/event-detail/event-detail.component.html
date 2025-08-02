@@ -81,7 +81,9 @@
 
 <app-event-reviews [eventId]="event?.id" [show]="showReviews"></app-event-reviews>
 <app-event-named-entities
-  [eventId]="event.id"
+
+  *ngIf="event && showNamedEntities"
+  [eventId]="event?.id"
   [show]="showNamedEntities"
 ></app-event-named-entities>
 
@@ -140,7 +142,7 @@
 
 
 <!-- Review Form Modal Component -->
-<app-event-review-form
+<app-event-review-form 
   [eventId]="event?.id"
   [show]="showReviewForm"
   (close)="closeReviewForm()"
