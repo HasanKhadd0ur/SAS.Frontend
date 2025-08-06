@@ -5,7 +5,6 @@ import 'leaflet-minimap';
 import 'leaflet-measure';
 import { Event } from '../../events/models/event.model';
 import { EventService } from '../../events/services/event.service';
-import { TopicIcon } from 'src/app/shared/icons/topic-icons';
 
 declare module 'leaflet' {
   interface MapOptions {
@@ -69,8 +68,8 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
       layers: [osm],
     }).setView([33.5138, 36.2765], 5);
 
+    // Set default icon (fallback)
     delete (L.Icon.Default.prototype as any)._getIconUrl;
-
     L.Icon.Default.mergeOptions({
       iconRetinaUrl: 'assets/leaflet/icons8-protest.png',
       iconUrl: 'assets/leaflet/marker-icon.png',
@@ -118,58 +117,85 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private addMarkers(events: Event[]): void {
+  private clearMarkers(): void {
     this.markers.forEach((marker) => this.map.removeLayer(marker));
     this.markers = [];
+  }
 
-    const groupedEvents = new Map<string, Event[]>();
-
+  private groupEventsByLocation(events: Event[]): { [key: string]: Event[] } {
+    const grouped: { [key: string]: Event[] } = {};
     events.forEach((event) => {
       const lat = event.location?.latitude;
       const lng = event.location?.longitude;
       if (lat != null && lng != null) {
         const key = `${lat},${lng}`;
-        if (!groupedEvents.has(key)) {
-          groupedEvents.set(key, []);
+        if (!grouped[key]) {
+          grouped[key] = [];
         }
-        groupedEvents.get(key)!.push(event);
+        grouped[key].push(event);
       }
     });
-
-    groupedEvents.forEach((eventsAtLocation, key) => {
-      const [lat, lng] = key.split(',').map(Number);
-      const maxEventsToShow = 3;
-      const eventsToShow = eventsAtLocation.slice(0, maxEventsToShow);
-
-      let popupContent = eventsToShow
-        .map((e) => `<div><b>${e.eventInfo.title}</b></div>`)
-        .join('<hr style="margin:4px 0">');
-
-      if (eventsAtLocation.length > maxEventsToShow) {
-        const moreCount = eventsAtLocation.length - maxEventsToShow;
-        popupContent += `<hr style="margin:4px 0"><div>... and ${moreCount} more</div>`;
-      }
-
-      const iconUrl = eventsAtLocation[0]?.topic?.iconUrl;
-      const faClass = TopicIcon.getFaClass(iconUrl);
-
-      let icon: L.Icon | L.DivIcon;
-      if (faClass) {
-        icon = L.divIcon({
-          html: `<i class="${faClass}" style="color: red; font-size: 24px;"></i>`,
-          className: '',
-          iconSize: [30, 30],
-          iconAnchor: [15, 30],
-        });
-      } else {
-        icon = new L.Icon.Default();
-      }
-
-      const marker = L.marker([lat, lng], { icon }).bindPopup(popupContent);
-      marker.addTo(this.map);
-      this.markers.push(marker);
-    });
+    return grouped;
   }
+
+  private buildPopupContent(events: Event[]): string {
+    const maxEventsToShow = 3;
+    const eventsToShow = events.slice(0, maxEventsToShow);
+
+    let popupContent = eventsToShow
+      .map((e) => `<div><b>${e.eventInfo.title}</b></div>`)
+      .join('<hr style="margin:4px 0">');
+
+    if (events.length > maxEventsToShow) {
+      popupContent += `<hr style="margin:4px 0"><div>... and ${events.length - maxEventsToShow} more</div>`;
+    }
+
+    return popupContent;
+  }
+private addMarkers(events: Event[]): void {
+  debugger
+  if (!this.map) return;
+
+  this.clearMarkers();
+  const grouped = this.groupEventsByLocation(events);
+
+  for (const key in grouped) {
+    const eventsAtLocation = grouped[key];
+    const { latitude, longitude } = eventsAtLocation[0].location;
+
+    const popupContent = this.buildPopupContent(eventsAtLocation);
+    const topicIconUrl = eventsAtLocation[0]?.topic?.iconUrl;
+
+    let icon: L.Icon<L.IconOptions>;
+
+    // Check if iconUrl exists and is not an empty string (trimmed)
+    if (topicIconUrl && topicIconUrl.trim() !== '') {
+      icon = new L.Icon({
+        iconUrl: topicIconUrl,
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32],
+        shadowUrl: 'assets/leaflet/marker-shadow.png',
+        shadowSize: [41, 41],
+        shadowAnchor: [12, 41],
+      });
+    } else {
+      // Use default icon if no valid topic icon url
+      icon = new L.Icon({
+        iconUrl: 'assets/leaflet/marker-icon.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: 'assets/leaflet/marker-shadow.png',
+        shadowSize: [41, 41],
+      });
+    }
+
+    const marker = L.marker([latitude, longitude], { icon }).bindPopup(popupContent);
+    marker.addTo(this.map);
+    this.markers.push(marker);
+  }
+}
 
   private centerMap(): void {
     if (this.markers.length > 0) {

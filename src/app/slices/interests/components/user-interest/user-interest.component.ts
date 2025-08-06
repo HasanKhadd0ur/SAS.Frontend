@@ -38,7 +38,7 @@ export class UserInterestsComponent implements OnInit {
   }
 
   private loadInterests(): void {
-    this.service.getAll().subscribe((res) => {
+    this.service.getMyInterests().subscribe((res) => {
       this.interests = res;
       if (this.mapInitialized) {
         this.addInterestsToMap();
