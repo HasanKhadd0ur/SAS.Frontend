@@ -28,6 +28,10 @@ import { EventNamedEntitiesComponent } from './components/event-named-entities/e
 import { EventMessagesComponent } from './components/event-messages/event-messages.component';
 import { EventReviewFormComponent } from './components/event-review-form/event-review-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EventRangeComponent } from './event-range/event-range.component';
+import { EventsByAreaComponent } from './events-by-area/events-by-area.component';
+import { EventsDomainsComponent } from './events-domains/events-domains.component';
+import { EventsByDomainComponent } from './events-by-domain/events-by-domain.component';
 
 
 @NgModule({
@@ -45,7 +49,11 @@ import { HttpClientModule } from '@angular/common/http';
     EventReviewsComponent,
     EventNamedEntitiesComponent,
     EventMessagesComponent,
-    EventReviewFormComponent
+    EventReviewFormComponent,
+    EventRangeComponent,
+    EventsByAreaComponent,
+    EventsDomainsComponent,
+    EventsByDomainComponent
   ],
   imports: [
     CommonModule,

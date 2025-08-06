@@ -132,4 +132,14 @@ export class EventService {
   editReview(reviewId: string, review: Partial<Review>): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/reviews/${reviewId}`, review);
   }
+
+  getEventsByDomain(domainId: string, pageNumber?: number, pageSize?: number): Observable<Event[]> {
+
+    let params = new HttpParams();
+  if (pageNumber) params = params.set('pageNumber', pageNumber.toString());
+  if (pageSize) params = params.set('pageSize', pageSize.toString());
+
+  return this.http.get<Event[]>(`${this.baseUrl}/by-domain/${domainId}`, { params });
+}
+
 }

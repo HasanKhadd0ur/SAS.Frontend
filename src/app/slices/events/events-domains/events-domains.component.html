@@ -1,0 +1,43 @@
+<p-card header="Our Domains" styleClass="mb-5 shadow-md ">
+  <div
+    *ngIf="pagedScrapingDomains.length > 0; else noSources"
+    class="data-source-card-container"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="300"
+    (scrolled)="loadMore()"
+  >
+    <div
+      class="data-source-card p-4 mb-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300"
+      *ngFor="let ds of pagedScrapingDomains"
+    >
+      <!-- Header -->
+      <div class="ds-header flex justify-between items-center mb-3">
+        <div class="ds-title-section flex items-center gap-3">
+          <i class="pi pi-database text-primary text-xl"></i>
+          <span class="font-semibold text-lg text-gray-900">{{ ds.name }}</span>
+        </div>
+      </div>
+
+      <!-- Metadata Body -->
+      <div class="ds-body text-sm text-gray-600 mb-4 leading-relaxed">
+        {{ ds.description || 'No description available.' }}
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="ds-footer flex justify-end">
+        <button
+          pButton
+          icon="pi pi-eye"
+          label="View"
+          class="p-button-sm p-button-outlined p-button-primary"
+          (click)="onView(ds)"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noSources>
+    <p class="text-center text-gray-500 py-8 italic">No Domains found.</p>
+  </ng-template>
+</p-card>

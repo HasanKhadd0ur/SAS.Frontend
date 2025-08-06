@@ -39,4 +39,9 @@ export class UserInterestService {
   update(id: string, request: { interestName: string; radiusInKm: number; location: Location }): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, request);
   }
+
+/** GET: Get interests for a specific user */
+getMyInterests(): Observable<UserInterest[]> {
+  return this.http.get<UserInterest[]>(`${this.apiUrl}/my-interests`);
+}
 }

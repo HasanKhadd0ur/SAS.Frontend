@@ -1,0 +1,9 @@
+.radius-handle {
+  width: 16px;
+  height: 16px;
+  background-color: blue;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}

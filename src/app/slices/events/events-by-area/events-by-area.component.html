@@ -1,0 +1,81 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-info text-white">
+    <strong><i class="pi pi-map-marker me-2"></i>Events By Area</strong>
+  </div>
+
+  <div class="card-body">
+    <div class="mb-2">
+      <small class="text-muted">Click on the map to pick a location. Drag the blue circle handle to adjust radius.</small>
+    </div>
+
+    <div id="area-map" class="border rounded" style="height: 300px;"></div>
+
+    <form class="row gy-3 mt-3">
+      <div class="col-md-4">
+        <label>Latitude</label>
+        <input type="number" [(ngModel)]="latitude" name="latitude" class="form-control" readonly />
+      </div>
+      <div class="col-md-4">
+        <label>Longitude</label>
+        <input type="number" [(ngModel)]="longitude" name="longitude" class="form-control" readonly />
+      </div>
+      <div class="col-md-4">
+        <label>Radius (km)</label>
+        <input
+          type="number"
+          [(ngModel)]="radius"
+          name="radius"
+          class="form-control"
+          readonly
+          min="1"
+        />
+      </div>
+      <div class="col-12 d-grid mt-2">
+        <button class="btn btn-outline-primary" type="button" (click)="loadEvents()">Search</button>
+      </div>
+    </form>
+
+    <div class="mt-3 d-flex justify-content-end">
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="toggleView"
+          [(ngModel)]="showMapView"
+          (change)="onToggleView()"
+        />
+        <label class="form-check-label ms-2" for="toggleView">
+          {{ showMapView ? '🗺️ Map View' : '📄 List View' }}
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="showMapView && !isLoading" id="result-map" class="mt-4 border rounded" style="height: 400px;"></div>
+
+    <div *ngIf="!showMapView && !isLoading && events.length > 0" class="mt-4">
+      <div *ngFor="let event of events" class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-between">
+            <span>{{ event.eventInfo.title }}</span>
+            <small class="text-muted">{{ event.createdAt | date: 'short' }}</small>
+          </h5>
+          <p class="card-text">{{ event.eventInfo.summary || 'No summary provided.' }}</p>
+          <p class="text-muted small mb-2">{{ event.topic?.name }}</p>
+          <a [routerLink]="['/events/view', event.id]" class="btn btn-sm btn-outline-primary">
+            <i class="fas fa-eye me-1"></i> View
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && events.length === 0" class="alert alert-warning text-center mt-4">
+      No events found for this location and radius.
+    </div>
+  </div>
+</div>
