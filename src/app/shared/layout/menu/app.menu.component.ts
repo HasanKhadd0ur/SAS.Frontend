@@ -35,7 +35,10 @@ ngOnInit() {
         { label: 'Near Me', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
         { label: 'What Happpen Today', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/events/today/summary'] },
         { label: 'Back to History', icon: 'pi pi-fw pi-box', routerLink: ['/events/history'] },
-      ]
+        { label: 'By Range', icon: 'pi pi-fw pi-calendar', routerLink: ['/events/by-range'] },
+        { label: 'By Area', icon: 'pi pi-fw pi-map-marker', routerLink: ['/events/by-area'] },
+
+     ]
     },
     {
       label: 'Topics',

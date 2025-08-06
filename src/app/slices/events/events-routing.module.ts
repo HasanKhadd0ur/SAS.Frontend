@@ -10,6 +10,7 @@ import { UpdateEventInfoComponent } from './update-event-info/update-event-info.
 import { NamedEntityComponent } from './named-entity/named-entity.component';
 import { NamedEntityEventsComponent } from './named-entity-events/named-entity-events.component';
 import { EventRangeComponent } from './event-range/event-range.component';
+import { EventsByAreaComponent } from './events-by-area/events-by-area.component';
 
 const routes: Routes = [
   { path: 'daily-events', component: DailyEventsComponent },
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'entities',  component: NamedEntityComponent,},
   { path: 'by-named-entity/:id',  component: NamedEntityEventsComponent,},
   { path: 'by-range',  component: EventRangeComponent,},
+  { path: 'by-area', component: EventsByAreaComponent },
+
 
 ];
 
