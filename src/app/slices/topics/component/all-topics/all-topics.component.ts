@@ -5,25 +5,29 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TopicFormDialogComponent } from '../topic-form-dialog/topic-form-dialog.component';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-topic-list',
   templateUrl: './all-topics.component.html',
-  standalone:false,
+  standalone: false,
   styleUrls: ['./all-topics.component.css'],
 })
 export class AllTopicsComponent implements OnInit {
   topics: Topic[] = [];
+  userHasMonitorRole: boolean = false;
 
   constructor(
     private topicService: TopicService,
     private router: Router,
     private dialogService: DialogService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.loadTopics();
+    this.userHasMonitorRole = this.userService.getRoles().includes(UserService.ROLE_MONITOR);
   }
 
   loadTopics(): void {
@@ -50,7 +54,6 @@ export class AllTopicsComponent implements OnInit {
       }
     });
   }
-
 
   onEditTopic(topic: Topic): void {
     const ref = this.dialogService.open(TopicFormDialogComponent, {
@@ -80,5 +83,4 @@ export class AllTopicsComponent implements OnInit {
       }
     });
   }
-
 }

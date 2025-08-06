@@ -1,7 +1,13 @@
-<div class="card my-4 shadow-sm">
+<div class="card my-4 shadow-sm"> 
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">Event Topics</h5>
-    <button class="btn btn-sm btn-success" (click)="onCreateTopic()">
+
+    <!-- Show Add button only if user has Monitor role -->
+    <button 
+      *ngIf="userHasMonitorRole" 
+      class="btn btn-sm btn-success" 
+      (click)="onCreateTopic()"
+    >
       <i class="fas fa-plus"></i> Add Topic
     </button>
   </div>
@@ -21,10 +27,21 @@
             <button class="btn btn-outline-primary btn-sm me-1" (click)="onViewTopic(topic)">
               <i class="fas fa-eye me-1"></i> View
             </button>
-            <button class="btn btn-outline-warning btn-sm me-1" (click)="onEditTopic(topic)">
+
+            <!-- Show Edit and Delete buttons only if user has Monitor role -->
+            <button 
+              *ngIf="userHasMonitorRole" 
+              class="btn btn-outline-warning btn-sm me-1" 
+              (click)="onEditTopic(topic)"
+            >
               <i class="fas fa-edit me-1"></i> Edit
             </button>
-            <button class="btn btn-outline-danger btn-sm" (click)="onDeleteTopic(topic)">
+
+            <button 
+              *ngIf="userHasMonitorRole" 
+              class="btn btn-outline-danger btn-sm" 
+              (click)="onDeleteTopic(topic)"
+            >
               <i class="fas fa-trash me-1"></i> Delete
             </button>
           </div>
