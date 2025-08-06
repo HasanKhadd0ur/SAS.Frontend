@@ -5,6 +5,7 @@ import 'leaflet-minimap';
 import 'leaflet-measure';
 import { Event } from '../../events/models/event.model';
 import { EventService } from '../../events/services/event.service';
+import { TopicIcon } from 'src/app/shared/icons/topic-icons';
 
 declare module 'leaflet' {
   interface MapOptions {
@@ -150,17 +151,19 @@ export class LeafletMapComponent implements OnInit, AfterViewInit {
       }
 
       const iconUrl = eventsAtLocation[0]?.topic?.iconUrl;
+      const faClass = TopicIcon.getFaClass(iconUrl);
 
-      const icon = iconUrl
-        ? L.icon({
-            iconUrl: iconUrl,
-            iconSize: [30, 35],
-            iconAnchor: [15, 35],
-            popupAnchor: [0, -30],
-            shadowUrl: 'assets/leaflet/marker-shadow.png',
-            shadowSize: [40, 40],
-          })
-        : new L.Icon.Default();
+      let icon: L.Icon | L.DivIcon;
+      if (faClass) {
+        icon = L.divIcon({
+          html: `<i class="${faClass}" style="color: red; font-size: 24px;"></i>`,
+          className: '',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+        });
+      } else {
+        icon = new L.Icon.Default();
+      }
 
       const marker = L.marker([lat, lng], { icon }).bindPopup(popupContent);
       marker.addTo(this.map);

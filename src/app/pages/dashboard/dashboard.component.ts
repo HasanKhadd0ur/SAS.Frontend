@@ -1,71 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { EventService } from 'src/app/slices/events/services/event.service';
+import { Event } from 'src/app/slices/events/models/event.model';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-landing',
+  standalone: false,
   templateUrl: './dashboard.component.html',
-  standalone:false
 })
-export class DashboardComponent  implements OnInit{
+export class DashboardComponent implements OnInit {
+  events: Event[] = [];
+  recentEvents: Event[] = [];
 
-  tieredItems: MenuItem[] = [];
-
-  sasStats = [
-    {
-      title: 'Active Events',
-      value: 128,
-      icon: 'pi-exclamation-triangle',
-      iconBg: 'bg-red-100',
-      iconColor: 'text-red-500',
-      subtitle: '15 new',
-      subtitleColor: 'text-green-500',
-      footer: 'since last update',
-      footerColor: 'text-500'
-    },
-    {
-      title: 'Monitored Regions',
-      value: 34,
-      icon: 'pi-globe',
-      iconBg: 'bg-blue-100',
-      iconColor: 'text-blue-500',
-      subtitle: '3 regions added',
-      subtitleColor: 'text-green-500',
-      footer: 'this week',
-      footerColor: 'text-500'
-    },
-    {
-      title: 'User Alerts Sent',
-      value: 5420,
-      icon: 'pi-bell',
-      iconBg: 'bg-orange-100',
-      iconColor: 'text-orange-500',
-      subtitle: '120 new alerts',
-      subtitleColor: 'text-green-500',
-      footer: 'last 24 hours',
-      footerColor: 'text-500'
+  stats = {
+    total: 0,
+    reviewed: 0,
+    unreviewed: 0,
+    sentiments: {
+      Positive: 0,
+      Neutral: 0,
+      Negative: 0
     }
-  ];
-      ngOnInit() {
-        this.tieredItems = [
-            {
-                label: 'Profile',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'Settings',
-                        icon: 'pi pi-fw pi-cog'
-                    },
-                    {
-                        label: 'Billing',
-                        icon: 'pi pi-fw pi-file'
-                    }
-                ]
-            },
-            { separator: true },
-            {
-                label: 'Quit',
-                icon: 'pi pi-fw pi-sign-out'
-            }
-        ];
+  };
+
+  loading = true;
+
+  constructor(private eventService: EventService) {}
+
+  ngOnInit(): void {
+    this.loadDailyEvents();
+  }
+
+  loadDailyEvents(): void {
+    this.eventService.getDailyEvent().subscribe({
+      next: (data) => {
+        const cutoffDate = new Date();
+        cutoffDate.setHours(cutoffDate.getHours() - 48);
+
+        // Filter events updated within last 488 hours
+        const filteredEvents = data.filter(e => new Date(e.lastUpdatedAt) >= cutoffDate);
+
+        this.events = filteredEvents;
+
+        // Keep only last 4 events sorted by lastUpdatedAt desc
+        this.recentEvents = [...filteredEvents]
+          .sort((a, b) => new Date(b.lastUpdatedAt).getTime() - new Date(a.lastUpdatedAt).getTime())
+          .slice(0, 4);
+
+        this.computeStats(filteredEvents);
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading daily events:', err);
+        this.loading = false;
       }
+    });
+  }
+
+  computeStats(events: Event[]) {
+    this.stats.total = events.length;
+    this.stats.reviewed = events.filter(e => e.isReviewed).length;
+    this.stats.unreviewed = this.stats.total - this.stats.reviewed;
+
+    this.stats.sentiments = {
+      Positive: events.filter(e => e.eventInfo?.sentimentLabel === 'Positive').length,
+      Neutral: events.filter(e => e.eventInfo?.sentimentLabel === 'Neutral').length,
+      Negative: events.filter(e => e.eventInfo?.sentimentLabel === 'Negative').length
+    };
+  }
 }

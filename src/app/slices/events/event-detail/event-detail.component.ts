@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
-import { Event } from '../../events/models/event.model';
+import { Event, Review } from '../../events/models/event.model';
 import { Topic } from '../../events/models/topic.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TopicService } from '../../topics/services/topic.service';
+import { Overlay, OverlayRef } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-detail',
@@ -22,16 +23,27 @@ export class EventDetailComponent implements OnInit {
   loadingMessages = false;
   showMessages = false;
   showDeleteConfirm = false;
+  @ViewChild('reviewFormPopup') reviewFormPopup!: TemplateRef<any>;
+
+  private overlayRef: OverlayRef | null = null;
+
+  showReviewForm = false;
 
   editingTopic = false;
 
   topicForm: FormGroup;
 
   filteredTopics: Topic[] = [];
-
+  showReviews = false;
+  loadingReviews = false;
+  reviews: Review[] = []
   // Named entities
   showNamedEntities = false;
   namedEntities: any[] = [];
+ 
+  reviewForm: FormGroup = this.fb.group({
+    comment: ['', [Validators.required, Validators.maxLength(1000)]]
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +53,8 @@ export class EventDetailComponent implements OnInit {
     private messageService: MessageService,
     private topicService :TopicService,
     private fb: FormBuilder,
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef
   ) {
     this.topicForm = this.fb.group({
       topicName: ['', Validators.required],
@@ -58,30 +72,17 @@ export class EventDetailComponent implements OnInit {
 
     this.isMonitor = this.userService.getRoles().includes(UserService.ROLE_MONITOR);
   }
-   loadEventMessages() {
-    if (!this.event) return;
-
-    this.loadingMessages = true;
-    this.showMessages = false;
-
-    this.eventService.getMessagesByEvent(this.event.id).subscribe({
-      next: (messages) => {
-        this.eventMessages = messages;
-        this.showMessages = true;
-        this.loadingMessages = false;
-      },
-      error: (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load event messages.',
-          life: 3000,
-        });
-        this.loadingMessages = false;
-      }
-    });
+  
+  openReviewForm() {
+    this.showReviewForm = true;
+    // If using Angular CDK Overlay, you can create and attach overlay here (optional)
   }
 
+  closeReviewForm() {
+    this.showReviewForm = false;
+    this.reviewForm.reset();
+    // Detach overlay if using Angular CDK Overlay
+  }
 
   onTopicNameInput(value: string) {
     if (!value || value.trim() === '') {
@@ -108,9 +109,6 @@ export class EventDetailComponent implements OnInit {
   toggleMessages(): void {
   this.showMessages = !this.showMessages;
 
-  if (this.showMessages && this.eventMessages.length === 0) {
-    this.loadEventMessages();
-  }
 }
 
 
@@ -210,21 +208,6 @@ export class EventDetailComponent implements OnInit {
 
   toggleNamedEntities() {
     this.showNamedEntities = !this.showNamedEntities;
-    if (this.showNamedEntities && this.event) {
-      this.eventService.getEventNamedEntities(this.event.id).subscribe({
-        next: (entities) => {
-          this.namedEntities = entities;
-        },
-        error: () => {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'Warning',
-            detail: 'Failed to load named entities.',
-            life: 3000,
-          });
-        },
-      });
-    }
   }
 
   goToEventsByNamedEntity(entityName: string) {
@@ -261,4 +244,69 @@ confirmDelete() {
   this.showDeleteConfirm = true;
 }
 
+ loadReviews() {
+    if (!this.event) return;
+
+    this.loadingReviews = true;
+    this.eventService.getReviewsByEvent(this.event.id).subscribe({
+      next: (reviews) => {
+        this.reviews = reviews;
+        this.showReviews = true;
+        this.loadingReviews = false;
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load event reviews.',
+          life: 3000,
+        });
+        this.loadingReviews = false;
+      },
+    });
+  }
+  onReviewSubmitted() {
+    this.loadReviews(); // Or any action to refresh reviews after submit
+  }
+  toggleReviews() {
+    this.showReviews = !this.showReviews;
+
+    if (this.showReviews && this.reviews.length === 0) {
+      this.loadReviews();
+    }
+  }
+
+  // Update submitReview to reload reviews after adding
+  submitReview() {
+    if (!this.event || this.reviewForm.invalid) return;
+
+    const reviewData = {
+      eventId: this.event.id,
+      rating: this.reviewForm.value.rating,
+      comment: this.reviewForm.value.comment
+    };
+
+    this.eventService.addReview(reviewData).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Review Submitted',
+          detail: 'Your review has been added.',
+          life: 3000,
+        });
+        this.showReviewForm = false;
+        this.reviewForm.reset();
+        this.loadReviews(); // refresh reviews
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to submit review.',
+          life: 3000,
+        });
+        console.error('Submit review failed:', err);
+      }
+    });
+  }
 }

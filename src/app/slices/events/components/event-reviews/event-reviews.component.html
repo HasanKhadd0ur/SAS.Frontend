@@ -1,0 +1,24 @@
+<div class="mt-5 p-4 border rounded-3 shadow-sm bg-white" *ngIf="show">
+  <h5 class="text-center mb-4 text-primary fw-bold">
+    <i class="fas fa-comments me-2"></i>Event Reviews
+  </h5>
+
+  <!-- No Reviews Message -->
+  <div *ngIf="reviews.length === 0" class="text-center text-muted py-4">
+    <i class="fas fa-comment-slash fa-2x mb-3 d-block"></i>
+    <p class="mb-0">No reviews found for this event.</p>
+  </div>
+
+  <!-- Review List -->
+  <div *ngIf="reviews.length > 0" class="d-flex flex-column gap-4">
+    <div *ngFor="let review of reviews" class="review-card border-start border-4 border-primary ps-3 pe-2 py-3 bg-light rounded-3 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-semibold text-dark">
+          {{ review.userFullName || review.userName }}
+        </div>
+        <small class="text-muted">{{ review.createdAt | date: 'medium' }}</small>
+      </div>
+      <p class="mb-0 text-secondary" style="white-space: pre-line;">{{ review.comment }}</p>
+    </div>
+  </div>
+</div>

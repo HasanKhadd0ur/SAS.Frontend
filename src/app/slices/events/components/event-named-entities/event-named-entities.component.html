@@ -1,0 +1,35 @@
+<div *ngIf="show" class="event-ner mt-4 p-3 border rounded shadow-sm bg-light">
+  <h5 class="text-center mb-3">
+    <i class="fas fa-tags"></i> Named Entities
+  </h5>
+
+  <div *ngIf="loading" class="text-center text-muted">
+    <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+    <p>Loading named entities...</p>
+  </div>
+
+  <div *ngIf="!loading && namedEntities.length === 0" class="text-center text-muted">
+    <i class="fas fa-question-circle fa-2x mb-2"></i>
+    <p>No named entities found.</p>
+  </div>
+
+  <ul *ngIf="namedEntities.length > 0" class="list-group">
+    <li *ngFor="let entity of namedEntities" class="list-group-item d-flex align-items-start gap-3">
+      <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+        <i class="fas fa-font"></i>
+      </div>
+      <div class="flex-grow-1">
+        <a [routerLink]="['/events/by-named-entity', entity.id]" class="text-decoration-none fw-bold text-dark">
+          {{ entity.entityName }}
+        </a>
+        <br />
+        <small class="text-muted">Type: {{ entity.type?.typeName || 'Unknown' }}</small>
+      </div>
+      <div>
+        <a [routerLink]="['/events/by-named-entity', entity.id]" class="btn btn-outline-primary btn-sm" title="View related events">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -17,7 +17,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 // import { provideAnimationsAsync } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
@@ -29,6 +29,10 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { RippleModule } from "primeng/ripple";
 import { MapModule } from './slices/map/map.module';
 import { LocationInferenceModule } from './slices/location-inference/location-inference.module';
+import { DetectionModule } from './slices/detection/detection.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PolicyViewComponent } from './slices/detection/compoenents/policy-view/policy-view.component';
+
 
 @NgModule({
   declarations: [
@@ -36,12 +40,14 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
     LandingComponent,
     NotfoundComponent,
     DashboardComponent,
+    PolicyViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MenubarModule,
     SharedModule,
+    DetectionModule,
     DividerModule,
     FormsModule,
     SidebarModule,
@@ -54,6 +60,7 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
     HttpClientModule,
      ButtonModule,
     RippleModule,
+    ConfirmDialogModule,
     StyleClassModule,
     LocationInferenceModule 
 ],
@@ -62,10 +69,11 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true 
-    },
-    // provideAnimationsAsync(),
+    },    // provideAnimationsAsync(),
     providePrimeNG({
+      
     theme: {
+      
       preset: Aura,
       options: {
         cssLayer: {
@@ -75,6 +83,8 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
       }
     }
     }),
+    ConfirmationService,
+
     MessageService
   ],
   bootstrap: [AppComponent]

@@ -1,21 +1,53 @@
-<p-dialog header="Create Scraping Domain" [(visible)]="display" [modal]="true" [closable]="true" [responsive]="true" [style]="{width: '400px'}">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="p-fluid">
-      <div class="p-field">
-        <label for="name">Name</label>
-        <input id="name" type="text" pInputText formControlName="name" />
-      </div>
-      <div class="p-field">
-        <label for="normalisedName">Normalized Name</label>
-        <input id="normalisedName" type="text" pInputText formControlName="normalisedName" />
-      </div>
-      <div class="p-field">
-        <label for="description">Description</label>
-        <textarea id="description" pInputTextarea formControlName="description"></textarea>
-      </div>
+<div class="container my-5 p-4 shadow rounded bg-white" style="max-width: 600px;">
+  <h3 class="mb-4 text-primary border-bottom pb-2">
+    <i class="fas fa-plus-circle me-2"></i> Add New Scraping Domain
+  </h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+    <div class="mb-3">
+      <label for="normalisedName" class="form-label fw-semibold">
+        Normalized Name <span class="text-danger">*</span>
+      </label>
+      <input
+        id="normalisedName"
+        type="text"
+        class="form-control"
+        formControlName="normalisedName"
+        placeholder="Enter normalized name"
+        [class.is-invalid]="form.get('normalisedName')?.invalid && form.get('normalisedName')?.touched"
+      />
+      <div class="invalid-feedback">Normalized name is required.</div>
     </div>
-    <p-footer>
-      <button type="submit" pButton label="Save" [disabled]="form.invalid"></button>
-    </p-footer>
+
+    <div class="mb-3">
+      <label for="name" class="form-label fw-semibold">
+        Name <span class="text-danger">*</span>
+      </label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Enter name"
+        [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched"
+      />
+      <div class="invalid-feedback">Name is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label fw-semibold">Description</label>
+      <textarea
+        id="description"
+        rows="3"
+        class="form-control"
+        formControlName="description"
+        placeholder="Enter description (optional)"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loading">
+      <i class="fas fa-save me-2"></i> {{ loading ? 'Saving...' : 'Save' }}
+    </button>
   </form>
-</p-dialog>
+</div>

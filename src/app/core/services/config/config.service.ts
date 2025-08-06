@@ -24,6 +24,9 @@ export class ConfigService {
   getLocationInferenceServiceUrl(): string {
     return  environment.SERVER_URL + 'location-inference/';
   }
+  getDetectionServiceUrl(): string {
+    return  environment.SERVER_URL + 'detection';
+  }
   
   // You can add other URLs similarly
   getApiUrl(): string {

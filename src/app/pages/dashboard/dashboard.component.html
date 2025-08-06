@@ -1,32 +1,64 @@
-<div class="grid p-fluid">
-  <div class="col-12">
-        <div class="card card-w-title">
-            <h5>MenuBar</h5>
-            <p-menubar [model]="tieredItems">
-                <ng-template pTemplate="end">
-                    <span class="p-input-icon-right">
-                        <input type="text" pInputText placeholder="Search">
-                        <i class="pi pi-search"></i>
-                    </span>
-                </ng-template>
-            </p-menubar>
-        </div>
-    </div>
+<!-- 🌟 Hero Section -->
+<div class="surface-0 text-center py-8 px-4 shadow-2 border-round mb-5">
+  <h1 class="text-5xl font-bold text-900 mb-3">Welcome to the Situational Awareness System</h1>
+  <p class="text-600 text-lg mb-5">
+    Monitor real-world events in real-time using AI-powered detection and geolocation from social media data.
+  </p>
+  <p-button label="Explore Events" [routerLink]="['/map/live']" icon="pi pi-map-marker" styleClass="p-button-raised p-button-info"></p-button>
 </div>
-<div class="grid">
-  <div *ngFor="let stat of sasStats" class="col-12 lg:col-6 xl:col-3">
-    <div class="card mb-0">
-      <div class="flex justify-content-between mb-3">
-        <div>
-          <span class="block text-500 font-medium mb-3">{{ stat.title }}</span>
-          <div class="text-900 font-medium text-xl">{{ stat.value }}</div>
-        </div>
-        <div class="flex align-items-center justify-content-center border-round" [ngClass]="stat.iconBg" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-          <i class="pi" [ngClass]="[stat.icon, stat.iconColor, 'text-xl']"></i>
+
+<div class="p-4">
+  <h2 class="text-2xl font-semibold mb-3">Situational Awareness Dashboard</h2>
+
+  <p *ngIf="loading">Loading events...</p>
+
+  <div *ngIf="!loading">
+    <!-- 🔢 Stats Summary -->
+    <div class="grid mb-4">
+      <div class="col-12 md:col-6 lg:col-3">
+        <div class="card p-3 text-center shadow-2">
+          <h5>Total Events</h5>
+          <h3>{{ stats.total }}</h3>
         </div>
       </div>
-      <span [ngClass]="stat.subtitleColor" class="font-medium">{{ stat.subtitle }}</span>
-      <span [ngClass]="stat.footerColor">{{ stat.footer }}</span>
+      <div class="col-12 md:col-6 lg:col-3">
+        <div class="card p-3 text-center shadow-2">
+          <h5>Reviewed</h5>
+          <h3>{{ stats.reviewed }}</h3>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-3">
+        <div class="card p-3 text-center shadow-2">
+          <h5>Unreviewed</h5>
+          <h3>{{ stats.unreviewed }}</h3>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-3">
+        <div class="card p-3 text-center shadow-2">
+          <h5>Sentiment</h5>
+          <p class="mb-1">😊 {{ stats.sentiments.Positive }}</p>
+          <p class="mb-1">😐 {{ stats.sentiments.Neutral }}</p>
+          <p class="mb-0">😠 {{ stats.sentiments.Negative }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🧾 Recent Events List -->
+    <div class="card p-4">
+      <h4 class="mb-3">Recent Events</h4>
+      <div *ngIf="recentEvents.length === 0">No recent events in the last 48 hours.</div>
+
+      <div *ngFor="let event of recentEvents" class="border-bottom pb-3 mb-3">
+        <h5>{{ event.eventInfo?.title }}</h5>
+        <p class="mb-1">📝 {{ event.eventInfo?.summary }}</p>
+        <p class="mb-1">📍 {{ event.location?.city ?? 'Unknown' }}, {{ event.location?.country ?? 'N/A' }}</p>
+        <!-- Removed sentiment label from here -->
+
+        <!-- Link to view event details -->
+        <a [routerLink]="['/events/view', event.id]" class="p-button p-component p-button-text p-button-plain">
+          View Details
+        </a>
+      </div>
     </div>
   </div>
 </div>

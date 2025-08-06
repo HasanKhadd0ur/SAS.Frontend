@@ -1,46 +1,50 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DialogService } from 'primeng/dynamicdialog';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ScrapingDomainsService } from '../../services/scraping-domains.service';
+import { CreateScrapingDomainCommand } from '../../models/scraping-domains.model';
 
 @Component({
   selector: 'app-scraping-domain-create',
   templateUrl: './scraping-domain-create.component.html',
-  standalone: false
-})
+  styleUrls: ['./scraping-domain-create.component.css'],
+  standalone:false})
 export class ScrapingDomainCreateComponent {
-  @Output() created = new EventEmitter<void>();
   form: FormGroup;
-  display = false;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
-    private service: ScrapingDomainsService
+    private scrapingDomainsService: ScrapingDomainsService,
+    private router: Router,
+    private messageService: MessageService
   ) {
+    debugger
     this.form = this.fb.group({
-      name: ['', Validators.required],
       normalisedName: ['', Validators.required],
+      name: ['', Validators.required],
       description: ['']
     });
   }
 
-  show(): void {
-    this.display = true;
-  }
-
-  hide(): void {
-    this.display = false;
-  }
-
   submit(): void {
-    if (this.form.invalid) return;
-    this.service.create(this.form.value).subscribe({
-      next: () => {
-        this.hide();
-        this.created.emit();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.loading = true;
+    const command: CreateScrapingDomainCommand = this.form.value;
+
+    this.scrapingDomainsService.create(command).subscribe({
+      next: (id) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Scraping domain created!' });
+        this.loading = false;
+        this.router.navigate(['/scraping-domains']);
       },
-      error: (err) => {
-        console.error('Error creating domain', err);
+      error: (error) => {
+        this.loading = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create scraping domain.' });
       }
     });
   }

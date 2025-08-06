@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container my-4">
   <div class="row align-items-start">
     <!-- Map on the left -->
-    <div class="col-12 col-md-7">
+    <div class="col-7 col-md-7 mb-3 mb-md-0">
       <div
         id="map"
         style="height: 400px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
@@ -9,11 +9,9 @@
     </div>
 
     <!-- Form on the right -->
-    <div class="col-12 col-md-5">
-
-      
+    <div class="col-5 col-md-5">
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <h4 class="text-center">Define Your Interest Area</h4>
+        <h4 class="text-center mb-4">Define Your Interest Area</h4>
 
         <!-- Interest Name -->
         <div class="mb-3">
@@ -93,21 +91,23 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="d-grid">
+        <div class="d-grid gap-2">
           <button
             type="submit"
-            class="btn m-1 btn-primary btn-sm"
+            class="btn btn-primary btn-sm"
             [disabled]="form.invalid"
           >
             <i class="fas fa-plus-circle"></i> Create Interest
           </button>
-          
-            <button class="m-1 btn btn-sm  btn-secondary" routerLink="/user-interests">
-          <i class="fas fa-list"></i> Show Interests List
-        </button>
-      
-        </div>
 
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            routerLink="/user-interests"
+          >
+            <i class="fas fa-list"></i> Show Interests List
+          </button>
+        </div>
       </form>
     </div>
   </div>

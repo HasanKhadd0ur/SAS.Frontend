@@ -3,17 +3,15 @@ import { Router } from '@angular/router';
 import { ScrapingDomain } from '../../models/scraping-domains.model';
 import { ScrapingDomainsService } from '../../services/scraping-domains.service';
 import { Platform } from '../../../platforms/models/platforms.model';
-import { DataSourcesService } from '../../../datasources/servies/datasources.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PlatformsService } from '../../../platforms/services/platforms.service';
 
 @Component({
   selector: 'app-scraping-domain-list',
-  standalone: false,
   templateUrl: './scraping-domain-list.component.html',
-  styleUrl: './scraping-domain-list.component.css'
+  standalone:false,
+  styleUrls: ['./scraping-domain-list.component.css'],  // <-- fix here
 })
-
 export class ScrapingDomainListComponent implements OnInit {
 
   scrapingDomains: ScrapingDomain[] = [];
@@ -22,10 +20,8 @@ export class ScrapingDomainListComponent implements OnInit {
   batchSize = 6;
   currentIndex = 0;
 
-
   constructor(
-    private dataSourcesService: DataSourcesService,
-    private scrapingDomainService: ScrapingDomainsService,
+    private scrapingDomainService: ScrapingDomainsService,   // <-- fix here (use scrapingDomainService)
     private messageService: MessageService,
     private platformsService: PlatformsService,
     private confirmationService: ConfirmationService,
@@ -33,11 +29,8 @@ export class ScrapingDomainListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.platformsService.getAll().subscribe({
       next: (platforms) => {
-        console.log(platforms);
-
         this.platforms = platforms;
         this.loadDomains();
       },
@@ -51,18 +44,18 @@ export class ScrapingDomainListComponent implements OnInit {
     this.scrapingDomainService.getAll().subscribe({
       next: (domains) => {
         this.scrapingDomains = domains;
-        
-        this.loadMore();
+        this.resetPaged();
       },
       error: () => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load Scraping Domains' });
       }
     });
-
   }
 
-  getPlatformName(id: string): string {
-    return this.platforms.find(p => p.id === id)?.name || 'Unknown';
+  resetPaged() {
+    this.pagedScrapingDomains = [];
+    this.currentIndex = 0;
+    this.loadMore();
   }
 
   loadMore(): void {
@@ -71,20 +64,29 @@ export class ScrapingDomainListComponent implements OnInit {
     this.currentIndex += this.batchSize;
   }
 
-  onEdit(dataSource: ScrapingDomain): void {
-    this.router.navigate(['/datasources/edit', dataSource.id]);
+  getPlatformName(id: string): string {
+    return this.platforms.find(p => p.id === id)?.name || 'Unknown';
   }
 
-  confirmDelete(dataSource: ScrapingDomain): void {
+  onEdit(domain: ScrapingDomain): void {
+    this.router.navigate(['/scraping-domains/edit', domain.id]);
+  }
+
+  onView(domain: ScrapingDomain): void {
+    this.router.navigate(['/scraping-domains', domain.id]);
+  }
+
+  confirmDelete(domain: ScrapingDomain): void {
     this.confirmationService.confirm({
-      message: `Are you sure you want to delete '${dataSource.name}'?`,
+      message: `Are you sure you want to delete '${domain.name}'?`,
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.dataSourcesService.delete(dataSource.id).subscribe({
+        this.scrapingDomainService.delete(domain.id).subscribe({
           next: () => {
-            this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Data source deleted' });
-            this.reset();
+            this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Scraping domain deleted successfully.' });
+            // Refresh list after deletion
+            this.loadDomains();
           },
           error: () => {
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Delete failed' });
@@ -92,12 +94,5 @@ export class ScrapingDomainListComponent implements OnInit {
         });
       }
     });
-  }
-
-  reset(): void {
-    this.scrapingDomains = [];
-    this.pagedScrapingDomains = [];
-    this.currentIndex = 0;
-    this.ngOnInit();
   }
 }

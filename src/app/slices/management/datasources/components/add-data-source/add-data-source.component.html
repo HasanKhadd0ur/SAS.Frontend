@@ -1,74 +1,94 @@
-<div class="container mt-4" style="max-width: 600px;">
-  <h3>Add New Data Source</h3>
+<div class="container my-5 p-4 shadow rounded bg-white" style="max-width: 700px;">
+  <h3 class="mb-4 text-primary border-bottom pb-2">
+    <i class="fas fa-plus-circle me-2"></i>Add New Data Source
+  </h3>
 
   <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-
-    <div class="mb-3">
-      <label for="name" class="form-label">Name *</label>
-      <input id="name" type="text" class="form-control" formControlName="name"
-        [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+    <!-- Name -->
+    <div class="form-group mb-4">
+      <label for="name" class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Enter data source name"
+        [ngClass]="{'is-invalid': isInvalid('name')}"
+      />
+      <div class="invalid-feedback">Name is required.</div>
     </div>
 
-    <div class="mb-3">
-      <label for="target" class="form-label">Target *</label>
-      <input id="target" type="text" class="form-control" formControlName="target"
-        [class.is-invalid]="form.get('target')?.invalid && form.get('target')?.touched" />
+    <!-- Target -->
+    <div class="form-group mb-4">
+      <label for="target" class="form-label fw-semibold">Target <span class="text-danger">*</span></label>
+      <input
+        id="target"
+        type="text"
+        class="form-control"
+        formControlName="target"
+        placeholder="Enter target URL or keyword"
+        [ngClass]="{'is-invalid': isInvalid('target')}"
+      />
+      <div class="invalid-feedback">Target is required.</div>
     </div>
 
     <!-- Domain -->
-    <div class="mb-3">
-      <label class="form-label">Domain *</label>
-      <p-autoComplete 
+    <div class="form-group mb-4">
+      <label for="domain" class="form-label fw-semibold">Domain <span class="text-danger">*</span></label>
+      <p-autoComplete
+        id="domain"
         formControlName="domain"
         [suggestions]="domainSuggestions"
         field="name"
         optionLabel="name"
         (completeMethod)="searchDomains($event)"
-        placeholder="Search domain"
+        placeholder="Search and select domain"
         [forceSelection]="true"
         class="w-100"
+        [ngClass]="{'p-invalid': isInvalid('domain')}"
       ></p-autoComplete>
-      <div class="invalid-feedback d-block" *ngIf="form.get('domain')?.invalid && form.get('domain')?.touched">
-        Domain is required.
-      </div>
+      <div class="invalid-feedback d-block" *ngIf="isInvalid('domain')">Domain is required.</div>
     </div>
 
     <!-- Platform -->
-    <div class="mb-3">
-      <label class="form-label">Platform *</label>
-      <p-autoComplete 
+    <div class="form-group mb-4">
+      <label class="form-label fw-semibold">Platform <span class="text-danger">*</span></label>
+      <p-autoComplete
         formControlName="platform"
         [suggestions]="platformSuggestions"
         field="name"
         optionLabel="name"
         (completeMethod)="searchPlatforms($event)"
-        placeholder="Search platform"
+        placeholder="Search and select platform"
         [forceSelection]="true"
         class="w-100"
+        [ngClass]="{'p-invalid': isInvalid('platform')}"
       ></p-autoComplete>
-      <div class="invalid-feedback d-block" *ngIf="form.get('platform')?.invalid && form.get('platform')?.touched">
-        Platform is required.
-      </div>
+      <div class="invalid-feedback d-block" *ngIf="isInvalid('platform')">Platform is required.</div>
     </div>
 
     <!-- Type -->
-    <div class="mb-3">
-      <label class="form-label">Data Source Type *</label>
-      <p-autoComplete 
+    <div class="form-group mb-4">
+      <label class="form-label fw-semibold">Data Source Type <span class="text-danger">*</span></label>
+      <p-autoComplete
         formControlName="type"
         [suggestions]="typeSuggestions"
         field="name"
         optionLabel="name"
         (completeMethod)="searchTypes($event)"
-        placeholder="Search type"
+        placeholder="Search and select type"
         [forceSelection]="true"
         class="w-100"
+        [ngClass]="{'p-invalid': isInvalid('type')}"
       ></p-autoComplete>
-      <div class="invalid-feedback d-block" *ngIf="form.get('type')?.invalid && form.get('type')?.touched">
-        Data source type is required.
-      </div>
+      <div class="invalid-feedback d-block" *ngIf="isInvalid('type')">Data source type is required.</div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add Data Source</button>
+    <!-- Submit -->
+    <div class="text-end mt-4">
+      <button type="submit" class="btn btn-primary px-4" [disabled]="form.invalid">
+        <i class="fas fa-save me-2"></i>Add Data Source
+      </button>
+    </div>
   </form>
 </div>

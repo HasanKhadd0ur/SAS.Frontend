@@ -1,0 +1,63 @@
+<!-- Backdrop -->
+<div *ngIf="show" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow rounded-4 border-0">
+
+      <!-- Header -->
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title d-flex align-items-center">
+          <i class="fas fa-user me-2"></i> Submit Your Review
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          aria-label="Close"
+          (click)="cancel()"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body px-4 py-3">
+        <p class="text-muted mb-4">
+          Share your thoughts and feedback about this event. Your input helps others understand the event better.
+        </p>
+
+        <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+          <!-- Review Textarea -->
+          <div class="mb-4">
+            <label for="comment" class="form-label fw-semibold">Review</label>
+            <textarea
+              id="comment"
+              formControlName="comment"
+              rows="5"
+              class="form-control"
+              placeholder="Write your review here..."
+            ></textarea>
+            <div *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched" class="text-danger mt-2">
+              Review is required.
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-flex justify-content-end gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary px-4"
+              (click)="cancel()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary px-4"
+              [disabled]="reviewForm.invalid"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
