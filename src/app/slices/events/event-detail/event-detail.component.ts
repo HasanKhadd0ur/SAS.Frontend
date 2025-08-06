@@ -154,6 +154,7 @@ export class EventDetailComponent implements OnInit {
           this.event.topic = {
             id: selectedTopicId,
             name: this.topicForm.value.topicName,
+            description:this.topicForm.value.description
           };
         }
         this.editingTopic = false;
