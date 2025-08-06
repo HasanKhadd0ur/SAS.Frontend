@@ -37,6 +37,7 @@ ngOnInit() {
         { label: 'Back to History', icon: 'pi pi-fw pi-box', routerLink: ['/events/history'] },
         { label: 'By Range', icon: 'pi pi-fw pi-calendar', routerLink: ['/events/by-range'] },
         { label: 'By Area', icon: 'pi pi-fw pi-map-marker', routerLink: ['/events/by-area'] },
+        { label: 'Domains', icon: 'pi pi-fw pi-globe', routerLink: ['/events/domains'] },
 
      ]
     },

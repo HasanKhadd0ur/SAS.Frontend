@@ -11,6 +11,8 @@ import { NamedEntityComponent } from './named-entity/named-entity.component';
 import { NamedEntityEventsComponent } from './named-entity-events/named-entity-events.component';
 import { EventRangeComponent } from './event-range/event-range.component';
 import { EventsByAreaComponent } from './events-by-area/events-by-area.component';
+import { EventsDomainsComponent } from './events-domains/events-domains.component';
+import { EventsByDomainComponent } from './events-by-domain/events-by-domain.component';
 
 const routes: Routes = [
   { path: 'daily-events', component: DailyEventsComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'by-named-entity/:id',  component: NamedEntityEventsComponent,},
   { path: 'by-range',  component: EventRangeComponent,},
   { path: 'by-area', component: EventsByAreaComponent },
+  { path: 'by-domain/:id', component: EventsByDomainComponent },
+  { path: 'domains', component: EventsDomainsComponent },
 
 
 ];
