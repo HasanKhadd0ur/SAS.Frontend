@@ -5,11 +5,13 @@ import { DetectionRoutingModule } from './detection-routing.module';
 import { SettingComponent } from './compoenents/setting/setting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PolicyComponent } from './compoenents/policy/policy.component';
 
 
 @NgModule({
   declarations: [
-    SettingComponent
+    SettingComponent,
+    PolicyComponent
   ],
   imports: [
     CommonModule,

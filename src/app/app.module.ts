@@ -31,6 +31,8 @@ import { MapModule } from './slices/map/map.module';
 import { LocationInferenceModule } from './slices/location-inference/location-inference.module';
 import { DetectionModule } from './slices/detection/detection.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PolicyViewComponent } from './slices/detection/compoenents/policy-view/policy-view.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     LandingComponent,
     NotfoundComponent,
     DashboardComponent,
+    PolicyViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,10 +69,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true 
-    },ConfirmationService,
-    // provideAnimationsAsync(),
+    },    // provideAnimationsAsync(),
     providePrimeNG({
+      
     theme: {
+      
       preset: Aura,
       options: {
         cssLayer: {
@@ -79,6 +83,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
       }
     }
     }),
+    ConfirmationService,
+
     MessageService
   ],
   bootstrap: [AppComponent]

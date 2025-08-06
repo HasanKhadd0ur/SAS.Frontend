@@ -7,7 +7,7 @@ import { ConfigService } from 'src/app/core/services/config/config.service';
   providedIn: 'root',
 })
 export class StrategyService {
-  private apiBase = `${this.config.getDetectionServiceUrl()}`; 
+  private apiBase = `${this.config.getDetectionServiceUrl()}/config`; 
 
   constructor(private http: HttpClient,private config :ConfigService) {}
 

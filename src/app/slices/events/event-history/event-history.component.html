@@ -53,13 +53,6 @@
           <span *ngIf="event.topic" class="icon-tag">{{ event.topic.name }}</span>
 
           <div class="event-footer">
-            <button
-              class="review-btn"
-              [disabled]="event.isReviewed"
-              (click)="markReviewed(event)"
-            >
-              {{ event.isReviewed ? 'Reviewed' : 'Mark as Reviewed' }}
-            </button>
             <button class="view-button" [routerLink]="['/events/view', event.id]">
               <i class="fas fa-eye"></i> View
             </button>

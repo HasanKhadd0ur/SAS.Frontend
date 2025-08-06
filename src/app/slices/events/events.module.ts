@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 import { EventsRoutingModule } from './events-routing.module';
 import { DailyEventsComponent } from './dailly-events/dailly-events.component';
@@ -27,6 +27,7 @@ import { EventReviewsComponent } from './components/event-reviews/event-reviews.
 import { EventNamedEntitiesComponent } from './components/event-named-entities/event-named-entities.component';
 import { EventMessagesComponent } from './components/event-messages/event-messages.component';
 import { EventReviewFormComponent } from './components/event-review-form/event-review-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { EventReviewFormComponent } from './components/event-review-form/event-r
     MenubarModule,
     CalendarModule,
     TagModule,
+    HttpClientModule,
     MarkdownModule.forRoot(),
     InfiniteScrollModule,
     ButtonModule,

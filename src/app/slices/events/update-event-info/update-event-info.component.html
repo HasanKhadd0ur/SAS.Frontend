@@ -1,24 +1,29 @@
-<div class="container px-3">
-  <h3 class="text-center">✏️ Update Event Information</h3>
+<div class="container py-4 px-3 rounded shadow-sm bg-white">
+  <h3 class="text-center mb-4">✏️ Update Event Information</h3>
 
   <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input id="title" type="text" formControlName="title" class="form-control" />
-      <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
+    <!-- Title -->
+    <div class="mb-4">
+      <label for="title" class="form-label fw-semibold">Title</label>
+      <input id="title" type="text" formControlName="title" class="form-control" placeholder="Enter event title" />
+      <small *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
         Title is required and must be under 200 characters.
-      </div>
+      </small>
     </div>
 
-    <div class="mb-3">
-      <label for="summary" class="form-label">Summary</label>
-      <textarea id="summary" formControlName="summary" class="form-control" rows="4"></textarea>
-      <div *ngIf="form.get('summary')?.invalid && form.get('summary')?.touched" class="text-danger">
+    <!-- Summary -->
+    <div class="mb-4">
+      <label for="summary" class="form-label fw-semibold">Summary</label>
+      <textarea id="summary" formControlName="summary" class="form-control" rows="5" placeholder="Write a short summary..."></textarea>
+      <small *ngIf="form.get('summary')?.invalid && form.get('summary')?.touched" class="text-danger">
         Summary is required and must be under 1000 characters.
-      </div>
+      </small>
     </div>
 
-    <button type="submit" class="m-1 btn btn-primary" [disabled]="form.invalid">Update Info</button>
-    <button class="m-1 btn btn-secondary" [routerLink]="['/events/view', this.eventId]">Back to Event</button>
+    <!-- Actions -->
+    <div class="d-flex justify-content-end gap-2 mt-3">
+      <button type="submit" class="btn btn-primary px-4" [disabled]="form.invalid">💾 Update Info</button>
+      <a class="btn btn-outline-secondary px-4" [routerLink]="['/events/view', eventId]">↩️ Back to Event</a>
+    </div>
   </form>
 </div>

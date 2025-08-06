@@ -46,7 +46,7 @@
     <!-- 🧾 Recent Events List -->
     <div class="card p-4">
       <h4 class="mb-3">Recent Events</h4>
-      <div *ngIf="recentEvents.length === 0">No recent events in the last 488 hours.</div>
+      <div *ngIf="recentEvents.length === 0">No recent events in the last 48 hours.</div>
 
       <div *ngFor="let event of recentEvents" class="border-bottom pb-3 mb-3">
         <h5>{{ event.eventInfo?.title }}</h5>

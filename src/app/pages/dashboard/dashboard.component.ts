@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.eventService.getDailyEvent().subscribe({
       next: (data) => {
         const cutoffDate = new Date();
-        cutoffDate.setHours(cutoffDate.getHours() - 488);
+        cutoffDate.setHours(cutoffDate.getHours() - 48);
 
         // Filter events updated within last 488 hours
         const filteredEvents = data.filter(e => new Date(e.lastUpdatedAt) >= cutoffDate);
