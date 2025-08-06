@@ -1,0 +1,86 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+    <span><i class="fas fa-calendar-alt me-2"></i> Events Between Dates</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="card-body">
+    <form class="row gy-3 align-items-center">
+      <!-- Date Range -->
+      <div class="col-md-5">
+        <label class="form-label fw-semibold">From:</label>
+        <input type="date" name="startDate" [(ngModel)]="startDate" class="date-input" />
+
+      </div>
+
+      <div class="col-md-5">
+        <label class="form-label fw-semibold">To:</label>
+        <input type="date" name="endDate" [(ngModel)]="endDate" class="date-input" />
+
+      </div>
+
+      <!-- Load Events -->
+      <div class="col-md-2 d-grid">
+        <button type="button" class="btn btn-outline-primary mt-4" (click)="loadEvents()">
+          <i class="fas fa-search"></i> Load
+        </button>
+      </div>
+    </form>
+
+    <!-- Toggle View -->
+    <div class="mt-4 d-flex align-items-center justify-content-end">
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="toggleView"
+          [(ngModel)]="showMapView"
+          (change)="onToggleView()"
+        />
+        <label class="form-check-label ms-2" for="toggleView">
+          {{ showMapView ? '🗺️ Map View' : '📄 List View' }}
+        </label>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Map View -->
+    <div *ngIf="showMapView" id="map" class="mt-4 rounded border" style="height: 400px;"></div>
+
+    <!-- List View -->
+    <div *ngIf="!showMapView && !isLoading" class="mt-4">
+      <div *ngIf="events.length > 0; else noData">
+        <div
+          *ngFor="let event of events"
+          class="card mb-3 border-0 shadow-sm"
+        >
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between">
+              <span>{{ event.eventInfo.title }}</span>
+              <small class="text-muted">{{ event.createdAt | date: 'shortDate' }}</small>
+            </h5>
+            <p class="card-text">{{ event.eventInfo.summary || 'No summary provided.' }}</p>
+            <p class="text-muted small mb-2">{{ event.topic?.name }}</p>
+            <a [routerLink]="['/events/view', event.id]" class="btn btn-sm btn-outline-primary">
+              <i class="fas fa-eye me-1"></i> View
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No data -->
+    <ng-template #noData>
+      <div class="alert alert-warning mt-4 text-center" role="alert">
+        <p *ngIf="startDate && endDate">No events found for the selected date range.</p>
+        <p *ngIf="!startDate || !endDate">Please select both start and end dates, then click Load.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

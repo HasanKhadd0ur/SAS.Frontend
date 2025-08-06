@@ -9,6 +9,7 @@ import { UpdateEventLocationComponent } from './update-event-location/update-eve
 import { UpdateEventInfoComponent } from './update-event-info/update-event-info.component';
 import { NamedEntityComponent } from './named-entity/named-entity.component';
 import { NamedEntityEventsComponent } from './named-entity-events/named-entity-events.component';
+import { EventRangeComponent } from './event-range/event-range.component';
 
 const routes: Routes = [
   { path: 'daily-events', component: DailyEventsComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: ':eventId/update-info',  component: UpdateEventInfoComponent,},
   { path: 'entities',  component: NamedEntityComponent,},
   { path: 'by-named-entity/:id',  component: NamedEntityEventsComponent,},
+  { path: 'by-range',  component: EventRangeComponent,},
 
 ];
 
