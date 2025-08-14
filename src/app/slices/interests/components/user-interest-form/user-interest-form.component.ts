@@ -47,7 +47,7 @@ export class UserInterestFormComponent implements OnInit {
   }
 
   loadExistingInterests(): void {
-    this.userInterestService.getAll().subscribe({
+    this.userInterestService.getMyInterests().subscribe({
       next: (data) => {
         this.existingInterests = data;
         setTimeout(() => this.initMap(), 0);

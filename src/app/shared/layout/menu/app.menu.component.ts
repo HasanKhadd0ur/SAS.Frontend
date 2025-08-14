@@ -97,6 +97,8 @@ ngOnInit() {
         { label: 'Pipeline Config', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/pipeline'] },
         { label: 'Blocked Terms', icon: 'pi pi-fw pi-prime', routerLink: ['/management/settings/blocked-terms'] },
         { label: 'Location Infernce', icon: 'pi pi-fw pi-prime', routerLink: ['/location/config'] },
+        { label: 'Detection Policy', icon: 'pi pi-fw pi-prime', routerLink: ['/detection/policy'] },
+        { label: 'Detection Strategy', icon: 'pi pi-fw pi-prime', routerLink: ['/detection/settings'] },
       ]
     });
     this.model.splice(5, 0, {

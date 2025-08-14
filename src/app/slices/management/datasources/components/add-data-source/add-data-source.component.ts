@@ -96,7 +96,7 @@ export class AddDataSourceComponent implements OnInit {
         this.form.reset();
         
         // Redirect to the newly created data source detail or edit page
-        this.router.navigate(['/datasources', createdDataSourceId]);
+        this.router.navigate(['/data-sources', createdDataSourceId]);
   
       },
       error: () => {

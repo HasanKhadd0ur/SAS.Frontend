@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TopicService } from '../../topics/services/topic.service';
 import { Overlay, OverlayRef } from 'ngx-toastr';
+import { NotificationService } from '../../notifications/services/notification.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -53,8 +54,7 @@ export class EventDetailComponent implements OnInit {
     private messageService: MessageService,
     private topicService :TopicService,
     private fb: FormBuilder,
-    private overlay: Overlay,
-    private viewContainerRef: ViewContainerRef
+    private notificationService: NotificationService
   ) {
     this.topicForm = this.fb.group({
       topicName: ['', Validators.required],
@@ -226,7 +226,7 @@ deleteEvent() {
         detail: 'The event has been deleted.',
         life: 3000,
       });
-      this.router.navigate(['/events']);
+      this.router.navigate(['/events/daily-events']);
     },
     error: (err) => {
       this.messageService.add({
