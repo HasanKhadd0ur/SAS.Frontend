@@ -24,7 +24,6 @@ import { providePrimeNG } from 'primeng/config';
 
 import { StyleClassModule } from 'primeng/styleclass';
 import Aura from '@primeng/themes/aura';
-import { NotificationsComponent } from './shared/coponents/notifications/notifications.component';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { RippleModule } from "primeng/ripple";
 import { MapModule } from './slices/map/map.module';
@@ -32,7 +31,8 @@ import { LocationInferenceModule } from './slices/location-inference/location-in
 import { DetectionModule } from './slices/detection/detection.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PolicyViewComponent } from './slices/detection/compoenents/policy-view/policy-view.component';
-
+import { AboutComponent } from './pages/about/about.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,8 @@ import { PolicyViewComponent } from './slices/detection/compoenents/policy-view/
     NotfoundComponent,
     DashboardComponent,
     PolicyViewComponent,
+    AboutComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

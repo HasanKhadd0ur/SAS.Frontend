@@ -1,0 +1,74 @@
+<div class="surface-0 flex justify-content-center">
+  <div id="home" class="landing-wrapper w-full">
+    <app-shared-header></app-shared-header>
+
+    <section class="about-page">
+    
+      <!-- FAQ -->
+      <div class="faq-wrapper">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" (click)="toggleFAQ($event)">Why SAS?</button>
+          <div class="faq-answer">
+            <p>
+              Social media has become a primary source of real-time information. 
+              Our system leverages this by continuously scraping and analyzing 
+              data from platforms like <strong>Telegram</strong> and 
+              <strong>Twitter</strong> to identify events as they unfold.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" (click)="toggleFAQ($event)">What is SAS?</button>
+          <div class="faq-answer">
+            <p>
+              SAS (Situation Awareness System) is a scalable platform that monitors,
+              detects, and visualizes events using social media data with AI-powered crawlers.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" (click)="toggleFAQ($event)">How does SAS detect events?</button>
+          <div class="faq-answer">
+            <p>
+              SAS leverages deep learning models, natural language processing, and
+              clustering techniques to identify emerging events and determine their
+              geographic locations.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" (click)="toggleFAQ($event)">Who can use SAS?</button>
+          <div class="faq-answer">
+            <p>
+              SAS is designed for both the public and decision-makers. General users can
+              explore events, while authorized monitors and analysts can update and verify
+              event details.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" (click)="toggleFAQ($event)">Is SAS free to use?</button>
+          <div class="faq-answer">
+            <p>
+              Basic access to the daily event map is open for everyone. Advanced features
+              such as historical data, analytics, and personalized alerts require an
+              account.
+            </p>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <!-- Footer -->
+      <div class="py-4 px-4 mx-0 mt-8 lg:mx-8">
+        <app-shared-footer></app-shared-footer>
+      </div>
+    
+  </div>
+</div>
