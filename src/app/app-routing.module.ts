@@ -4,11 +4,21 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { AppLayoutComponent } from './shared/layout/app.layout.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AboutComponent } from './pages/about/about.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 const routes: Routes = [
   {
         path: '',
         component: LandingComponent
+  },
+  {
+        path: 'about',
+        component: AboutComponent
+  },
+  {
+        path: 'faq',
+        component: FaqComponent
   },
   { path: 'auth',loadChildren: () => import('./slices/identity/identity.module').then(m => m.IdentityModule)
     

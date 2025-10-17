@@ -1,0 +1,83 @@
+    <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex justify-content-between items-center">
+      
+      <!-- Logo -->
+      <a class="flex items-center" href="#">
+        <img
+          src="assets/layout/images/{{ layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white' }}.png"
+          alt="Sakai Logo"
+          height="50"
+          class="mr-2"
+        />
+        <span class="text-900 font-medium text-2xl">SAS</span>
+      </a>
+
+      <!-- Hamburger icon (mobile only) -->
+      <a
+        pRipple
+        class="cursor-pointer block lg:hidden text-700"
+        pStyleClass="@next"
+        enterClass="hidden"
+        leaveToClass="hidden"
+      >
+        <i class="pi pi-bars text-4xl"></i>
+      </a>
+
+      <!-- Main Navigation & Auth -->
+      <div class="hidden lg:flex items-center gap-8">
+        <!-- Navigation Links -->
+        
+        <!-- Auth Buttons -->
+        <div class="flex items-center gap-4">
+        <ul class="list-none flex gap-6">
+          <li>
+            <a
+                    (click)="router.navigate(['/home'], { fragment: 'home' })"
+                    pRipple
+                    class="px-4 py-2 rounded-full font-medium text-blue-500 hover:bg-blue-100 transition-colors duration-200 cursor-pointer flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 hover:text-blue-500 transition-colors duration-200"
+                    >
+                    <span>Home</span>
+                    </a>
+
+          </li>
+          <li>
+            <a (click)="router.navigate(['/landing'], { fragment: 'features' })"  pRipple class="px-4 py-2 rounded-full font-medium text-blue-500 hover:bg-blue-100 transition-colors duration-200 cursor-pointer flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 hover:text-blue-500 transition-colors duration-200">
+              Features
+            </a>
+          </li>
+          <li>
+            <a (click)="router.navigate(['/landing'], { fragment: 'highlights' })" pRipple    class="px-4 py-2 rounded-full font-medium text-blue-500 hover:bg-blue-100 transition-colors duration-200 cursor-pointer flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 hover:text-blue-500 transition-colors duration-200">
+              Highlights
+            </a>
+          </li>
+        </ul>
+          <ng-container *ngIf="!isLoggedIn; else loggedInTpl">
+            <button
+              pButton
+              pRipple
+              label="Login"
+              (click)="router.navigate(['/auth/login'])"
+              class="p-button-text p-button-rounded border-none text-blue-500"
+            ></button>
+            <button
+              pButton
+              pRipple
+              label="Register"
+              (click)="router.navigate(['/auth/register'])"
+              class="p-button-rounded border-none bg-blue-500 text-white"
+            ></button>
+          </ng-container>
+
+          <ng-template #loggedInTpl>
+            <span class="px-4 py-2 rounded-full font-medium text-blue-500 hover:bg-blue-100 transition-colors duration-200 cursor-pointer text-900 font-medium whitespace-nowrap flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 hover:text-blue-500 transition-colors duration-200"
+                   >Hi, {{ username }}</span>
+            <button
+              pButton
+              pRipple
+              label="Logout"
+              (click)="logout()"
+              class="p-button-text p-button-rounded border-none text-red-500"
+            ></button>
+          </ng-template>
+        </div>
+      </div>
+    </div>

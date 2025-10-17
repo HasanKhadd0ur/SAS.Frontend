@@ -1,0 +1,71 @@
+.about-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 40px;
+  min-height: 70vh;
+  background: linear-gradient(180deg, #f9fafc 0%, #ffffff 100%);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+
+.logo-container {
+  flex: 0 0 250px; /* fixed width for logo column */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+.content {
+  flex: 1;
+  max-width: 800px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #0d1b2a;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin: 30px 0 15px;
+  color: #1b263b;
+}
+
+p {
+  font-size: 1.15em;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.tagline {
+  margin-top: 20px;
+  font-size: 1.3em;
+  color: #0077b6;
+  font-weight: bold;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .about-page {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-container {
+    margin-bottom: 20px;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}

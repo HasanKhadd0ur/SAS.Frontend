@@ -1,0 +1,38 @@
+<div class="grid justify-content-between">
+    <div class="col-12 md:col-2" style="margin-top:-1.5rem;">
+        <a (click)="router.navigate(['/pages/landing'], {fragment: 'home'})" class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
+            <img src="assets/logo/sas-logo.jpg" alt="SAS Logo" class="logo" />
+        </a>
+    </div>
+
+
+    <div class="col-12 md:col-10 lg:col-7">
+        <div class="grid text-center md:text-left">
+            <div class="col-12 md:col-3">
+                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
+                <a [routerLink]="['/about']" class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
+            </div>
+            
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
+            </div>
+
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="assets/demo/images/landing/new-badge.svg" class="ml-2"/></a>
+                <a [routerLink]="['/faq']" class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
+                <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+            </div>
+
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
+                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
+                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</div>

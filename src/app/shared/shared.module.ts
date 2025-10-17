@@ -20,6 +20,8 @@ import { NotificationsComponent } from './coponents/notifications/notifications.
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
+import { SharedFooterComponent } from './components/shared-footer/shared-footer.component';
+import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { TooltipModule } from 'primeng/tooltip';
       AppSidebarComponent,
       AppLayoutComponent,
       NotificationsComponent,
+      SharedFooterComponent,
+      SharedHeaderComponent,
   ],
   imports: [
 
@@ -56,6 +60,8 @@ import { TooltipModule } from 'primeng/tooltip';
       AppMenuComponent,
       AppSidebarComponent,
       AppLayoutComponent,
+      SharedFooterComponent,
+      SharedHeaderComponent
   
   ],
   providers:[MessageService]
