@@ -71,5 +71,7 @@ export class EventsDomainsComponent  implements OnInit {
   onView(domain: ScrapingDomain): void {
     this.router.navigate(['/events/by-domain', domain.id]);
   }
-
+  onViewMap(domain: ScrapingDomain) {
+    this.router.navigate(['/events/map-by-domain', domain.id]);
+}
 }
