@@ -1,0 +1,17 @@
+#map:fullscreen {
+  height: 100vh !important;
+  width: 100vw !important;
+  z-index: 9999;
+}
+#event-domain-map {
+  height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+}
+.relative {
+  position: relative;
+}
+button {
+  font-size: 1em;
+}

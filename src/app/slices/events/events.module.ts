@@ -32,6 +32,7 @@ import { EventRangeComponent } from './event-range/event-range.component';
 import { EventsByAreaComponent } from './events-by-area/events-by-area.component';
 import { EventsDomainsComponent } from './events-domains/events-domains.component';
 import { EventsByDomainComponent } from './events-by-domain/events-by-domain.component';
+import { MapBydomainComponent } from './map-bydomain/map-bydomain.component';
 
 
 @NgModule({
@@ -53,11 +54,12 @@ import { EventsByDomainComponent } from './events-by-domain/events-by-domain.com
     EventRangeComponent,
     EventsByAreaComponent,
     EventsDomainsComponent,
-    EventsByDomainComponent
+    EventsByDomainComponent,
+    MapBydomainComponent
   ],
   imports: [
     CommonModule,
-     FormsModule, 
+    FormsModule, 
     EventsRoutingModule,
     ListboxModule,
     TableModule,

@@ -13,6 +13,7 @@ import { EventRangeComponent } from './event-range/event-range.component';
 import { EventsByAreaComponent } from './events-by-area/events-by-area.component';
 import { EventsDomainsComponent } from './events-domains/events-domains.component';
 import { EventsByDomainComponent } from './events-by-domain/events-by-domain.component';
+import { MapBydomainComponent } from './map-bydomain/map-bydomain.component';
 
 const routes: Routes = [
   { path: 'daily-events', component: DailyEventsComponent },
@@ -28,8 +29,7 @@ const routes: Routes = [
   { path: 'by-area', component: EventsByAreaComponent },
   { path: 'by-domain/:id', component: EventsByDomainComponent },
   { path: 'domains', component: EventsDomainsComponent },
-
-
+  { path: 'map-by-domain/:id',component: MapBydomainComponent}
 ];
 
 @NgModule({
