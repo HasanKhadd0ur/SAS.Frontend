@@ -31,30 +31,43 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
+                "src/favicon.ico",
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/@fortawesome/fontawesome-free/webfonts",
+                  "output": "assets/webfonts"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/bootstrap-icons/font/fonts",
+                  "output": "assets/fonts"
+                }
+                
+            ],
             "styles": [
                 "node_modules/primeicons/primeicons.css",
                 "node_modules/leaflet/dist/leaflet.css",
                 "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "node_modules/bootstrap-icons/font/bootstrap-icons.css",
                 "node_modules/leaflet/dist/leaflet.css",
                 "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css",
-                "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-                "assets/leaflet-fullscreen/dist/leaflet.fullscreen.css",
+                "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css",
                 "node_modules/leaflet-minimap/dist/Control.MiniMap.min.css",
                 "node_modules/leaflet-measure/dist/leaflet-measure.css",
                 "node_modules/ngx-toastr/toastr.css",
-                
+                "node_modules/leaflet/dist/leaflet.css",
                 "node_modules/primeflex/primeflex.css",
                 "node_modules/primeflex/primeflex.min.css",
+                
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+                "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                 "src/styles.scss"
               ],
             "scripts": [
                "node_modules/leaflet/dist/leaflet.js",
                 "node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js",
-                "assets/leaflet-fullscreen/dist/leaflet.fullscreen.min.js",
+                "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.min.js",
                 "node_modules/leaflet-minimap/dist/Control.MiniMap.min.js",
                 "node_modules/leaflet-measure/dist/leaflet-measure.js",
                 "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"

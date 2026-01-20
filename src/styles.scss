@@ -7,12 +7,12 @@ $gutter: 1rem;
 //   font-family: 'Segoe UI', sans-serif;
 // }
 
-@import "assets/layout/styles/layout/layout.scss" ;
+@use "assets/layout/styles/layout/layout.scss" ;
 
 /* Demos and Custom Styles */
-@import "assets/styles/flags/flags" ;
-@import "assets/styles/badges" ;
-@import "assets/styles/code" ;
+@use "assets/styles/flags/flags" ;
+@use "assets/styles/badges" ;
+@use "assets/styles/code" ;
 // @layer theme {
 //   :root {
 //     --p-primary-color: #ce93d8;
